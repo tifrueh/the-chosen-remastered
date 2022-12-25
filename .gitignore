@@ -1,3 +1,5 @@
+# ---+--- GitHub C++ template START ---+---
+
 # Prerequisites
 *.d
 
@@ -30,3 +32,12 @@
 *.exe
 *.out
 *.app
+
+# ---+--- GitHub C++ template END ---+---
+
+
+# Visual Studio Code
+.vscode
+
+# Executable
+the-chosen-remastered
