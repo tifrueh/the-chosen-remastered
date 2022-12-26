@@ -29,8 +29,8 @@ ctui::TUI::TUI() {
 
     napms(2000);
 
-    ctui::createBox(maxy - 7, maxx - 4, 2, 2);
-    ctui::createBox(3, maxx - 4, maxy - 5, 2);
+    createBox(maxy - 7, maxx - 4, 2, 2);
+    createBox(3, maxx - 4, maxy - 5, 2);
 
     outWin = newwin(maxy - 9, maxx - 7, 3, 4);
     scrollok(outWin, TRUE);
@@ -49,6 +49,15 @@ ctui::TUI::~TUI() {
     endwin();
 }
 
+WINDOW *ctui::TUI::createBox(int height, int width, int yPos, int xPos) {
+    WINDOW *localWin = newwin(height, width, yPos, xPos);
+    box(localWin, 0, 0);
+
+    wrefresh(localWin);
+
+    return localWin;
+}
+
 void ctui::TUI::tuiNapMs(const int &ms) {
     napms(ms);
 }
@@ -61,7 +70,17 @@ void ctui::TUI::tuiPrint(const std::string &input) {
 
 std::string ctui::TUI::tuiInput() {
     char str[inMaxx] = "";
-    ctui::textField(inWin, 0, 3, inMaxx, str);
+
+    curs_set(1);
+    echo();
+    mvwgetstr(inWin, 0, 3, str);
+    noecho();
+    curs_set(0);
+
+    wmove(inWin, 0, 3);
+    wclrtoeol(inWin);
+
+    wrefresh(inWin);
 
     std::string out = str;
 
@@ -72,28 +91,4 @@ std::string ctui::TUI::tuiInput(const std::string &prompt) {
     tuiPrint(prompt);
     std::string out = tuiInput();
     return out;
-}
-
-
-void ctui::textField(WINDOW* win, int yPos, int xPos, int yLen, char* out) {
-    
-    curs_set(1);
-    echo();
-    mvwgetstr(win, yPos, xPos, out);
-    noecho();
-    curs_set(0);
-
-    wmove(win, 0, 3);
-    wclrtoeol(win);
-
-    wrefresh(win);
-}
-
-WINDOW *ctui::createBox(int height, int width, int yPos, int xPos) {
-    WINDOW *localWin = newwin(height, width, yPos, xPos);
-    box(localWin, 0, 0);
-
-    wrefresh(localWin);
-
-    return localWin;
 }
