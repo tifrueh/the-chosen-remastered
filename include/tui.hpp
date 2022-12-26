@@ -22,10 +22,10 @@ namespace ctui {
         public:
             TUI();
             ~TUI();
-            void tuiNapMs(int ms);
-            void tuiPrint(std::string input);
+            void tuiNapMs(const int &ms);
+            void tuiPrint(const std::string &input);
             std::string tuiInput();
-            std::string tuiInput(std::string prompt);
+            std::string tuiInput(const std::string &prompt);
     };
 
     void textField(WINDOW* win, int yPos, int xPos, int yLen, char* out);

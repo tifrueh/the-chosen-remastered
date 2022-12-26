@@ -35,11 +35,11 @@ ctui::TUI::~TUI() {
     endwin();
 }
 
-void ctui::TUI::tuiNapMs(int ms) {
+void ctui::TUI::tuiNapMs(const int &ms) {
     napms(ms);
 }
 
-void ctui::TUI::tuiPrint(std::string input) {
+void ctui::TUI::tuiPrint(const std::string &input) {
     const char *str = input.c_str();
     wprintw(outWin, str);
     wrefresh(outWin);
@@ -54,7 +54,7 @@ std::string ctui::TUI::tuiInput() {
     return out;
 }
 
-std::string ctui::TUI::tuiInput(std::string prompt) {
+std::string ctui::TUI::tuiInput(const std::string &prompt) {
     tuiPrint(prompt);
     std::string out = tuiInput();
     return out;
