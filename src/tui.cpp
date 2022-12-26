@@ -4,6 +4,7 @@
 
 
 #include <ncurses.h>
+#include <string.h>
 #include <string>
 #include "tui.hpp"
 
@@ -14,6 +15,19 @@ ctui::TUI::TUI() {
     curs_set(0);
 
     getmaxyx(stdscr, maxy, maxx);
+
+    const char splashLineOne[] = "The Chosen";
+    const char splashLineTwo[] = "At Night's End";
+
+    mvprintw(maxy / 2, (maxx - strlen(splashLineOne)) / 2, splashLineOne);
+    refresh();
+
+    napms(1000);
+
+    mvprintw(maxy / 2 + 1, (maxx - strlen(splashLineTwo)) / 2, splashLineTwo);
+    refresh();
+
+    napms(2000);
 
     ctui::createBox(maxy - 7, maxx - 4, 2, 2);
     ctui::createBox(3, maxx - 4, maxy - 5, 2);

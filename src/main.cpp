@@ -19,4 +19,5 @@
 
 int main() {
     ctui::TUI tui;
+    tui.tuiNapMs(4000);
 }
