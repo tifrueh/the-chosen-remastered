@@ -18,5 +18,5 @@
 #include "tui.hpp"
 
 int main() {
-    return 0;
+    ctui::TUI tui;
 }

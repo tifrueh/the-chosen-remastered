@@ -4,3 +4,26 @@
 
 
 #pragma once
+
+#include <ncurses.h>
+#include <string>
+
+namespace ctui {
+
+    class TUI {
+
+        private:
+            WINDOW *outWin;
+            WINDOW *inWin;
+        
+        public:
+            TUI();
+            ~TUI();
+            void cPrint(std::string input);
+            void cInput(std::string prompt);
+    };
+
+    void textField(WINDOW* win, int yPos, int xPos, int yLen, char* out);
+    WINDOW *createBox(int height, int width, int yPos, int xPos);
+
+}
