@@ -6,6 +6,8 @@ CPPFLAGS ?=
 CXXFLAGS ?=
 LDFLAGS ?=
 
+DEBUG ?= n
+
 override CPPFLAGS += -I./include
 override CXXFLAGS += -std=c++20
 override LDFLAGS += -lncurses
@@ -14,6 +16,11 @@ DESTDIR ?= /usr/local
 DESTDIR_BIN = $(DESTDIR)/bin
 
 TARGET = the-chosen-remastered
+
+ifeq ($(DEBUG), y)
+	override CXXFLAGS += -g
+	override LDFLAGS += -g
+endif
 
 MAKE_OBJ = $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c
 
