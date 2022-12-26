@@ -1,4 +1,4 @@
-SRCS = main.cpp
+SRCS = main.cpp tui.cpp
 OBJS = $(subst .cpp,.o,$(SRCS))
 
 CXX ?= g++
@@ -30,6 +30,9 @@ $(TARGET) : $(OBJS)
 
 main.o : src/main.cpp
 	$(MAKE_OBJ) src/main.cpp
+
+tui.o : src/tui.cpp
+	$(MAKE_OBJ) src/tui.cpp
 
 
 .PHONY : clean distclean install uninstall
