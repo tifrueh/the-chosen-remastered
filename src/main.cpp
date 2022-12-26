@@ -16,6 +16,7 @@
 
 
 #include "tui.hpp"
+#include "filehandling.hpp"
 
 int main() {
     ctui::TUI tui;
