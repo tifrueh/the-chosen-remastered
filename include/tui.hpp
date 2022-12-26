@@ -25,6 +25,7 @@ namespace ctui {
             void tuiNapMs(int ms);
             void tuiPrint(std::string input);
             std::string tuiInput();
+            std::string tuiInput(std::string prompt);
     };
 
     void textField(WINDOW* win, int yPos, int xPos, int yLen, char* out);

@@ -54,6 +54,12 @@ std::string ctui::TUI::tuiInput() {
     return out;
 }
 
+std::string ctui::TUI::tuiInput(std::string prompt) {
+    tuiPrint(prompt);
+    std::string out = tuiInput();
+    return out;
+}
+
 
 void ctui::textField(WINDOW* win, int yPos, int xPos, int yLen, char* out) {
     
