@@ -8,6 +8,7 @@ LDFLAGS ?=
 
 override CPPFLAGS += -I./include
 override CXXFLAGS += -std=c++20
+override LDFLAGS += -lncurses
 
 DESTDIR ?= /usr/local
 DESTDIR_BIN = $(DESTDIR)/bin
