@@ -20,8 +20,8 @@ namespace ctui {
             TUI();
             ~TUI();
             void tuiNapMs(int ms);
-            void cPrint(std::string input);
-            std::string cInput();
+            void tuiPrint(std::string input);
+            std::string tuiInput();
     };
 
     void textField(WINDOW* win, int yPos, int xPos, int yLen, char* out);

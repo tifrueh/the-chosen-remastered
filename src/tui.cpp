@@ -38,7 +38,7 @@ void ctui::TUI::tuiNapMs(int ms) {
     napms(ms);
 }
 
-void ctui::TUI::cPrint(std::string input) {
+void ctui::TUI::tuiPrint(std::string input) {
     const char *str = input.c_str();
     wprintw(outWin, str);
     wrefresh(outWin);
