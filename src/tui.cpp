@@ -13,7 +13,6 @@ ctui::TUI::TUI() {
     noecho();
     curs_set(0);
 
-    int maxy, maxx;
     getmaxyx(stdscr, maxy, maxx);
 
     ctui::createBox(maxy - 7, maxx - 4, 2, 2);
@@ -21,9 +20,11 @@ ctui::TUI::TUI() {
 
     outWin = newwin(maxy - 9, maxx - 7, 3, 4);
     scrollok(outWin, TRUE);
+    getmaxyx(outWin, outMaxy, outMaxx);
 
     inWin = newwin(1, maxx - 6, maxy - 4, 3);
     keypad(inWin, TRUE);
+    getmaxyx(inWin, inMaxy, inMaxx);
 
     mvwprintw(inWin, 0, 1, ">");
     wmove(inWin, 0, 3);
@@ -44,6 +45,15 @@ void ctui::TUI::tuiPrint(std::string input) {
     wrefresh(outWin);
 }
 
+std::string ctui::TUI::tuiInput() {
+    char str[inMaxx] = "";
+    ctui::textField(inWin, 0, 3, inMaxx, str);
+
+    std::string out = str;
+
+    return out;
+}
+
 void ctui::textField(WINDOW* win, int yPos, int xPos, int yLen, char* out) {
     
     curs_set(1);
@@ -54,6 +64,8 @@ void ctui::textField(WINDOW* win, int yPos, int xPos, int yLen, char* out) {
 
     wmove(win, 0, 3);
     wclrtoeol(win);
+
+    wrefresh(win);
 }
 
 WINDOW *ctui::createBox(int height, int width, int yPos, int xPos) {

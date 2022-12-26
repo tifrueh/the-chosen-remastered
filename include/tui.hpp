@@ -15,6 +15,9 @@ namespace ctui {
         private:
             WINDOW *outWin;
             WINDOW *inWin;
+            int maxy, maxx;
+            int inMaxy, inMaxx;
+            int outMaxy, outMaxx;
         
         public:
             TUI();
