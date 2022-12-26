@@ -4,6 +4,7 @@
 
 
 #include <ncurses.h>
+#include <string>
 #include "tui.hpp"
 
 ctui::TUI::TUI() {
@@ -27,12 +28,20 @@ ctui::TUI::TUI() {
     mvwprintw(inWin, 0, 1, ">");
     wmove(inWin, 0, 3);
     wrefresh(inWin);
-
-    napms(4000);
 }
 
 ctui::TUI::~TUI() {
     endwin();
+}
+
+void ctui::TUI::tuiNapMs(int ms) {
+    napms(ms);
+}
+
+void ctui::TUI::cPrint(std::string input) {
+    const char *str = input.c_str();
+    wprintw(outWin, str);
+    wrefresh(outWin);
 }
 
 void ctui::textField(WINDOW* win, int yPos, int xPos, int yLen, char* out) {

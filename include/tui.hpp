@@ -19,6 +19,7 @@ namespace ctui {
         public:
             TUI();
             ~TUI();
+            void tuiNapMs(int ms);
             void cPrint(std::string input);
             std::string cInput();
     };
