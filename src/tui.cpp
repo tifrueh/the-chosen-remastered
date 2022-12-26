@@ -54,6 +54,7 @@ std::string ctui::TUI::tuiInput() {
     return out;
 }
 
+
 void ctui::textField(WINDOW* win, int yPos, int xPos, int yLen, char* out) {
     
     curs_set(1);
