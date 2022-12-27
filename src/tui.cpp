@@ -69,7 +69,7 @@ void ctui::TUI::tuiPrint(const std::string &input) {
 }
 
 std::string ctui::TUI::tuiInput() {
-    char str[inMaxx] = "";
+    char *str = (char*) malloc(maxx * sizeof(char));
 
     curs_set(1);
     echo();
