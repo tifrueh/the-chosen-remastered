@@ -1,26 +1,29 @@
-SRCS = main.cpp
-OBJS = $(subst .cpp,.o,$(SRCS))
+SRCS = src/main.cpp src/tui.cpp src/customstring.cpp src/gameentity.cpp
+OBJS = $(subst src,build,$(subst .cpp,.o,$(SRCS)))
 
 CXX ?= g++
 CPPFLAGS ?=
 CXXFLAGS ?=
 LDFLAGS ?=
 
+DEBUG ?= n
+
 override CPPFLAGS += -I./include
-override CXXFLAGS += -std=c++20
+override CXXFLAGS += -std=c++20 -Wall
+override LDFLAGS += -lncurses
 
 DESTDIR ?= /usr/local
 DESTDIR_BIN = $(DESTDIR)/bin
 
-TARGET = the-chosen-remastered
+TARGET = build/the-chosen-remastered
+
+ifeq ($(DEBUG), y)
+	override CXXFLAGS += -g
+	override LDFLAGS += -g
+endif
 
 MAKE_OBJ = $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c
-
-ifeq ($(LDFLAGS), )
-	MAKE_LINK = $(CXX) -o $(TARGET)
-else
-	MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET)
-endif
+MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET)
 
 
 all : $(TARGET)
@@ -28,8 +31,8 @@ all : $(TARGET)
 $(TARGET) : $(OBJS)
 	$(MAKE_LINK) $(OBJS)
 
-main.o : src/main.cpp
-	$(MAKE_OBJ) src/main.cpp
+build/%.o : src/%.cpp
+	$(MAKE_OBJ) src/$*.cpp -o $@
 
 
 .PHONY : clean distclean install uninstall

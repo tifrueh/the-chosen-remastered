@@ -14,6 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
+#include <string>
+#include "tui.hpp"
+#include "customstring.hpp"
+
 int main() {
-    return 0;
+    ctui::TUI tui("Initial location");
+    std::string cmd;
+
+    while (cmd != "exit") {
+        cmd = tui.tuiInput();
+        tui.incrementMoves();
+        tui.tuiPrint(cmd + "\n");
+        cstr::to_lower(cmd);
+        cstr::trim(cmd);
+    }
 }
