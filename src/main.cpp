@@ -16,6 +16,7 @@
 
 
 #include <string>
+#include <boost/algorithm/string.hpp>
 #include "tui.hpp"
 
 int main() {
@@ -24,6 +25,8 @@ int main() {
 
     while (cmd != "exit") {
         cmd = tui.tuiInput();
+        boost::algorithm::to_lower(cmd);
+        boost::algorithm::trim(cmd);
         tui.tuiPrint(cmd + "\n");
     }
 }
