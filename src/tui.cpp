@@ -18,30 +18,29 @@ ctui::TUI::TUI() {
 
     getmaxyx(stdscr, maxy, maxx);
 
-    const char splashLineOne[] = "The Chosen";
-    const char splashLineTwo[] = "At Night's End";
-
-    mvprintw(maxy / 2, (maxx - strlen(splashLineOne)) / 2, splashLineOne);
-    refresh();
-
-    napms(1000);
-
-    mvprintw(maxy / 2 + 1, (maxx - strlen(splashLineTwo)) / 2, splashLineTwo);
-    refresh();
-
-    napms(2000);
-
     createBox(3, maxx, 0, 0);
     createBox(maxy - 6, maxx, 3, 0);
     createBox(3, maxx, maxy - 3, 0);
 
+    locationWin = newwin(1, 40, 1, 2);
+    wprintw(locationWin, "[LOCATION PLACEHOLDER]");
+    wrefresh(locationWin);
+
+    scoreWin = newwin(1, 10, 1, maxx - 26);
+    wprintw(scoreWin, "SCORE: 000");
+    wrefresh(scoreWin);
+
+    movesWin = newwin(1, 12, 1, maxx - 14);
+    wprintw(movesWin, "MOVES: 0000");
+    wrefresh(movesWin);
+
     outWin = newwin(maxy - 8, maxx - 4, 4, 2);
     scrollok(outWin, TRUE);
-    getmaxyx(outWin, outMaxy, outMaxx);
+    outMaxx = getmaxx(outWin);
 
     inWin = newwin(1, maxx - 2, maxy - 2, 1);
     keypad(inWin, TRUE);
-    getmaxyx(inWin, inMaxy, inMaxx);
+    inMaxx = getmaxx(inWin);
 
     mvwprintw(inWin, 0, 1, ">");
     wmove(inWin, 0, 3);
@@ -72,7 +71,7 @@ void ctui::TUI::tuiPrint(const std::string &input) {
 }
 
 std::string ctui::TUI::tuiInput() {
-    char *str = (char*) malloc(maxx * sizeof(char));
+    char *str = (char*) malloc(inMaxx * sizeof(char));
 
     curs_set(1);
     echo();

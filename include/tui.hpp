@@ -13,11 +13,14 @@ namespace ctui {
     class TUI {
 
         private:
+            WINDOW *locationWin;
+            WINDOW *scoreWin;
+            WINDOW *movesWin;
             WINDOW *outWin;
             WINDOW *inWin;
             int maxy, maxx;
-            int inMaxy, inMaxx;
-            int outMaxy, outMaxx;
+            int inMaxx;
+            int outMaxx;
 
             WINDOW *createBox(int height, int width, int yPos, int xPos);
         
