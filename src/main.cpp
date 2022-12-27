@@ -17,7 +17,6 @@
 
 #include <string>
 #include "tui.hpp"
-#include "resources.hpp"
 
 int main() {
     ctui::TUI tui;
