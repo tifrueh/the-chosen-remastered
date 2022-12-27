@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <string>
-
 namespace chosen {
     class Player;
 }
