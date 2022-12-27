@@ -15,10 +15,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+#include <string>
 #include "tui.hpp"
 #include "filehandling.hpp"
 
 int main() {
     ctui::TUI tui;
-    tui.tuiNapMs(4000);
+    std::string cmd;
+
+    while (cmd != "exit") {
+        cmd = tui.tuiInput();
+        tui.tuiPrint(cmd + "\n");
+    }
 }
