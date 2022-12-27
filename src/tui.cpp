@@ -31,14 +31,15 @@ ctui::TUI::TUI() {
 
     napms(2000);
 
-    createBox(maxy - 7, maxx - 4, 2, 2);
-    createBox(3, maxx - 4, maxy - 5, 2);
+    createBox(3, maxx, 0, 0);
+    createBox(maxy - 6, maxx, 3, 0);
+    createBox(3, maxx, maxy - 3, 0);
 
-    outWin = newwin(maxy - 9, maxx - 7, 3, 4);
+    outWin = newwin(maxy - 8, maxx - 4, 4, 2);
     scrollok(outWin, TRUE);
     getmaxyx(outWin, outMaxy, outMaxx);
 
-    inWin = newwin(1, maxx - 6, maxy - 4, 3);
+    inWin = newwin(1, maxx - 2, maxy - 2, 1);
     keypad(inWin, TRUE);
     getmaxyx(inWin, inMaxy, inMaxx);
 
