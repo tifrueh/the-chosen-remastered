@@ -13,6 +13,7 @@ ctui::TUI::TUI() {
     raw();
     noecho();
     curs_set(0);
+    setlocale(LC_ALL, "");
 
     getmaxyx(stdscr, maxy, maxx);
 
