@@ -3,6 +3,8 @@
 // Full copyright notice in src/main.cpp
 
 
+#pragma once
+
 #include <string>
 
 namespace cstr {
