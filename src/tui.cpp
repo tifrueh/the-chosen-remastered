@@ -86,6 +86,8 @@ std::string ctui::TUI::tuiInput() {
 
     std::string out = str;
 
+    free(str);
+
     return out;
 }
 
