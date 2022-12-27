@@ -1,5 +1,5 @@
-SRCS = main.cpp tui.cpp customstring.cpp player.cpp
-OBJS = $(subst .cpp,.o,$(SRCS))
+SRCS = src/main.cpp src/tui.cpp src/customstring.cpp src/player.cpp
+OBJS = $(subst src,build,$(subst .cpp,.o,$(SRCS)))
 
 CXX ?= g++
 CPPFLAGS ?=
@@ -15,7 +15,7 @@ override LDFLAGS += -lncurses
 DESTDIR ?= /usr/local
 DESTDIR_BIN = $(DESTDIR)/bin
 
-TARGET = the-chosen-remastered
+TARGET = build/the-chosen-remastered
 
 ifeq ($(DEBUG), y)
 	override CXXFLAGS += -g
@@ -36,17 +36,18 @@ all : $(TARGET)
 $(TARGET) : $(OBJS)
 	$(MAKE_LINK) $(OBJS)
 
-main.o : src/main.cpp
-	$(MAKE_OBJ) src/main.cpp
+build/main.o : src/main.cpp
+	$(MAKE_OBJ) src/main.cpp -o build/main.o
 
-tui.o : src/tui.cpp
-	$(MAKE_OBJ) src/tui.cpp
+build/tui.o : src/tui.cpp
+	$(MAKE_OBJ) src/tui.cpp -o build/tui.o
 
-customstring.o : src/customstring.cpp
-	$(MAKE_OBJ) src/customstring.cpp
+build/customstring.o : src/customstring.cpp
+	$(MAKE_OBJ) src/customstring.cpp -o build/customstring.o
 
-player.o : src/player.cpp
-	$(MAKE_OBJ) src/player.cpp
+build/player.o : src/player.cpp
+	$(MAKE_OBJ) src/player.cpp -o build/player.o
+
 
 .PHONY : clean distclean install uninstall
 
