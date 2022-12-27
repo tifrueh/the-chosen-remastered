@@ -1,4 +1,4 @@
-SRCS = main.cpp tui.cpp resourcehandling.cpp
+SRCS = main.cpp tui.cpp
 OBJS = $(subst .cpp,.o,$(SRCS))
 
 CXX ?= g++
@@ -41,9 +41,6 @@ main.o : src/main.cpp
 
 tui.o : src/tui.cpp
 	$(MAKE_OBJ) src/tui.cpp
-
-resourcehandling.o : src/resourcehandling.cpp
-	$(MAKE_OBJ) src/resourcehandling.cpp
 
 
 .PHONY : clean distclean install uninstall
