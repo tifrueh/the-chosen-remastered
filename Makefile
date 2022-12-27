@@ -36,7 +36,6 @@ build/%.o : src/%.cpp
 
 .PHONY : clean distclean install uninstall
 
-
 clean : 
 	-rm $(OBJS)
 
