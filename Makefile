@@ -1,4 +1,4 @@
-SRCS = main.cpp tui.cpp customstring.cpp
+SRCS = main.cpp tui.cpp customstring.cpp player.cpp
 OBJS = $(subst .cpp,.o,$(SRCS))
 
 CXX ?= g++
@@ -45,6 +45,8 @@ tui.o : src/tui.cpp
 customstring.o : src/customstring.cpp
 	$(MAKE_OBJ) src/customstring.cpp
 
+player.o : src/player.cpp
+	$(MAKE_OBJ) src/player.cpp
 
 .PHONY : clean distclean install uninstall
 
