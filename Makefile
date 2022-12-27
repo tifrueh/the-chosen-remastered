@@ -1,4 +1,4 @@
-SRCS = src/main.cpp src/tui.cpp src/customstring.cpp src/player.cpp
+SRCS = src/main.cpp src/tui.cpp src/customstring.cpp
 OBJS = $(subst src,build,$(subst .cpp,.o,$(SRCS)))
 
 CXX ?= g++
