@@ -4,6 +4,7 @@
 
 
 #include <ncurses.h>
+#include <locale.h>
 #include <string.h>
 #include <string>
 #include "tui.hpp"
