@@ -10,4 +10,5 @@
 namespace cstr {
     void to_lower(std::string &string);
     void trim(std::string &string);
+    std::string int_to_string(int number, int numberOfDigits);
 }

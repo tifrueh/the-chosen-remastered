@@ -21,18 +21,23 @@ namespace ctui {
             int maxy, maxx;
             int inMaxx;
             int outMaxx;
+            int score;
+            int moves;
 
-            void initStatusBar();
+            void initStatusBar(const std::string &initialLocation);
             void initOutWin();
             void initInWin();
 
             WINDOW *createBox(int height, int width, int yPos, int xPos);
         
         public:
-            TUI();
+            TUI(const std::string &initialLocation);
             ~TUI();
             void tuiNapMs(const int &ms);
             void tuiPrint(const std::string &input);
+            void setLocation(const std::string &location);
+            void incrementScore();
+            void incrementMoves();
             std::string tuiInput();
             std::string tuiInput(const std::string &prompt);
     };

@@ -8,8 +8,12 @@
 #include <string.h>
 #include <string>
 #include "tui.hpp"
+#include "customstring.hpp"
 
-ctui::TUI::TUI() {
+ctui::TUI::TUI(const std::string &initialLocation) {
+    score = 0;
+    moves = 0;
+
     initscr();
     raw();
     noecho();
@@ -18,7 +22,7 @@ ctui::TUI::TUI() {
 
     getmaxyx(stdscr, maxy, maxx);
 
-    initStatusBar();
+    initStatusBar(initialLocation);
     initOutWin();
     initInWin();
 }
@@ -27,11 +31,13 @@ ctui::TUI::~TUI() {
     endwin();
 }
 
-void ctui::TUI::initStatusBar() {
+void ctui::TUI::initStatusBar(const std::string &initialLocation) {
+    const char *str = initialLocation.c_str();
+
     createBox(3, maxx, 0, 0);
 
     locationWin = newwin(1, 40, 1, 2);
-    wprintw(locationWin, "[LOCATION PLACEHOLDER]");
+    wprintw(locationWin, str);
     wrefresh(locationWin);
 
     scoreWin = newwin(1, 10, 1, maxx - 26);
@@ -107,4 +113,27 @@ std::string ctui::TUI::tuiInput(const std::string &prompt) {
     tuiPrint(prompt);
     std::string out = tuiInput();
     return out;
+}
+
+void ctui::TUI::setLocation(const std::string &location) {
+    const char *str = location.c_str();
+
+    wclear(locationWin);
+    wprintw(locationWin, str);
+}
+
+void ctui::TUI::incrementScore() {
+    score += 1;
+    std::string sScore = cstr::int_to_string(score, 3);
+    const char *csScore = sScore.c_str();
+    mvwprintw(scoreWin, 0, 7, csScore);
+    wrefresh(scoreWin);
+}
+
+void ctui::TUI::incrementMoves() {
+    moves += 1;
+    std::string sMoves = cstr::int_to_string(moves, 4);
+    const char *csMoves = sMoves.c_str();
+    mvwprintw(movesWin, 0, 7, csMoves);
+    wrefresh(movesWin);
 }

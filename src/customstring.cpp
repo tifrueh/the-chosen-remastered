@@ -18,3 +18,18 @@ void cstr::trim(std::string &string) {
 
     string = string.substr(begin, count);
 }
+
+std::string cstr::int_to_string(int number, int numberOfDigits) {
+    std::string sNumber = std::to_string(number);
+    int numberOfZeroes = numberOfDigits - sNumber.size();
+
+    std::reverse(sNumber.begin(), sNumber.end());
+
+    for (int i = 0; i < numberOfZeroes; i++) {
+        sNumber.append("0");
+    }
+
+    std::reverse(sNumber.begin(), sNumber.end());
+
+    return sNumber;
+}

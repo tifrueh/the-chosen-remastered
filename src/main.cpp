@@ -20,11 +20,12 @@
 #include "customstring.hpp"
 
 int main() {
-    ctui::TUI tui;
+    ctui::TUI tui("Initial location");
     std::string cmd;
 
     while (cmd != "exit") {
         cmd = tui.tuiInput();
+        tui.incrementMoves();
         tui.tuiPrint(cmd + "\n");
         cstr::to_lower(cmd);
         cstr::trim(cmd);
