@@ -25,8 +25,8 @@ int main() {
 
     while (cmd != "exit") {
         cmd = tui.tuiInput();
+        tui.tuiPrint(cmd + "\n");
         boost::algorithm::to_lower(cmd);
         boost::algorithm::trim(cmd);
-        tui.tuiPrint(cmd + "\n");
     }
 }
