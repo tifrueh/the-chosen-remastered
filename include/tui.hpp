@@ -22,6 +22,10 @@ namespace ctui {
             int inMaxx;
             int outMaxx;
 
+            void initStatusBar();
+            void initOutWin();
+            void initInWin();
+
             WINDOW *createBox(int height, int width, int yPos, int xPos);
         
         public:

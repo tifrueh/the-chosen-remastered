@@ -18,9 +18,17 @@ ctui::TUI::TUI() {
 
     getmaxyx(stdscr, maxy, maxx);
 
+    initStatusBar();
+    initOutWin();
+    initInWin();
+}
+
+ctui::TUI::~TUI() {
+    endwin();
+}
+
+void ctui::TUI::initStatusBar() {
     createBox(3, maxx, 0, 0);
-    createBox(maxy - 6, maxx, 3, 0);
-    createBox(3, maxx, maxy - 3, 0);
 
     locationWin = newwin(1, 40, 1, 2);
     wprintw(locationWin, "[LOCATION PLACEHOLDER]");
@@ -33,10 +41,18 @@ ctui::TUI::TUI() {
     movesWin = newwin(1, 12, 1, maxx - 14);
     wprintw(movesWin, "MOVES: 0000");
     wrefresh(movesWin);
+}
+
+void ctui::TUI::initOutWin() {
+    createBox(maxy - 6, maxx, 3, 0);
 
     outWin = newwin(maxy - 8, maxx - 4, 4, 2);
     scrollok(outWin, TRUE);
     outMaxx = getmaxx(outWin);
+}
+
+void ctui::TUI::initInWin() {
+    createBox(3, maxx, maxy - 3, 0);
 
     inWin = newwin(1, maxx - 2, maxy - 2, 1);
     keypad(inWin, TRUE);
@@ -45,10 +61,6 @@ ctui::TUI::TUI() {
     mvwprintw(inWin, 0, 1, ">");
     wmove(inWin, 0, 3);
     wrefresh(inWin);
-}
-
-ctui::TUI::~TUI() {
-    endwin();
 }
 
 WINDOW *ctui::TUI::createBox(int height, int width, int yPos, int xPos) {
