@@ -24,32 +24,18 @@ endif
 
 MAKE_OBJ = $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c
 
-ifeq ($(LDFLAGS), )
-	MAKE_LINK = $(CXX) -o $(TARGET)
-else
-	MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET)
-endif
-
 
 all : $(TARGET)
 
 $(TARGET) : $(OBJS)
 	$(MAKE_LINK) $(OBJS)
 
-build/main.o : src/main.cpp
-	$(MAKE_OBJ) src/main.cpp -o build/main.o
-
-build/tui.o : src/tui.cpp
-	$(MAKE_OBJ) src/tui.cpp -o build/tui.o
-
-build/customstring.o : src/customstring.cpp
-	$(MAKE_OBJ) src/customstring.cpp -o build/customstring.o
-
-build/player.o : src/player.cpp
-	$(MAKE_OBJ) src/player.cpp -o build/player.o
+build/%.o : src/%.cpp
+	$(MAKE_OBJ) src/$*.cpp -o $@
 
 
 .PHONY : clean distclean install uninstall
+
 
 clean : 
 	-rm $(OBJS)
