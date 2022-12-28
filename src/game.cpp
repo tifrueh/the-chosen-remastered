@@ -10,6 +10,12 @@
 #include "resources.hpp"
 #include "game.hpp"
 
+chosen::Game::Game() {
+    state = 0;
+    score = 0;
+    moves = 0;
+}
+
 void chosen::Game::gameloop() {
     ctui::TUI tui("[---------LOCATION PLACEHOLDER---------]");
     std::string command;
@@ -18,7 +24,6 @@ void chosen::Game::gameloop() {
 
     while (command != "exit" && command != "quit") {
         command = tui.tuiInput();
-        tui.incrementMoves();
         cstr::trim(command);
         std::string errorMessage = "I do not know what you meant by " + command + ".";
 
@@ -101,5 +106,9 @@ void chosen::Game::gameloop() {
         else {
             tui.tuiPrint(errorMessage);
         }
+
+        moves++;
+        tui.updateMoves(moves);
+        tui.updateScore(score);
     }
 }

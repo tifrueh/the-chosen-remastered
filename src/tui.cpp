@@ -12,8 +12,6 @@
 #include "customstring.hpp"
 
 ctui::TUI::TUI(const std::string &initialLocation) {
-    score = 0;
-    moves = 0;
 
     initscr();
     raw();
@@ -141,16 +139,14 @@ void ctui::TUI::setLocation(const std::string &location) {
     wprintw(locationWin, str);
 }
 
-void ctui::TUI::incrementScore() {
-    score += 1;
+void ctui::TUI::updateScore(const int &score) {
     std::string sScore = cstr::int_to_string(score, 3);
     const char *csScore = sScore.c_str();
     mvwprintw(scoreWin, 0, 7, csScore);
     wrefresh(scoreWin);
 }
 
-void ctui::TUI::incrementMoves() {
-    moves += 1;
+void ctui::TUI::updateMoves(const int &moves) {
     std::string sMoves = cstr::int_to_string(moves, 4);
     const char *csMoves = sMoves.c_str();
     mvwprintw(movesWin, 0, 7, csMoves);

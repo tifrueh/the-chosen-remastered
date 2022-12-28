@@ -22,8 +22,6 @@ namespace ctui {
             int maxy, maxx;
             int inMaxx;
             int outMaxx;
-            int score;
-            int moves;
 
             void initStatusBar(const std::string &initialLocation);
             void initOutWin();
@@ -39,8 +37,8 @@ namespace ctui {
             void waitForInput(const std::string &prompt);
             void tuiPrint(const std::string &input);
             void setLocation(const std::string &location);
-            void incrementScore();
-            void incrementMoves();
+            void updateScore(const int &score);
+            void updateMoves(const int &moves);
             std::string tuiInput();
             std::string tuiInput(const std::string &prompt);
 
