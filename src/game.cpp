@@ -26,9 +26,7 @@ void chosen::Game::gameloop() {
         cstr::trim(command);
         std::string errorMessage = "I do not know what you meant by " + command + ".\n";
 
-        if (command != "") {
-            tui.tuiPrint("> " + command + "\n\n");
-        }
+        tui.tuiPrint("\n> " + command + "\n");
 
         cstr::to_lower(command);
 
@@ -97,6 +95,9 @@ void chosen::Game::gameloop() {
             if (affirm != "y") {
                 command = "";
             }
+        }
+        else if (command == "") {
+            tui.tuiPrint("I beg your pardon?\n");
         }
         else {
             tui.tuiPrint(errorMessage);
