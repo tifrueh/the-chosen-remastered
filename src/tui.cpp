@@ -92,7 +92,10 @@ void ctui::TUI::waitForInput(const std::string &prompt) {
 }
 
 void ctui::TUI::tuiPrint(const std::string &input) {
-    const char *str = input.c_str();
+    std::string out = input;
+    cstr::wrap(out, outMaxx);
+    out.append("\n");
+    const char *str = out.c_str();
     wprintw(outWin, str);
     wrefresh(outWin);
 }
