@@ -7,18 +7,14 @@
 #include "tui.hpp"
 #include "customstring.hpp"
 #include "parser.hpp"
+#include "resources.hpp"
 #include "game.hpp"
 
 void chosen::Game::gameloop() {
     ctui::TUI tui("[---------LOCATION PLACEHOLDER---------]");
     std::string command;
 
-    tui.tuiPrint("Welcome message\n"
-                 "---------------\n"
-                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \n"
-                 "sed do eiusmod tempor incididunt ut labore et dolore magna \n"
-                 "aliqua. Volutpat maecenas volutpat blandit aliquam."
-                 );
+    tui.tuiPrint(crsrc::welcome_message_txt);
 
     while (command != "exit" && command != "quit") {
         command = tui.tuiInput();
