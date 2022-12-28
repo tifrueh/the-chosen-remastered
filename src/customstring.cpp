@@ -14,10 +14,14 @@ void cstr::to_lower(std::string &string) {
 void cstr::trim(std::string &string) {
 
     const int begin = string.find_first_not_of(" ");
-    const int end = string.find_last_not_of(" ");
-    const int count = end - begin + 1;
+    const int end = string.find_first_of(" ", begin);
+    const int count = end - begin;
 
-    if (string == "" || begin == std::string::npos){
+    if (string == ""){
+        return;
+    }
+    else if (begin == std::string::npos) {
+        string = "";
         return;
     }
 
