@@ -24,6 +24,24 @@ void cstr::trim(std::string &string) {
     string = string.substr(begin, count);
 }
 
+int cstr::count_words(const std::string &string) {
+    int words = 0;
+    int begin = string.find_first_not_of(" ");
+    int end = string.find_first_of(" ", begin);
+
+    if (string == "" || string.find_first_not_of(" ") == std::string::npos) {
+        return words;
+    }
+
+    while (begin != std::string::npos) {
+        words++;
+        begin = string.find_first_not_of(" ", end);
+        end = string.find_first_of(" ", begin);
+    }
+
+    return words;   
+}
+
 std::string cstr::int_to_string(int number, int numberOfDigits) {
     std::string sNumber = std::to_string(number);
     int numberOfZeroes = numberOfDigits - sNumber.size();
@@ -37,4 +55,26 @@ std::string cstr::int_to_string(int number, int numberOfDigits) {
     std::reverse(sNumber.begin(), sNumber.end());
 
     return sNumber;
+}
+
+std::string cstr::get_first_n_words(const std::string &string, const int &n) {
+
+    if (string == "" || string.find_first_not_of(" ") == std::string::npos) {
+        return string;
+    }
+
+    int begin = 0;
+    int end = 0;
+    std::string out;
+
+    for (int i = 0; i < n; i++) {
+        begin = string.find_first_not_of(" ", begin);
+        end = string.find_first_of(" ", begin);
+        out.append(string.substr(begin, end - begin) + " ");
+        begin = end;
+    }
+
+    out.pop_back();
+
+    return out;
 }
