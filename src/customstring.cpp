@@ -29,7 +29,7 @@ int cstr::count_words(const std::string &string) {
     int begin = string.find_first_not_of(" ");
     int end = string.find_first_of(" ", begin);
 
-    if (string == "" || string.find_first_not_of(" ") == std::string::npos) {
+    if (string == "" || begin == std::string::npos) {
         return words;
     }
 
@@ -59,19 +59,21 @@ std::string cstr::int_to_string(int number, int numberOfDigits) {
 
 std::string cstr::get_first_n_words(const std::string &string, const int &n) {
 
+    int begin = string.find_first_not_of(" ");
+    int end = string.find_first_of(" ", begin);
+
     if (string == "" || string.find_first_not_of(" ") == std::string::npos) {
         return string;
     }
-
-    int begin = 0;
-    int end = 0;
     std::string out;
 
     for (int i = 0; i < n; i++) {
-        begin = string.find_first_not_of(" ", begin);
-        end = string.find_first_of(" ", begin);
+        if (begin == std::string::npos || end == std::string::npos) {
+            return out;
+        }
         out.append(string.substr(begin, end - begin) + " ");
-        begin = end;
+        begin = string.find_first_not_of(" ", end);
+        end = string.find_first_of(" ", begin);
     }
 
     out.pop_back();
