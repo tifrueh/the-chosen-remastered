@@ -28,6 +28,17 @@ void cstr::trim(std::string &string) {
     string = string.substr(begin, count);
 }
 
+void cstr::wrap(std::string &string, const int &width) {
+    int line = 1;
+    int pos = string.rfind(" ", width);
+
+    while ((pos + width) <= string.size()) {
+        string.at(pos) = '\n';
+        line++;
+        pos = string.rfind(" ", pos + width);
+    }
+}
+
 int cstr::count_words(const std::string &string) {
     int words = 0;
     int begin = string.find_first_not_of(" ");
