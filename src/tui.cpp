@@ -12,7 +12,18 @@
 #include "customstring.hpp"
 
 ctui::TUI::TUI(const std::string &initialLocation) {
+    init(initialLocation);
+}
 
+ctui::TUI::TUI() {
+    init("[---------LOCATION PLACEHOLDER---------]");
+}
+
+ctui::TUI::~TUI() {
+    endwin();
+}
+
+void ctui::TUI::init(const std::string &initialLocation) {
     initscr();
     raw();
     noecho();
@@ -24,10 +35,6 @@ ctui::TUI::TUI(const std::string &initialLocation) {
     initStatusBar(initialLocation);
     initOutWin();
     initInWin();
-}
-
-ctui::TUI::~TUI() {
-    endwin();
 }
 
 void ctui::TUI::initStatusBar(const std::string &initialLocation) {

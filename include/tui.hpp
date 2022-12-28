@@ -23,6 +23,7 @@ namespace ctui {
             int inMaxx;
             int outMaxx;
 
+            void init(const std::string &initialLocation);
             void initStatusBar(const std::string &initialLocation);
             void initOutWin();
             void initInWin();
@@ -31,6 +32,7 @@ namespace ctui {
         
         public:
             TUI(const std::string &initialLocation);
+            TUI();
             ~TUI();
             void tuiNapMs(const int &ms);
             void waitForInput();
