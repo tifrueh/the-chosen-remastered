@@ -29,13 +29,11 @@ void cstr::trim(std::string &string) {
 }
 
 void cstr::wrap(std::string &string, const int &width) {
-    int line = 1;
-    int pos = string.rfind(" ", width);
+    int pos = 0;
 
-    while ((pos + width) <= string.size()) {
-        string.at(pos) = '\n';
-        line++;
+    while ((pos + width) < string.size()) {
         pos = string.rfind(" ", pos + width);
+        string.at(pos) = '\n';
     }
 }
 
