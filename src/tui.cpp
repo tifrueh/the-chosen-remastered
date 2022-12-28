@@ -94,7 +94,13 @@ void ctui::TUI::waitForInput(const std::string &prompt) {
 
 void ctui::TUI::tuiPrint(const std::string &input) {
     std::string out = input;
-    cstr::wrap(out, outMaxx);
+
+    if (outMaxx < 120) {
+        cstr::wrap(out, outMaxx);
+    }
+    else {
+        cstr::wrap(out, 120);
+    }
     out.append("\n");
     const char *str = out.c_str();
     wprintw(outWin, str);
