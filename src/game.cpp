@@ -95,7 +95,9 @@ void chosen::Game::gameloop() {
             if (affirm != "y") {
                 command = "";
             }
-            tui.waitForInput("\n[Hit any key to exit]");
+            else {
+                tui.waitForInput("\n[Hit any key to exit]");
+            }
         }
         else if (command == "") {
             tui.tuiPrint("I beg your pardon?\n");
