@@ -10,7 +10,7 @@
 #include "game.hpp"
 
 void chosen::Game::gameloop() {
-    ctui::TUI tui("[LOCATION PLACEHOLDER]");
+    ctui::TUI tui("[LOCATION PLACEHOLDER------------------]");
     std::string command;
 
     tui.tuiPrint("Welcome message\n"
