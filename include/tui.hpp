@@ -54,6 +54,5 @@ template <size_t N>
 void ctui::TUI::tuiPrint(const std::array<std::string, N> &input) {
     for (std::string string : input) {
         tuiPrint(string);
-        tuiNapMs(2000);
     }
 }

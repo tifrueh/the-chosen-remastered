@@ -14,7 +14,7 @@ void chosen::Game::gameloop() {
     ctui::TUI tui("[---------LOCATION PLACEHOLDER---------]");
     std::string command;
 
-    tui.tuiPrint<12>(crsrc::welcome_message_txt);
+    tui.tuiPrint<11>(crsrc::welcome_message_txt);
 
     while (command != "exit" && command != "quit") {
         command = tui.tuiInput();
