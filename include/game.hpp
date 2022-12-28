@@ -5,12 +5,16 @@
 
 #pragma once
 
+#include "tui.hpp"
+
 namespace chosen {
     class Game {
         private:
             int state;
             int score;
             int moves;
+
+            ctui::TUI tui;
 
             void cmdTalkTo();
             void cmdTalk();
@@ -24,7 +28,7 @@ namespace chosen {
             void cmdUnlock();
             void cmdNorth();
             void cmdEast();
-            void cmdSough();
+            void cmdSouth();
             void cmdWest();
             void cmdUp();
             void cmdDown();

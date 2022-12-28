@@ -17,12 +17,11 @@ chosen::Game::Game() {
 }
 
 void chosen::Game::gameloop() {
-    ctui::TUI tui("[---------LOCATION PLACEHOLDER---------]");
     std::string command;
 
     tui.tuiPrint<11>(crsrc::welcome_message_txt);
 
-    while (command != "exit" && command != "quit") {
+    while (state == 0) {
         command = tui.tuiInput();
         cstr::trim(command);
         std::string errorMessage = "I do not know what you meant by " + command + ".";
@@ -32,73 +31,67 @@ void chosen::Game::gameloop() {
         cstr::to_lower(command);
 
         if (cprs::isCommand(command, "talk to")) {
-            tui.tuiPrint("cmd: talk to someone");
+            cmdTalkTo();
         }
         else if (cprs::isCommand(command, "talk")) {
-            tui.tuiPrint("cmd: talk to someone (short version)");
+            cmdTalk();
         }
         else if (cprs::isCommand(command, "fight")) {
-            tui.tuiPrint("cmd: fight someone");
+            cmdFight();
         }
         else if (cprs::isCommand(command, "take")) {
-            tui.tuiPrint("cmd: take something");
+            cmdTake();
         }
         else if (cprs::isCommand(command, "drop")) {
-            tui.tuiPrint("cmd: drop something");
+            cmdDrop();
         }
         else if (cprs::isCommand(command, "hug")) {
-            tui.tuiPrint("cmd: hug someone");
+            cmdHug();
         }
         else if (cprs::isCommand(command, "open")) {
-            tui.tuiPrint("cmd: open a door");
+            cmdOpen();
         }
         else if (cprs::isCommand(command, "close")) {
-            tui.tuiPrint("cmd: close a door");
+            cmdClose();
         }
         else if (cprs::isCommand(command, "lock")) {
-            tui.tuiPrint("cmd: lock a door");
+            cmdLock();
         }
         else if (cprs::isCommand(command, "unlock")) {
-            tui.tuiPrint("cmd: unlock a door");
+            cmdUnlock();
         }
         else if (command == "north") {
-            tui.tuiPrint("cmd: move north");
+            cmdNorth();
         }
         else if (command == "east") {
-            tui.tuiPrint("cmd: move east");
+            cmdEast();
         }
         else if (command == "south") {
-            tui.tuiPrint("cmd: move south");
+            cmdSouth();
         }
         else if (command == "west") {
-            tui.tuiPrint("cmd: move west");
+            cmdWest();
         }
         else if (command == "up") {
-            tui.tuiPrint("cmd: move up");
+            cmdUp();
         }
         else if (command == "down") {
-            tui.tuiPrint("cmd: move down");
+            cmdDown();
         }
         else if (command == "scream") {
-            tui.tuiPrint("cmd: scream (stop it ... get some help)");
+            cmdScream();
         }
         else if (command == "help") {
-            tui.tuiPrint("cmd: help");
+            cmdHelp();
         }
         else if (command == "inventory" || command == "i") {
-            tui.tuiPrint("cmd: open your inventory");
+            cmdInventory();
         }
         else if (command == "look" || command == "look around" || command == "l") {
-            tui.tuiPrint("cmd: look around");
+            cmdLook();
         }
         else if (command == "exit" || command == "quit") {
-            std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
-            if (affirm != "y") {
-                command = "";
-            }
-            else {
-                tui.waitForInput("\n[Hit any key to exit]");
-            }
+            cmdExit();
         }
         else if (command == "") {
             tui.tuiPrint("I beg your pardon?");
@@ -110,5 +103,93 @@ void chosen::Game::gameloop() {
         moves++;
         tui.updateMoves(moves);
         tui.updateScore(score);
+    }
+}
+
+void chosen::Game::cmdTalkTo() {
+    tui.tuiPrint("cmd: talk to someone");
+}
+
+void chosen::Game::cmdTalk() {
+    tui.tuiPrint("cmd: talk to someone (short version)");
+}
+
+void chosen::Game::cmdFight() {
+    tui.tuiPrint("cmd: fight someone");
+}
+
+void chosen::Game::cmdTake() {
+    tui.tuiPrint("cmd: take something");
+}
+
+void chosen::Game::cmdDrop() {
+    tui.tuiPrint("cmd: drop something");
+}
+
+void chosen::Game::cmdHug() {
+    tui.tuiPrint("cmd: hug someone");
+}
+
+void chosen::Game::cmdOpen() {
+    tui.tuiPrint("cmd: open a door");
+}
+
+void chosen::Game::cmdClose() {
+    tui.tuiPrint("cmd: close a door");
+}
+
+void chosen::Game::cmdLock() {
+    tui.tuiPrint("cmd: lock a door");
+}
+
+void chosen::Game::cmdUnlock() {
+    tui.tuiPrint("cmd: unlock a door");
+}
+
+void chosen::Game::cmdNorth() {
+    tui.tuiPrint("cmd: move north");
+}
+
+void chosen::Game::cmdEast() {
+    tui.tuiPrint("cmd: move east");
+}
+
+void chosen::Game::cmdSouth() {
+    tui.tuiPrint("cmd: move south");
+}
+
+void chosen::Game::cmdWest() {
+    tui.tuiPrint("cmd: move west");
+}
+
+void chosen::Game::cmdUp() {
+    tui.tuiPrint("cmd: move up");
+}
+
+void chosen::Game::cmdDown() {
+    tui.tuiPrint("cmd: move down");
+}
+
+void chosen::Game::cmdScream() {
+    tui.tuiPrint("cmd: scream (stop it ... get some help)");
+}
+
+void chosen::Game::cmdHelp() {
+    tui.tuiPrint("cmd: help");
+}
+
+void chosen::Game::cmdInventory() {
+    tui.tuiPrint("cmd: open your inventory");
+}
+
+void chosen::Game::cmdLook() {
+    tui.tuiPrint("cmd: look around");
+}
+
+void chosen::Game::cmdExit() {
+    std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
+    if (affirm == "y") {
+        state = 1;
+        tui.waitForInput("\n[Hit any key to exit]");
     }
 }
