@@ -22,6 +22,7 @@ void chosen::Game::gameloop() {
 
     while (command != "exit" && command != "quit") {
         command = tui.tuiInput();
+        tui.incrementMoves();
         cstr::trim(command);
 
         if (command != "") {
