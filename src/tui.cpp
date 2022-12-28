@@ -82,6 +82,15 @@ void ctui::TUI::tuiNapMs(const int &ms) {
     napms(ms);
 }
 
+void ctui::TUI::waitForInput() {
+    wgetch(inWin);
+}
+
+void ctui::TUI::waitForInput(const std::string &prompt) {
+    tuiPrint(prompt);
+    wgetch(inWin);
+}
+
 void ctui::TUI::tuiPrint(const std::string &input) {
     const char *str = input.c_str();
     wprintw(outWin, str);

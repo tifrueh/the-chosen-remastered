@@ -34,6 +34,8 @@ namespace ctui {
             TUI(const std::string &initialLocation);
             ~TUI();
             void tuiNapMs(const int &ms);
+            void waitForInput();
+            void waitForInput(const std::string &prompt);
             void tuiPrint(const std::string &input);
             void setLocation(const std::string &location);
             void incrementScore();
