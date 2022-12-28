@@ -7,6 +7,7 @@
 #include <locale.h>
 #include <string.h>
 #include <string>
+#include <array>
 #include "tui.hpp"
 #include "customstring.hpp"
 
