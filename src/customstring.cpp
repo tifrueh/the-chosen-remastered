@@ -72,7 +72,7 @@ std::string cstr::get_first_n_words(const std::string &string, const int &n) {
     std::string out;
 
     for (int i = 0; i < n; i++) {
-        if (begin == std::string::npos || end == std::string::npos) {
+        if (begin == std::string::npos) {
             return out;
         }
         out.append(string.substr(begin, end - begin) + " ");
