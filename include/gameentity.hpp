@@ -13,6 +13,7 @@ namespace chosen {
             std::string classId;
             std::string id;
             std::string name;
+            GameEntity(const std::string &id, const std::string &name, const std::string &classId);
         
         public:
             GameEntity(const std::string &id, const std::string &name);
