@@ -21,11 +21,14 @@ chosen::Game::Game() {
 void chosen::Game::gameloop() {
     std::string command;
 
+    tui.setLocation("Unknown location");
+
     tui.tuiPrint<11>(crsrc::welcome_message_txt);
 
-    player.setName(tui.tuiInput("\nWhat is thy name?\n"));
+    player.setName(tui.tuiInput("\nWhat is your name?\n"));
 
     player.setLocation(cellar);
+    tui.setLocation(player.getLocationName());
 
     tui.tuiPrint(player.getFullLocationDescription());
 
