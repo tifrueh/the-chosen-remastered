@@ -42,6 +42,7 @@ namespace chosen {
             void cmdHelp();
             void cmdInventory();
             void cmdLook();
+            void cmdClear();
             void cmdExit();
 
         public:

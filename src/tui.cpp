@@ -178,3 +178,8 @@ void ctui::TUI::updateMoves(const int &moves) {
     mvwprintw(movesWin, 0, 7, csMoves);
     wrefresh(movesWin);
 }
+
+void ctui::TUI::clear() {
+    wclear(outWin);
+    wrefresh(outWin);
+}

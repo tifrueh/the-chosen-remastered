@@ -103,6 +103,9 @@ void chosen::Game::gameloop() {
         else if (command == "look" || command == "look around" || command == "l") {
             cmdLook();
         }
+        else if (command == "clear") {
+            cmdClear();
+        }
         else if (command == "exit" || command == "quit") {
             cmdExit();
         }
@@ -198,6 +201,10 @@ void chosen::Game::cmdInventory() {
 
 void chosen::Game::cmdLook() {
     tui.tuiPrint(player.getFullLocationDescription());
+}
+
+void chosen::Game::cmdClear() {
+    tui.clear();
 }
 
 void chosen::Game::cmdExit() {
