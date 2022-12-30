@@ -14,12 +14,20 @@ chosen::Game::Game() {
     state = 0;
     score = 0;
     moves = 0;
+
+    cellar.setDescription(crsrc::cellar_txt);
 }
 
 void chosen::Game::gameloop() {
     std::string command;
 
     tui.tuiPrint<11>(crsrc::welcome_message_txt);
+
+    player.setName(tui.tuiInput("\nWhat is thy name?\n"));
+
+    player.setLocation(cellar);
+
+    tui.tuiPrint(player.getFullLocationDescription());
 
     while (state == 0) {
         command = tui.tuiInput();
@@ -103,6 +111,7 @@ void chosen::Game::gameloop() {
         moves++;
         tui.updateMoves(moves);
         tui.updateScore(score);
+        tui.setLocation(player.getLocationName());
     }
 }
 
@@ -183,7 +192,7 @@ void chosen::Game::cmdInventory() {
 }
 
 void chosen::Game::cmdLook() {
-    tui.tuiPrint("cmd: look around");
+    tui.tuiPrint(player.getFullLocationDescription());
 }
 
 void chosen::Game::cmdExit() {

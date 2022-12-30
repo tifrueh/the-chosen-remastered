@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include "world.hpp"
+#include "player.hpp"
 #include "tui.hpp"
 
 namespace chosen {
@@ -15,6 +17,10 @@ namespace chosen {
             int moves;
 
             ctui::TUI tui;
+
+            chosen::Player player;
+
+            chosen::Room cellar = {"cellar", "Cellar"};
 
             void cmdTalkTo();
             void cmdTalk();
