@@ -9,7 +9,7 @@
 
 namespace chosen {
     class GameEntity {
-        private: 
+        protected: 
             std::string classId;
             std::string id;
             std::string name;
