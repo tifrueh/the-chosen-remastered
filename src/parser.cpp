@@ -9,8 +9,8 @@
 #include "customstring.hpp"
 
 std::string cprs::parseCommand(const std::string &input, const std::string &command) {
-    int cmdPos = input.find(command + " ");
-    int cmdEnd = cmdPos + command.size();
+    long unsigned int cmdPos = input.find(command + " ");
+    long unsigned int cmdEnd = cmdPos + command.size();
 
     if (cmdPos == std::string::npos) {
         return input;
@@ -24,11 +24,11 @@ std::string cprs::parseCommand(const std::string &input, const std::string &comm
 
 std::array<std::string, 2> cprs::parseCommand(const std::string &input, const std::string &command, const std::string &delimiter) {
     std::array<std::string, 2> out;
-    int cmdPos = input.find(command + " ");
-    int cmdEnd = cmdPos + command.size();
+    long unsigned int cmdPos = input.find(command + " ");
+    long unsigned int cmdEnd = cmdPos + command.size();
     
-    int delPos = input.find(" " + delimiter + " ") + 1;
-    int delEnd = delPos + delimiter.size();
+    long unsigned int delPos = input.find(" " + delimiter + " ") + 1;
+    long unsigned int delEnd = delPos + delimiter.size();
 
     if (cmdPos == std::string::npos) {
         out[0] = input;

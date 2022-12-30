@@ -13,9 +13,9 @@ void cstr::to_lower(std::string &string) {
 
 void cstr::trim(std::string &string) {
 
-    const int begin = string.find_first_not_of(" ");
-    const int end = string.find_last_not_of(" ");
-    const int count = end + 1 - begin;
+    const long unsigned int begin = string.find_first_not_of(" ");
+    const long unsigned int end = string.find_last_not_of(" ");
+    const long unsigned int count = end + 1 - begin;
 
     if (string == ""){
         return;
@@ -29,7 +29,7 @@ void cstr::trim(std::string &string) {
 }
 
 void cstr::wrap(std::string &string, const int &width) {
-    int pos = 0;
+    long unsigned int pos = 0;
 
     while ((pos + width) < string.size()) {
         pos = string.rfind(" ", pos + width);
@@ -39,8 +39,8 @@ void cstr::wrap(std::string &string, const int &width) {
 
 int cstr::count_words(const std::string &string) {
     int words = 0;
-    int begin = string.find_first_not_of(" ");
-    int end = string.find_first_of(" ", begin);
+    long unsigned int begin = string.find_first_not_of(" ");
+    long unsigned int end = string.find_first_of(" ", begin);
 
     if (string == "" || begin == std::string::npos) {
         return words;
@@ -72,8 +72,8 @@ std::string cstr::int_to_string(int number, int numberOfDigits) {
 
 std::string cstr::get_first_n_words(const std::string &string, const int &n) {
 
-    int begin = string.find_first_not_of(" ");
-    int end = string.find_first_of(" ", begin);
+    long unsigned int begin = string.find_first_not_of(" ");
+    long unsigned int end = string.find_first_of(" ", begin);
 
     if (string == "" || begin == std::string::npos || end == std::string::npos) {
         return string;
