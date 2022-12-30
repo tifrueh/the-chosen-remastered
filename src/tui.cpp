@@ -108,7 +108,7 @@ void ctui::TUI::tuiPrint(const std::string &input) {
     }
     out.append("\n");
     const char *str = out.c_str();
-    wprintw(outWin, str);
+    waddstr(outWin, str);
     wrefresh(outWin);
 }
 
