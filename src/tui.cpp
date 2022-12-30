@@ -144,6 +144,7 @@ void ctui::TUI::setLocation(const std::string &location) {
 
     wclear(locationWin);
     wprintw(locationWin, str);
+    wrefresh(locationWin);
 }
 
 void ctui::TUI::updateScore(const int &score) {
