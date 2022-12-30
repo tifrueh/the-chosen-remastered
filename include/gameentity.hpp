@@ -19,6 +19,5 @@ namespace chosen {
             std::string getClassId();
             std::string getId();
             std::string getName();
-            void setName(const std::string &name);
     };
 }
