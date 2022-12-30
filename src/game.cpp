@@ -25,7 +25,9 @@ void chosen::Game::gameloop() {
 
     tui.tuiPrint<11>(crsrc::welcome_message_txt);
 
-    player.setName(tui.tuiInput("\nWhat is your name?\n"));
+    player.setName(tui.tuiInput("\nWhat is your name?"));
+
+    tui.tuiPrint("");
 
     player.setLocation(cellar);
     tui.setLocation(player.getLocationName());
