@@ -10,12 +10,13 @@
 namespace chosen {
     class GameEntity {
         private: 
+            std::string classId;
             std::string id;
             std::string name;
         
         public:
-            GameEntity(const std::string &id);
             GameEntity(const std::string &id, const std::string &name);
+            std::string getClassId();
             std::string getId();
             std::string getName();
             void setName(const std::string &name);
