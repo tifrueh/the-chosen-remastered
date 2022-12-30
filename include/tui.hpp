@@ -27,6 +27,7 @@ namespace ctui {
             void initStatusBar(const std::string &initialLocation);
             void initOutWin();
             void initInWin();
+            void mvGetStr(const int &y, const int &x, char *str);
 
             WINDOW *createBox(int height, int width, int yPos, int xPos);
         

@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include <locale.h>
 #include <string.h>
+#include <ctype.h>
 #include <string>
 #include <array>
 #include "tui.hpp"
@@ -75,6 +76,30 @@ void ctui::TUI::initInWin() {
     wrefresh(inWin);
 }
 
+void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
+    char c = mvwgetch(inWin, 0, 3);
+
+    while (c != KEY_ENTER && c != '\n' && c != '\r') {
+        if (c == KEY_BACKSPACE || c == '\a' || c == '\b') {
+            str[strlen(str) - 1] = '\0';
+        } 
+        else if (isalnum(c)) {
+            strcat(str, &c);
+        }
+
+        wmove(inWin, 0, 3);
+        wclrtoeol(inWin);
+        wprintw(inWin, str);
+        wrefresh(inWin);
+
+        c = wgetch(inWin);
+    }
+
+    wmove(inWin, 0, 3);
+    wclrtoeol(inWin);
+    wrefresh(inWin);
+}
+
 WINDOW *ctui::TUI::createBox(int height, int width, int yPos, int xPos) {
     WINDOW *localWin = newwin(height, width, yPos, xPos);
     box(localWin, 0, 0);
@@ -113,18 +138,11 @@ void ctui::TUI::tuiPrint(const std::string &input) {
 }
 
 std::string ctui::TUI::tuiInput() {
-    char *str = (char*) malloc(inMaxx * sizeof(char));
+    char *str = (char*) calloc(inMaxx, sizeof(char));
 
     curs_set(1);
-    echo();
-    mvwgetstr(inWin, 0, 3, str);
-    noecho();
+    mvGetStr(0, 3, str);
     curs_set(0);
-
-    wmove(inWin, 0, 3);
-    wclrtoeol(inWin);
-
-    wrefresh(inWin);
 
     std::string out = str;
 
