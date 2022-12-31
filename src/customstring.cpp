@@ -55,6 +55,17 @@ int cstr::count_words(const std::string &string) {
     return words;   
 }
 
+int cstr::count(const std::string &str, const char &c) {
+    int count = 0;
+    for (auto it = str.begin(); it != str.end(); it++) {
+        if (*it == c) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 std::string cstr::int_to_string(int number, int numberOfDigits) {
     std::string sNumber = std::to_string(number);
     int numberOfZeroes = numberOfDigits - sNumber.size();
