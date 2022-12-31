@@ -23,6 +23,7 @@ namespace chosen {
         private:
             std::string description;
             std::array<Door*, 4> doors;
+            std::array<bool, 4> hasDirection;
         
         public:
             Room(const std::string &id, const std::string &name);
@@ -31,6 +32,7 @@ namespace chosen {
             std::array<std::string, 3> getFullDescription();
             void addDoor(Door &door, const int &direction);
             Door *getDoor(const int &direction);
+            bool hasDoorToDirection(const int &direction);
     };
 
     class Door : public GameEntity {

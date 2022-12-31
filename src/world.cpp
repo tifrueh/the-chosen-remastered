@@ -10,6 +10,7 @@
 
 chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, name, "GameEntity:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
+    hasDirection = {false, false, false, false};
 }
 
 void chosen::Room::setDescription(const std::string &description) {
@@ -31,12 +32,18 @@ std::array<std::string, 3> chosen::Room::getFullDescription() {
 
 void chosen::Room::addDoor(Door &door, const int &direction) {
     doors[direction] = &door;
+    hasDirection[direction] = true;
     door.addRoom(this);
 }
 
 chosen::Door* chosen::Room::getDoor(const int &direction) {
     return doors[direction];
 }
+
+bool chosen::Room::hasDoorToDirection(const int &direction) {
+    return hasDirection[direction];
+}
+
 
 chosen::Door::Door(const std::string &id) : GameEntity(id, "Door", "GameEntity:Door") {
     roomsConnected = 0;

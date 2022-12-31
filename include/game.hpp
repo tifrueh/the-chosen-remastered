@@ -25,6 +25,8 @@ namespace chosen {
 
             chosen::Door hallEastHallDoor = {"hallEastHallDoor"};
 
+            void movePlayer(const int &direction);
+
             void cmdTalkTo();
             void cmdTalk();
             void cmdFight();

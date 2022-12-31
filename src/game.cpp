@@ -127,6 +127,16 @@ void chosen::Game::gameloop() {
     }
 }
 
+void chosen::Game::movePlayer(const int &direction) {
+    if (player.getLocation()->hasDoorToDirection(direction)) {
+        player.move(direction);
+        tui.tuiPrint(player.getFullLocationDescription());
+    }
+    else {
+        tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
+    }
+}
+
 void chosen::Game::cmdTalkTo() {
     tui.tuiPrint("cmd: talk to someone");
 }
@@ -168,21 +178,19 @@ void chosen::Game::cmdUnlock() {
 }
 
 void chosen::Game::cmdNorth() {
-    tui.tuiPrint("cmd: move north");
+    movePlayer(NORTH);
 }
 
 void chosen::Game::cmdEast() {
-    player.move(EAST);
-    tui.tuiPrint(player.getFullLocationDescription());
+    movePlayer(EAST);
 }
 
 void chosen::Game::cmdSouth() {
-    tui.tuiPrint("cmd: move south");
+    movePlayer(SOUTH);
 }
 
 void chosen::Game::cmdWest() {
-    player.move(WEST);
-    tui.tuiPrint(player.getFullLocationDescription());
+    movePlayer(WEST);
 }
 
 void chosen::Game::cmdUp() {

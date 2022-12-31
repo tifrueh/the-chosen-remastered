@@ -3,6 +3,7 @@
 // Full copyright notice in main.cpp
 
 
+#include <stdexcept>
 #include "world.hpp"
 #include "player.hpp"
 
@@ -18,6 +19,10 @@ void chosen::Player::setLocation(chosen::Room &room) {
     location = &room;
 }
 
+chosen::Room *chosen::Player::getLocation() {
+    return location;
+}
+
 std::string chosen::Player::getLocationName() {
     return location->getName();
 }
@@ -31,6 +36,11 @@ std::array<std::string, 3> chosen::Player::getFullLocationDescription() {
 }
 
 void chosen::Player::move(const int &direction) {
-    Room *newLocation = location->getDoor(direction)->getOtherRoom(location);
-    setLocation(*newLocation);
+    if (location->hasDoorToDirection(direction)) { 
+        Room *newLocation = location->getDoor(direction)->getOtherRoom(location);
+        setLocation(*newLocation);
+    }
+    else {
+        throw std::logic_error("Movement through nonexisting door");
+    }
 }
