@@ -6,14 +6,25 @@
 #include <ncurses.h>
 #include <locale.h>
 #include <string.h>
+#include <ctype.h>
 #include <string>
+#include <array>
 #include "tui.hpp"
 #include "customstring.hpp"
 
 ctui::TUI::TUI(const std::string &initialLocation) {
-    score = 0;
-    moves = 0;
+    init(initialLocation);
+}
 
+ctui::TUI::TUI() {
+    init("[---------LOCATION PLACEHOLDER---------]");
+}
+
+ctui::TUI::~TUI() {
+    endwin();
+}
+
+void ctui::TUI::init(const std::string &initialLocation) {
     initscr();
     raw();
     noecho();
@@ -25,10 +36,6 @@ ctui::TUI::TUI(const std::string &initialLocation) {
     initStatusBar(initialLocation);
     initOutWin();
     initInWin();
-}
-
-ctui::TUI::~TUI() {
-    endwin();
 }
 
 void ctui::TUI::initStatusBar(const std::string &initialLocation) {
@@ -69,6 +76,30 @@ void ctui::TUI::initInWin() {
     wrefresh(inWin);
 }
 
+void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
+    char c = mvwgetch(inWin, 0, 3);
+
+    while (c != KEY_ENTER && c != '\n' && c != '\r') {
+        if (c == KEY_BACKSPACE || c == '\a' || c == '\b') {
+            str[strlen(str) - 1] = '\0';
+        } 
+        else if (isalnum(c)) {
+            strcat(str, &c);
+        }
+
+        wmove(inWin, 0, 3);
+        wclrtoeol(inWin);
+        wprintw(inWin, str);
+        wrefresh(inWin);
+
+        c = wgetch(inWin);
+    }
+
+    wmove(inWin, 0, 3);
+    wclrtoeol(inWin);
+    wrefresh(inWin);
+}
+
 WINDOW *ctui::TUI::createBox(int height, int width, int yPos, int xPos) {
     WINDOW *localWin = newwin(height, width, yPos, xPos);
     box(localWin, 0, 0);
@@ -82,25 +113,36 @@ void ctui::TUI::tuiNapMs(const int &ms) {
     napms(ms);
 }
 
+void ctui::TUI::waitForInput() {
+    wgetch(inWin);
+}
+
+void ctui::TUI::waitForInput(const std::string &prompt) {
+    tuiPrint(prompt);
+    wgetch(inWin);
+}
+
 void ctui::TUI::tuiPrint(const std::string &input) {
-    const char *str = input.c_str();
-    wprintw(outWin, str);
+    std::string out = input;
+
+    if (outMaxx < 120) {
+        cstr::wrap(out, outMaxx);
+    }
+    else {
+        cstr::wrap(out, 120);
+    }
+    out.append("\n");
+    const char *str = out.c_str();
+    waddstr(outWin, str);
     wrefresh(outWin);
 }
 
 std::string ctui::TUI::tuiInput() {
-    char *str = (char*) malloc(inMaxx * sizeof(char));
+    char *str = (char*) calloc(inMaxx, sizeof(char));
 
     curs_set(1);
-    echo();
-    mvwgetstr(inWin, 0, 3, str);
-    noecho();
+    mvGetStr(0, 3, str);
     curs_set(0);
-
-    wmove(inWin, 0, 3);
-    wclrtoeol(inWin);
-
-    wrefresh(inWin);
 
     std::string out = str;
 
@@ -120,20 +162,24 @@ void ctui::TUI::setLocation(const std::string &location) {
 
     wclear(locationWin);
     wprintw(locationWin, str);
+    wrefresh(locationWin);
 }
 
-void ctui::TUI::incrementScore() {
-    score += 1;
+void ctui::TUI::updateScore(const int &score) {
     std::string sScore = cstr::int_to_string(score, 3);
     const char *csScore = sScore.c_str();
     mvwprintw(scoreWin, 0, 7, csScore);
     wrefresh(scoreWin);
 }
 
-void ctui::TUI::incrementMoves() {
-    moves += 1;
+void ctui::TUI::updateMoves(const int &moves) {
     std::string sMoves = cstr::int_to_string(moves, 4);
     const char *csMoves = sMoves.c_str();
     mvwprintw(movesWin, 0, 7, csMoves);
     wrefresh(movesWin);
+}
+
+void ctui::TUI::clear() {
+    wclear(outWin);
+    wrefresh(outWin);
 }

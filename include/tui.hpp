@@ -7,6 +7,7 @@
 
 #include <ncurses.h>
 #include <string>
+#include <array>
 
 namespace ctui {
 
@@ -21,25 +22,39 @@ namespace ctui {
             int maxy, maxx;
             int inMaxx;
             int outMaxx;
-            int score;
-            int moves;
 
+            void init(const std::string &initialLocation);
             void initStatusBar(const std::string &initialLocation);
             void initOutWin();
             void initInWin();
+            void mvGetStr(const int &y, const int &x, char *str);
 
             WINDOW *createBox(int height, int width, int yPos, int xPos);
         
         public:
             TUI(const std::string &initialLocation);
+            TUI();
             ~TUI();
             void tuiNapMs(const int &ms);
+            void waitForInput();
+            void waitForInput(const std::string &prompt);
             void tuiPrint(const std::string &input);
             void setLocation(const std::string &location);
-            void incrementScore();
-            void incrementMoves();
+            void updateScore(const int &score);
+            void updateMoves(const int &moves);
+            void clear();
             std::string tuiInput();
             std::string tuiInput(const std::string &prompt);
+
+            template <size_t N>
+            void tuiPrint(const std::array<std::string, N> &input);
     };
 
+}
+
+template <size_t N>
+void ctui::TUI::tuiPrint(const std::array<std::string, N> &input) {
+    for (std::string string : input) {
+        tuiPrint(string);
+    }
 }

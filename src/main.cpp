@@ -16,18 +16,9 @@
 
 
 #include <string>
-#include "tui.hpp"
-#include "customstring.hpp"
+#include "game.hpp"
 
 int main() {
-    ctui::TUI tui("Initial location");
-    std::string cmd;
-
-    while (cmd != "exit") {
-        cmd = tui.tuiInput();
-        tui.incrementMoves();
-        tui.tuiPrint(cmd + "\n");
-        cstr::to_lower(cmd);
-        cstr::trim(cmd);
-    }
+    chosen::Game theChosen;
+    theChosen.gameloop();
 }

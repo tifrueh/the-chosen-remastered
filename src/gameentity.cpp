@@ -6,13 +6,18 @@
 #include <string>
 #include "gameentity.hpp"
 
-chosen::GameEntity::GameEntity(const std::string &id) {
+chosen::GameEntity::GameEntity(const std::string &id, const std::string &name, const std::string &classId) {
+    this->classId = classId;
     this->id = id;
+    this->name = name;
 }
 
 chosen::GameEntity::GameEntity(const std::string &id, const std::string &name) {
-    this->id = id;
-    this->name = name;
+    GameEntity(id, name, "GameEntity");
+}
+
+std::string chosen::GameEntity::getClassId() {
+    return classId;
 }
 
 std::string chosen::GameEntity::getId() {
@@ -21,8 +26,4 @@ std::string chosen::GameEntity::getId() {
 
 std::string chosen::GameEntity::getName() {
     return name;
-}
-
-void chosen::GameEntity::setName(const std::string &name) {
-    this->name = name;
 }
