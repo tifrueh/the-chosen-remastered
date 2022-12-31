@@ -20,7 +20,10 @@ namespace chosen {
 
             chosen::Player player;
 
-            chosen::Room cellar = {"cellar", "Cellar"};
+            chosen::Room hall = {"hall", "The Hall"};
+            chosen::Room eastHallRoom = {"eastHallRoom", "Room East to the Hall"};
+
+            chosen::Door hallEastHallDoor = {"hallEastHallDoor"};
 
             void cmdTalkTo();
             void cmdTalk();

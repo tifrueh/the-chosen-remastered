@@ -15,7 +15,11 @@ chosen::Game::Game() {
     score = 0;
     moves = 0;
 
-    cellar.setDescription(crsrc::cellar_txt);
+    hall.setDescription(crsrc::hall_txt);
+    hall.addDoor(hallEastHallDoor, EAST);
+
+    eastHallRoom.setDescription(crsrc::east_hall_room_txt);
+    eastHallRoom.addDoor(hallEastHallDoor, WEST);
 }
 
 void chosen::Game::gameloop() {
@@ -29,7 +33,7 @@ void chosen::Game::gameloop() {
 
     tui.tuiPrint("");
 
-    player.setLocation(cellar);
+    player.setLocation(hall);
     tui.setLocation(player.getLocationName());
 
     tui.tuiPrint(player.getFullLocationDescription());
@@ -168,7 +172,8 @@ void chosen::Game::cmdNorth() {
 }
 
 void chosen::Game::cmdEast() {
-    tui.tuiPrint("cmd: move east");
+    player.move(EAST);
+    tui.tuiPrint(player.getFullLocationDescription());
 }
 
 void chosen::Game::cmdSouth() {
@@ -176,7 +181,8 @@ void chosen::Game::cmdSouth() {
 }
 
 void chosen::Game::cmdWest() {
-    tui.tuiPrint("cmd: move west");
+    player.move(WEST);
+    tui.tuiPrint(player.getFullLocationDescription());
 }
 
 void chosen::Game::cmdUp() {

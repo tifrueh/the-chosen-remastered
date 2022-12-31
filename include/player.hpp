@@ -22,5 +22,7 @@ namespace chosen {
             std::string getLocationName();
             std::string getLocationDescription();
             std::array<std::string, 3> getFullLocationDescription();
+
+            void move(const int &direction);
     };
 }

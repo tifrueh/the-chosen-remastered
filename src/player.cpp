@@ -29,3 +29,8 @@ std::string chosen::Player::getLocationDescription() {
 std::array<std::string, 3> chosen::Player::getFullLocationDescription() {
     return location->getFullDescription();
 }
+
+void chosen::Player::move(const int &direction) {
+    Room *newLocation = location->getDoor(direction)->getOtherRoom(location);
+    setLocation(*newLocation);
+}
