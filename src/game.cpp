@@ -127,16 +127,6 @@ void chosen::Game::gameloop() {
     }
 }
 
-void chosen::Game::movePlayer(const int &direction) {
-    if (player.getLocation()->hasDoorToDirection(direction)) {
-        player.move(direction);
-        tui.tuiPrint(player.getFullLocationDescription());
-    }
-    else {
-        tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
-    }
-}
-
 void chosen::Game::cmdTalkTo() {
     tui.tuiPrint("cmd: talk to someone");
 }
@@ -226,5 +216,15 @@ void chosen::Game::cmdExit() {
     if (affirm == "y") {
         state = 1;
         tui.waitForInput("\n[Hit any key to exit]");
+    }
+}
+
+void chosen::Game::movePlayer(const int &direction) {
+    if (player.getLocation()->hasDoorToDirection(direction)) {
+        player.move(direction);
+        tui.tuiPrint(player.getFullLocationDescription());
+    }
+    else {
+        tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
     }
 }
