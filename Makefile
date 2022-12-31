@@ -9,7 +9,7 @@ LDFLAGS ?=
 DEBUG ?= n
 
 override CPPFLAGS += -I./include
-override CXXFLAGS += -std=c++20 -Wall
+override CXXFLAGS += -std=c++17 -Wall
 override LDFLAGS += -lncurses
 
 DESTDIR ?= /usr/local
