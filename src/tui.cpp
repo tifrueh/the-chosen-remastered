@@ -83,7 +83,7 @@ void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
         if (c == KEY_BACKSPACE || c == '\a' || c == '\b') {
             str[strlen(str) - 1] = '\0';
         } 
-        else if (isalnum(c)) {
+        else if (isalnum(c) || c == ' ') {
             strcat(str, &c);
         }
 
