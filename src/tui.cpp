@@ -83,7 +83,7 @@ void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
         if (c == KEY_BACKSPACE || c == '\a' || c == '\b') {
             str[strlen(str) - 1] = '\0';
         } 
-        else if (isalnum(c)) {
+        else if (isalnum(c) || c == ' ') {
             strcat(str, &c);
         }
 
@@ -123,17 +123,27 @@ void ctui::TUI::waitForInput(const std::string &prompt) {
 }
 
 void ctui::TUI::tuiPrint(const std::string &input) {
+
+    if (input == "") {
+        return;
+    }
+
     std::string out = input;
 
-    if (outMaxx < 120) {
+    if (outMaxx < 110) {
         cstr::wrap(out, outMaxx);
     }
     else {
-        cstr::wrap(out, 120);
+        cstr::wrap(out, 110);
     }
     out.append("\n");
     const char *str = out.c_str();
     waddstr(outWin, str);
+    wrefresh(outWin);
+}
+
+void ctui::TUI::tuiPrintNewline() {
+    waddstr(outWin, "\n");
     wrefresh(outWin);
 }
 

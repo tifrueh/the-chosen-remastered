@@ -39,6 +39,7 @@ namespace ctui {
             void waitForInput();
             void waitForInput(const std::string &prompt);
             void tuiPrint(const std::string &input);
+            void tuiPrintNewline();
             void setLocation(const std::string &location);
             void updateScore(const int &score);
             void updateMoves(const int &moves);

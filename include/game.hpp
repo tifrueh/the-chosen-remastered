@@ -20,7 +20,21 @@ namespace chosen {
 
             chosen::Player player;
 
-            chosen::Room cellar = {"cellar", "Cellar"};
+            chosen::Room hall = {"hall", "The Hall"};
+            chosen::Room westHallRoom = {"westHallRoom", "Room West to the Hall"};
+            chosen::Room trophyRoom = {"trophyRoom", "Trophy Room"};
+            chosen::Room nsPassageway = {"nsPassageway", "N/S Passageway"};
+            chosen::Room staffRoom = {"staffRoom", "Staff Room"};
+            chosen::Room library = {"library", "The Library"};
+            chosen::Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
+
+            chosen::Door hallWestHallDoor = {"hallWestHallDoor"};
+            chosen::Door westHallTrophyDoor = {"westHallTrophyDoor"};
+            chosen::Door trophyNSPassagewayDoor = {"trophyNSPassagewayDoor"};
+            chosen::Door nsPassagewayStaffDoor = {"nsPassagewayStaffDoor"};
+            chosen::Door staffLibraryDoor = {"staffLibraryDoor"};
+            chosen::Door libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor"};
+            chosen::Door libraryEntranceHallDoor = {"libraryEntranceHallDoor"};
 
             void cmdTalkTo();
             void cmdTalk();
@@ -44,6 +58,8 @@ namespace chosen {
             void cmdLook();
             void cmdClear();
             void cmdExit();
+
+            void movePlayer(const int &direction);
 
         public:
             Game();

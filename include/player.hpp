@@ -19,8 +19,11 @@ namespace chosen {
             Player();
             void setName(const std::string &name);
             void setLocation(chosen::Room &room);
+            Room *getLocation();
             std::string getLocationName();
             std::string getLocationDescription();
-            std::array<std::string, 3> getFullLocationDescription();
+            std::array<std::string, 4> getFullLocationDescription();
+
+            void move(const int &direction);
     };
 }

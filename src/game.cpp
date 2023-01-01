@@ -15,7 +15,34 @@ chosen::Game::Game() {
     score = 0;
     moves = 0;
 
-    cellar.setDescription(crsrc::cellar_txt);
+    hall.setDescription(crsrc::hall_txt);
+    hall.addDoor(hallWestHallDoor, WEST);
+    hall.addDoor(libraryEntranceHallDoor, NORTH);
+
+    westHallRoom.setDescription(crsrc::west_hall_room_txt);
+    westHallRoom.addDoor(hallWestHallDoor, EAST);
+    westHallRoom.addDoor(westHallTrophyDoor, WEST);
+
+    trophyRoom.setDescription(crsrc::trophy_room_txt);
+    trophyRoom.addDoor(westHallTrophyDoor, EAST);
+    trophyRoom.addDoor(trophyNSPassagewayDoor, NORTH);
+
+    nsPassageway.setDescription(crsrc::ns_passageway_txt);
+    nsPassageway.addDoor(trophyNSPassagewayDoor, SOUTH);
+    nsPassageway.addDoor(nsPassagewayStaffDoor, NORTH);
+
+    staffRoom.setDescription(crsrc::staff_room_txt);
+    staffRoom.addDoor(nsPassagewayStaffDoor, SOUTH);
+    staffRoom.addDoor(staffLibraryDoor, EAST);
+
+    library.setDescription(crsrc::library_txt);
+    library.addDoor(staffLibraryDoor, WEST);
+    library.addDoor(libraryLibraryEntranceDoor, SOUTH);
+
+    libraryEntrance.setDescription(crsrc::library_entrance_txt);
+    libraryEntrance.addDoor(libraryLibraryEntranceDoor, NORTH);
+    libraryEntrance.addDoor(libraryEntranceHallDoor, SOUTH);
+
 }
 
 void chosen::Game::gameloop() {
@@ -25,11 +52,19 @@ void chosen::Game::gameloop() {
 
     tui.tuiPrint<11>(crsrc::welcome_message_txt);
 
-    player.setName(tui.tuiInput("\nWhat is your name?"));
+    std::string playerName;
+    playerName = tui.tuiInput("\nWhat is your name?\n");
+    cstr::trim(playerName);
 
-    tui.tuiPrint("");
+    while (playerName == "") {
+        playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
+    }
 
-    player.setLocation(cellar);
+    player.setName(playerName);
+
+    tui.tuiPrint("You look around.\n");
+
+    player.setLocation(hall);
     tui.setLocation(player.getLocationName());
 
     tui.tuiPrint(player.getFullLocationDescription());
@@ -164,19 +199,19 @@ void chosen::Game::cmdUnlock() {
 }
 
 void chosen::Game::cmdNorth() {
-    tui.tuiPrint("cmd: move north");
+    movePlayer(NORTH);
 }
 
 void chosen::Game::cmdEast() {
-    tui.tuiPrint("cmd: move east");
+    movePlayer(EAST);
 }
 
 void chosen::Game::cmdSouth() {
-    tui.tuiPrint("cmd: move south");
+    movePlayer(SOUTH);
 }
 
 void chosen::Game::cmdWest() {
-    tui.tuiPrint("cmd: move west");
+    movePlayer(WEST);
 }
 
 void chosen::Game::cmdUp() {
@@ -212,5 +247,15 @@ void chosen::Game::cmdExit() {
     if (affirm == "y") {
         state = 1;
         tui.waitForInput("\n[Hit any key to exit]");
+    }
+}
+
+void chosen::Game::movePlayer(const int &direction) {
+    if (player.getLocation()->hasDoorToDirection(direction)) {
+        player.move(direction);
+        tui.tuiPrint(player.getFullLocationDescription());
+    }
+    else {
+        tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
     }
 }
