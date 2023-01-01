@@ -31,7 +31,7 @@ void chosen::Game::gameloop() {
 
     player.setName(tui.tuiInput("\nWhat is your name?"));
 
-    tui.tuiPrint("");
+    tui.tuiPrintNewline();
 
     player.setLocation(hall);
     tui.setLocation(player.getLocationName());
