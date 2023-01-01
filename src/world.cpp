@@ -20,13 +20,13 @@ std::string chosen::Room::getDoorString() {
     if (hasDirection[NORTH] == true) {
         directions.push_back("north");
     } 
-    else if (hasDirection[EAST] == true) {
+    if (hasDirection[EAST] == true) {
         directions.push_back("east");
     }
-    else if (hasDirection[SOUTH] == true) {
+    if (hasDirection[SOUTH] == true) {
         directions.push_back("south");
     }
-    else if (hasDirection[WEST] == true) {
+    if (hasDirection[WEST] == true) {
         directions.push_back("west");
     }
 
