@@ -5,12 +5,46 @@
 
 #include <string>
 #include <array>
+#include <vector>
 #include <stdexcept>
 #include "world.hpp"
 
 chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, name, "GameEntity:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false};
+}
+
+std::string chosen::Room::getDoorString() {
+    std::vector<std::string> directions;
+
+    if (hasDirection[NORTH] == true) {
+        directions.push_back("north");
+    } 
+    else if (hasDirection[EAST] == true) {
+        directions.push_back("east");
+    }
+    else if (hasDirection[SOUTH] == true) {
+        directions.push_back("south");
+    }
+    else if (hasDirection[WEST] == true) {
+        directions.push_back("west");
+    }
+
+    if (directions.size() == 1) {
+        return "There is a door to the " + directions[0] + ".";
+    }
+    else if (directions.size() == 2) {
+        return "There are doors to the " + directions[0] + " and to the " + directions[1] + ".";
+    }
+    else if (directions.size() == 3) {
+        return "There are doors to the " + directions[0] + " , to the " + directions[1] + " and to the " + directions[2] + ".";
+    }
+    else if (directions.size() == 4) {
+        return "There are doors to all directions.";
+    }
+    else {
+        return "";
+    }
 }
 
 void chosen::Room::setDescription(const std::string &description) {
@@ -21,11 +55,12 @@ std::string chosen::Room::getDescription() {
     return description;
 }
 
-std::array<std::string, 3> chosen::Room::getFullDescription() {
-    std::array<std::string, 3> out;
+std::array<std::string, 4> chosen::Room::getFullDescription() {
+    std::array<std::string, 4> out;
     out[0] = name;
     out[1] = std::string(name.size(), '-');
     out[2] = description;
+    out[3] = getDoorString();
 
     return out;
 }

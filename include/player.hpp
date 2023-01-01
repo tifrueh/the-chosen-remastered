@@ -22,7 +22,7 @@ namespace chosen {
             Room *getLocation();
             std::string getLocationName();
             std::string getLocationDescription();
-            std::array<std::string, 3> getFullLocationDescription();
+            std::array<std::string, 4> getFullLocationDescription();
 
             void move(const int &direction);
     };

@@ -24,12 +24,14 @@ namespace chosen {
             std::string description;
             std::array<Door*, 4> doors;
             std::array<bool, 4> hasDirection;
+
+            std::string getDoorString();
         
         public:
             Room(const std::string &id, const std::string &name);
             void setDescription(const std::string &description);
             std::string getDescription();
-            std::array<std::string, 3> getFullDescription();
+            std::array<std::string, 4> getFullDescription();
             void addDoor(Door &door, const int &direction);
             Door *getDoor(const int &direction);
             bool hasDoorToDirection(const int &direction);
