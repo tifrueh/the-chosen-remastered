@@ -29,9 +29,17 @@ void chosen::Game::gameloop() {
 
     tui.tuiPrint<11>(crsrc::welcome_message_txt);
 
-    player.setName(tui.tuiInput("\nWhat is your name?"));
+    std::string playerName;
+    playerName = tui.tuiInput("\nWhat is your name?\n");
+    cstr::trim(playerName);
 
-    tui.tuiPrintNewline();
+    while (playerName == "") {
+        playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
+    }
+
+    player.setName(playerName);
+
+    tui.tuiPrint("You look around.\n");
 
     player.setLocation(hall);
     tui.setLocation(player.getLocationName());
