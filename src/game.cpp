@@ -16,10 +16,33 @@ chosen::Game::Game() {
     moves = 0;
 
     hall.setDescription(crsrc::hall_txt);
-    hall.addDoor(hallEastHallDoor, EAST);
+    hall.addDoor(hallWestHallDoor, WEST);
+    hall.addDoor(libraryEntranceHallDoor, NORTH);
 
-    eastHallRoom.setDescription(crsrc::east_hall_room_txt);
-    eastHallRoom.addDoor(hallEastHallDoor, WEST);
+    westHallRoom.setDescription(crsrc::west_hall_room_txt);
+    westHallRoom.addDoor(hallWestHallDoor, EAST);
+    westHallRoom.addDoor(westHallTrophyDoor, WEST);
+
+    trophyRoom.setDescription(crsrc::trophy_room_txt);
+    trophyRoom.addDoor(westHallTrophyDoor, EAST);
+    trophyRoom.addDoor(trophyNSPassagewayDoor, NORTH);
+
+    nsPassageway.setDescription(crsrc::ns_passageway_txt);
+    nsPassageway.addDoor(trophyNSPassagewayDoor, SOUTH);
+    nsPassageway.addDoor(nsPassagewayStaffDoor, NORTH);
+
+    staffRoom.setDescription(crsrc::staff_room_txt);
+    staffRoom.addDoor(nsPassagewayStaffDoor, SOUTH);
+    staffRoom.addDoor(staffLibraryDoor, EAST);
+
+    library.setDescription(crsrc::library_txt);
+    library.addDoor(staffLibraryDoor, WEST);
+    library.addDoor(libraryLibraryEntranceDoor, SOUTH);
+
+    libraryEntrance.setDescription(crsrc::library_entrance_txt);
+    libraryEntrance.addDoor(libraryLibraryEntranceDoor, NORTH);
+    libraryEntrance.addDoor(libraryEntranceHallDoor, SOUTH);
+
 }
 
 void chosen::Game::gameloop() {
