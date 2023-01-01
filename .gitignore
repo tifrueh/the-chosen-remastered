@@ -41,3 +41,6 @@
 
 # Executable
 the-chosen-remastered
+
+# macOS
+.DS_Store
