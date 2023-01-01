@@ -130,11 +130,11 @@ void ctui::TUI::tuiPrint(const std::string &input) {
 
     std::string out = input;
 
-    if (outMaxx < 120) {
+    if (outMaxx < 110) {
         cstr::wrap(out, outMaxx);
     }
     else {
-        cstr::wrap(out, 120);
+        cstr::wrap(out, 110);
     }
     out.append("\n");
     const char *str = out.c_str();
