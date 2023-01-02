@@ -15,7 +15,8 @@ override LDFLAGS += -lncurses
 DESTDIR ?= /usr/local
 DESTDIR_BIN = $(DESTDIR)/bin
 
-TARGET = build/the-chosen-remastered
+TARGET = the-chosen-remastered
+TARGET_PATH = build/$(TARGET)
 
 ifeq ($(DEBUG), y)
 	override CXXFLAGS += -g
@@ -23,7 +24,7 @@ ifeq ($(DEBUG), y)
 endif
 
 MAKE_OBJ = $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c
-MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET)
+MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET_PATH)
 
 
 all : $(TARGET)
@@ -41,12 +42,12 @@ clean :
 	-rm $(OBJS)
 
 distclean : 
-	-rm $(TARGET)
+	-rm $(TARGET_PATH)
 
 install : $(TARGET)
 	@install -d $(DESTDIR_BIN)
-	@install $(TARGET) $(DESTDIR_BIN)
+	@install $(TARGET_PATH) $(DESTDIR_BIN)
 	@echo "$(TARGET) was installed to $(DESTDIR)"
 
 uninstall :
-	@if [ -f $(DESTDIR_BIN)/$(TARGET) ]; then rm $(DESTDIR_BIN)/$(TARGET); else echo "ERROR: $(TARGET) not installed at location: \"$(DESTDIR_BIN)\" --> please uninstall manually"; fi
+	@if [ -f $(DESTDIR_BIN)/$(TARGET) ]; then rm $(DESTDIR_BIN)/$(TARGET) && echo "$(DESTDIR_BIN)/$(TARGET) was deleted"; else echo "ERROR: $(TARGET) not installed at location: \"$(DESTDIR_BIN)\" --> please uninstall manually"; fi
