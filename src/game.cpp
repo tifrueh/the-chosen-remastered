@@ -215,11 +215,11 @@ void chosen::Game::cmdWest() {
 }
 
 void chosen::Game::cmdUp() {
-    tui.tuiPrint("cmd: move up");
+    movePlayer(UP);
 }
 
 void chosen::Game::cmdDown() {
-    tui.tuiPrint("cmd: move down");
+    movePlayer(DOWN);
 }
 
 void chosen::Game::cmdScream() {
@@ -251,11 +251,22 @@ void chosen::Game::cmdExit() {
 }
 
 void chosen::Game::movePlayer(const int &direction) {
-    if (player.getLocation()->hasLinkToDirection(direction)) {
-        player.move(direction);
-        tui.tuiPrint(player.getFullLocationDescription());
+    
+    if (!player.getLocation()->hasLinkToDirection(direction)) {
+
+        if (direction == UP) {
+            tui.tuiPrint("You jump. Nothing happens. Do you expect me to applaud?");
+        } 
+        else if (direction == DOWN) {
+            tui.tuiPrint("You kneel down and examine the floor. There doesn't seem to be a way down.");
+        }
+        else {
+            tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
+        }
+
+        return;
     }
-    else {
-        tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
-    }
+
+    player.move(direction);
+    tui.tuiPrint(player.getFullLocationDescription());
 }
