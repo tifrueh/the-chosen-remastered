@@ -65,31 +65,31 @@ std::array<std::string, 4> chosen::Room::getFullDescription() {
     return out;
 }
 
-void chosen::Room::addDoor(Door &door, const int &direction) {
-    doors[direction] = &door;
+void chosen::Room::addLink(Link &link, const int &direction) {
+    links[direction] = &link;
     hasDirection[direction] = true;
-    door.addRoom(this);
+    link.addRoom(this);
 }
 
-chosen::Door* chosen::Room::getDoor(const int &direction) {
+chosen::Link* chosen::Room::getLink(const int &direction) {
     if (hasDirection[direction]) {
-        return doors[direction];
+        return links[direction];
     }
     else {
-        throw std::out_of_range("This room has no door to this direction");
+        throw std::out_of_range("This room has no link to this direction");
     }
 }
 
-bool chosen::Room::hasDoorToDirection(const int &direction) {
+bool chosen::Room::hasLinkToDirection(const int &direction) {
     return hasDirection[direction];
 }
 
 
-chosen::Door::Door(const std::string &id) : GameEntity(id, "Door", "GameEntity:Door") {
+chosen::Link::Link(const std::string &id) : GameEntity(id, "Link", "GameEntity:Link") {
     roomsConnected = 0;
 }
 
-void chosen::Door::addRoom(Room *room) {
+void chosen::Link::addRoom(Room *room) {
     if (roomsConnected == 0) {
         rooms[0] = room;
         roomsConnected++;
@@ -99,11 +99,11 @@ void chosen::Door::addRoom(Room *room) {
         roomsConnected++;
     }
     else {
-        throw std::out_of_range("A door cannot have more than two rooms");
+        throw std::out_of_range("A link cannot have more than two rooms");
     }
 }
 
-chosen::Room *chosen::Door::getOtherRoom(Room *room) {
+chosen::Room *chosen::Link::getOtherRoom(Room *room) {
     if (rooms[0] == room) {
         return rooms[1];
     }

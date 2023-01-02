@@ -16,32 +16,32 @@ chosen::Game::Game() {
     moves = 0;
 
     hall.setDescription(crsrc::hall_txt);
-    hall.addDoor(hallWestHallDoor, WEST);
-    hall.addDoor(libraryEntranceHallDoor, NORTH);
+    hall.addLink(hallWestHallDoor, WEST);
+    hall.addLink(libraryEntranceHallDoor, NORTH);
 
     westHallRoom.setDescription(crsrc::west_hall_room_txt);
-    westHallRoom.addDoor(hallWestHallDoor, EAST);
-    westHallRoom.addDoor(westHallTrophyDoor, WEST);
+    westHallRoom.addLink(hallWestHallDoor, EAST);
+    westHallRoom.addLink(westHallTrophyDoor, WEST);
 
     trophyRoom.setDescription(crsrc::trophy_room_txt);
-    trophyRoom.addDoor(westHallTrophyDoor, EAST);
-    trophyRoom.addDoor(trophyNSPassagewayDoor, NORTH);
+    trophyRoom.addLink(westHallTrophyDoor, EAST);
+    trophyRoom.addLink(trophyNSPassagewayDoor, NORTH);
 
     nsPassageway.setDescription(crsrc::ns_passageway_txt);
-    nsPassageway.addDoor(trophyNSPassagewayDoor, SOUTH);
-    nsPassageway.addDoor(nsPassagewayStaffDoor, NORTH);
+    nsPassageway.addLink(trophyNSPassagewayDoor, SOUTH);
+    nsPassageway.addLink(nsPassagewayStaffDoor, NORTH);
 
     staffRoom.setDescription(crsrc::staff_room_txt);
-    staffRoom.addDoor(nsPassagewayStaffDoor, SOUTH);
-    staffRoom.addDoor(staffLibraryDoor, EAST);
+    staffRoom.addLink(nsPassagewayStaffDoor, SOUTH);
+    staffRoom.addLink(staffLibraryDoor, EAST);
 
     library.setDescription(crsrc::library_txt);
-    library.addDoor(staffLibraryDoor, WEST);
-    library.addDoor(libraryLibraryEntranceDoor, SOUTH);
+    library.addLink(staffLibraryDoor, WEST);
+    library.addLink(libraryLibraryEntranceDoor, SOUTH);
 
     libraryEntrance.setDescription(crsrc::library_entrance_txt);
-    libraryEntrance.addDoor(libraryLibraryEntranceDoor, NORTH);
-    libraryEntrance.addDoor(libraryEntranceHallDoor, SOUTH);
+    libraryEntrance.addLink(libraryLibraryEntranceDoor, NORTH);
+    libraryEntrance.addLink(libraryEntranceHallDoor, SOUTH);
 
 }
 
@@ -251,7 +251,7 @@ void chosen::Game::cmdExit() {
 }
 
 void chosen::Game::movePlayer(const int &direction) {
-    if (player.getLocation()->hasDoorToDirection(direction)) {
+    if (player.getLocation()->hasLinkToDirection(direction)) {
         player.move(direction);
         tui.tuiPrint(player.getFullLocationDescription());
     }

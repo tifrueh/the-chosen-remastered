@@ -36,11 +36,11 @@ std::array<std::string, 4> chosen::Player::getFullLocationDescription() {
 }
 
 void chosen::Player::move(const int &direction) {
-    if (location->hasDoorToDirection(direction)) { 
-        Room *newLocation = location->getDoor(direction)->getOtherRoom(location);
+    if (location->hasLinkToDirection(direction)) { 
+        Room *newLocation = location->getLink(direction)->getOtherRoom(location);
         setLocation(*newLocation);
     }
     else {
-        throw std::logic_error("Movement through nonexisting door");
+        throw std::logic_error("Movement through nonexisting link");
     }
 }

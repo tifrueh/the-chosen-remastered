@@ -28,13 +28,13 @@ namespace chosen {
             chosen::Room library = {"library", "The Library"};
             chosen::Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
 
-            chosen::Door hallWestHallDoor = {"hallWestHallDoor"};
-            chosen::Door westHallTrophyDoor = {"westHallTrophyDoor"};
-            chosen::Door trophyNSPassagewayDoor = {"trophyNSPassagewayDoor"};
-            chosen::Door nsPassagewayStaffDoor = {"nsPassagewayStaffDoor"};
-            chosen::Door staffLibraryDoor = {"staffLibraryDoor"};
-            chosen::Door libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor"};
-            chosen::Door libraryEntranceHallDoor = {"libraryEntranceHallDoor"};
+            chosen::Link hallWestHallDoor = {"hallWestHallDoor"};
+            chosen::Link westHallTrophyDoor = {"westHallTrophyDoor"};
+            chosen::Link trophyNSPassagewayDoor = {"trophyNSPassagewayDoor"};
+            chosen::Link nsPassagewayStaffDoor = {"nsPassagewayStaffDoor"};
+            chosen::Link staffLibraryDoor = {"staffLibraryDoor"};
+            chosen::Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor"};
+            chosen::Link libraryEntranceHallDoor = {"libraryEntranceHallDoor"};
 
             void cmdTalkTo();
             void cmdTalk();
