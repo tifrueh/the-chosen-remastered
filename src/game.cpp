@@ -15,7 +15,15 @@ chosen::Game::Game() {
     score = 0;
     moves = 0;
 
+    cellar.setDescription(crsrc::cellar_txt);
+    cellar.addLink(cellarLadder, UP);
+    
+    cellarLadderRoom.setDescription(crsrc::cellar_ladder_txt);
+    cellarLadderRoom.addLink(cellarLadder, DOWN);
+    cellarLadderRoom.addLink(ladderHallDoor, NORTH);
+
     hall.setDescription(crsrc::hall_txt);
+    hall.addLink(ladderHallDoor, SOUTH);
     hall.addLink(hallWestHallDoor, WEST);
     hall.addLink(libraryEntranceHallDoor, NORTH);
 
@@ -64,7 +72,7 @@ void chosen::Game::gameloop() {
 
     tui.tuiPrint("You look around.\n");
 
-    player.setLocation(hall);
+    player.setLocation(cellar);
     tui.setLocation(player.getLocationName());
 
     tui.tuiPrint(player.getFullLocationDescription());

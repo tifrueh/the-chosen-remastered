@@ -20,6 +20,8 @@ namespace chosen {
 
             chosen::Player player;
 
+            chosen::Room cellar = {"cellar", "Cellar"};
+            chosen::Room cellarLadderRoom = {"cellarLadder", "Ladder to the Cellar"};
             chosen::Room hall = {"hall", "The Hall"};
             chosen::Room westHallRoom = {"westHallRoom", "Room West to the Hall"};
             chosen::Room trophyRoom = {"trophyRoom", "Trophy Room"};
@@ -28,6 +30,8 @@ namespace chosen {
             chosen::Room library = {"library", "The Library"};
             chosen::Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
 
+            chosen::Link cellarLadder = {"cellarLadder"};
+            chosen::Link ladderHallDoor = {"ladderHallDoor"};
             chosen::Link hallWestHallDoor = {"hallWestHallDoor"};
             chosen::Link westHallTrophyDoor = {"westHallTrophyDoor"};
             chosen::Link trophyNSPassagewayDoor = {"trophyNSPassagewayDoor"};
