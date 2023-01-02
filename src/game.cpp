@@ -233,6 +233,11 @@ void chosen::Game::movePlayer(const int &direction) {
         return;
     }
 
+    std::string message = player.getLocation()->getLink(direction)->getMessage();
+    if (message != "") {
+        tui.tuiPrint(message + "\n");
+    }
+
     player.move(direction);
     tui.tuiPrint(player.getFullLocationDescription());
 }

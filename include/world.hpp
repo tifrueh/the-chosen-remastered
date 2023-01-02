@@ -27,6 +27,7 @@ namespace chosen {
             std::string description;
             std::array<Link*, 6> links;
             std::array<bool, 6> hasDirection;
+            std::array<bool, 6> hasVisibleDirection;
 
             std::string getDoorString();
             std::string getLadderString();
@@ -39,15 +40,21 @@ namespace chosen {
             void addLink(Link &link, const int &direction);
             Link *getLink(const int &direction);
             bool hasLinkToDirection(const int &direction);
+            bool hasVisibleLinkToDirection(const int &direction);
     };
 
     class Link : public GameEntity {
         private:
             int roomsConnected;
+            bool visible;
+            std::string message;
             std::array<Room*, 2> rooms;
         
         public:
-            Link(const std::string &id);
+            Link(const std::string &id, const bool &visible);
+            bool isVisible();
+            std::string getMessage();
+            void setMessage(const std::string &message);
             void addRoom(Room *room);
             Room *getOtherRoom(Room *room);
     };

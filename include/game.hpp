@@ -30,15 +30,15 @@ namespace chosen {
             chosen::Room library = {"library", "The Library"};
             chosen::Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
 
-            chosen::Link cellarLadder = {"cellarLadder"};
-            chosen::Link ladderHallDoor = {"ladderHallDoor"};
-            chosen::Link hallWestHallDoor = {"hallWestHallDoor"};
-            chosen::Link westHallTrophyDoor = {"westHallTrophyDoor"};
-            chosen::Link trophyNSPassagewayDoor = {"trophyNSPassagewayDoor"};
-            chosen::Link nsPassagewayStaffDoor = {"nsPassagewayStaffDoor"};
-            chosen::Link staffLibraryDoor = {"staffLibraryDoor"};
-            chosen::Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor"};
-            chosen::Link libraryEntranceHallDoor = {"libraryEntranceHallDoor"};
+            chosen::Link cellarLadder = {"cellarLadder", true};
+            chosen::Link ladderHallDoor = {"ladderHallDoor", true};
+            chosen::Link hallWestHallDoor = {"hallWestHallDoor", true};
+            chosen::Link westHallTrophyDoor = {"westHallTrophyDoor", true};
+            chosen::Link trophyNSPassagewayDoor = {"trophyNSPassagewayDoor", true};
+            chosen::Link nsPassagewayStaffDoor = {"nsPassagewayStaffDoor", true};
+            chosen::Link staffLibraryDoor = {"staffLibraryDoor", true};
+            chosen::Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor", true};
+            chosen::Link libraryEntranceHallDoor = {"libraryEntranceHallDoor", true};
 
             void initWorld();
             void initLoop();
@@ -61,7 +61,7 @@ namespace chosen {
             void cmdWest();
             void cmdUp();
             void cmdDown();
-            
+
             void cmdScream();
             void cmdHelp();
             void cmdInventory();

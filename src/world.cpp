@@ -17,16 +17,16 @@ chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(
 std::string chosen::Room::getDoorString() {
     std::vector<std::string> directions;
 
-    if (hasDirection[NORTH] == true) {
+    if (hasVisibleDirection[NORTH]) {
         directions.push_back("north");
     } 
-    if (hasDirection[EAST] == true) {
+    if (hasVisibleDirection[EAST]) {
         directions.push_back("east");
     }
-    if (hasDirection[SOUTH] == true) {
+    if (hasVisibleDirection[SOUTH]) {
         directions.push_back("south");
     }
-    if (hasDirection[WEST] == true) {
+    if (hasVisibleDirection[WEST]) {
         directions.push_back("west");
     }
 
@@ -50,10 +50,10 @@ std::string chosen::Room::getDoorString() {
 std::string chosen::Room::getLadderString() {
     std::vector<std::string> directions;
 
-    if (hasDirection[UP]) {
+    if (hasVisibleDirection[UP]) {
         directions.push_back("up");
     }
-    if (hasDirection[DOWN]) {
+    if (hasVisibleDirection[DOWN]) {
         directions.push_back("down");
     }
 
@@ -95,6 +95,11 @@ void chosen::Room::addLink(Link &link, const int &direction) {
 
     links[direction] = &link;
     hasDirection[direction] = true;
+
+    if (link.isVisible()) {
+        hasVisibleDirection[direction] = true;
+    }
+
     link.addRoom(this);
 }
 
@@ -111,9 +116,27 @@ bool chosen::Room::hasLinkToDirection(const int &direction) {
     return hasDirection[direction];
 }
 
+bool chosen::Room::hasVisibleLinkToDirection(const int &direction) {
+    return hasVisibleDirection[direction];
+}
 
-chosen::Link::Link(const std::string &id) : GameEntity(id, "Link", "GameEntity:Link") {
+
+chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "Link", "GameEntity:Link") {
     roomsConnected = 0;
+    this->visible = visible;
+    message = "";
+}
+
+bool chosen::Link::isVisible() {
+    return visible;
+}
+
+std::string chosen::Link::getMessage() {
+    return message;
+}
+
+void chosen::Link::setMessage(const std::string &message) {
+    this->message = message;
 }
 
 void chosen::Link::addRoom(Room *room) {
