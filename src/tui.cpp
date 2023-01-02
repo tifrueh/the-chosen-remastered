@@ -78,14 +78,15 @@ void ctui::TUI::initInWin() {
 }
 
 void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
-    char c = mvwgetch(inWin, 0, 3);
+    int iC = mvwgetch(inWin, 0, 3);
+    char strC[2] = {(char)iC, '\0'};
 
-    while (c != KEY_ENTER && c != '\n' && c != '\r') {
-        if (c == KEY_BACKSPACE || c == '\a' || c == '\b') {
+    while (iC != KEY_ENTER && iC != '\n' && iC != '\r') {
+        if (iC == KEY_BACKSPACE || iC == '\a' || iC == '\b') {
             str[strlen(str) - 1] = '\0';
         } 
-        else if (isalnum(c) || c == ' ') {
-            strcat(str, &c);
+        else if (isalnum(iC) || iC == ' ') {
+            strcat(str, strC);
         }
 
         wmove(inWin, 0, 3);
@@ -93,7 +94,8 @@ void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
         wprintw(inWin, str);
         wrefresh(inWin);
 
-        c = wgetch(inWin);
+        iC = wgetch(inWin);
+        strC[0] = iC;
     }
 
     wmove(inWin, 0, 3);
