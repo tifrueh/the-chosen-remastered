@@ -121,12 +121,13 @@ void chosen::Game::initWorld() {
     
     cellarLadderRoom.setDescription(crsrc::cellar_ladder_txt);
     cellarLadderRoom.addLink(cellarLadder, DOWN);
-    cellarLadderRoom.addLink(ladderHallDoor, DOWN);
+    cellarLadderRoom.addLink(ladderHallDoor, NORTH);
 
     hall.setDescription(crsrc::hall_txt);
     hall.addLink(ladderHallDoor, SOUTH);
     hall.addLink(hallWestHallDoor, WEST);
     hall.addLink(libraryEntranceHallDoor, NORTH);
+    hall.addLink(hallEastHallDoor, EAST);
 
     westHallRoom.setDescription(crsrc::west_hall_room_txt);
     westHallRoom.addLink(hallWestHallDoor, EAST);
@@ -151,6 +152,23 @@ void chosen::Game::initWorld() {
     libraryEntrance.setDescription(crsrc::library_entrance_txt);
     libraryEntrance.addLink(libraryLibraryEntranceDoor, NORTH);
     libraryEntrance.addLink(libraryEntranceHallDoor, SOUTH);
+
+    eastHallRoom.setDescription(crsrc::east_hall_room_txt);
+    eastHallRoom.addLink(hallEastHallDoor, WEST);
+    eastHallRoom.addLink(eastHallThroneEntranceDoor, EAST);
+
+    throneEntrance.setDescription(crsrc::throne_entrance_txt);
+    throneEntrance.addLink(eastHallThroneEntranceDoor, WEST);
+    throneEntrance.addLink(hiddenRoomLink, SOUTH);
+    throneEntrance.addLink(throneDoor, NORTH);
+
+    hiddenRoom.setDescription(crsrc::hidden_room_txt);
+    hiddenRoom.addLink(hiddenRoomLink, NORTH);
+
+    throneRoom.setDescription(crsrc::throne_room_txt);
+    throneRoom.addLink(throneDoor, SOUTH);
+
+    hiddenRoomLink.setMessage("As you lay your hand upon the wall, you pass through it and emerge on the other side.");
 }
 
 void chosen::Game::initLoop() {

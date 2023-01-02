@@ -12,6 +12,7 @@
 chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, name, "GameEntity:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false, false, false};
+    hasVisibleDirection = {false, false, false, false, false, false};
 }
 
 std::string chosen::Room::getDoorString() {

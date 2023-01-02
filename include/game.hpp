@@ -29,6 +29,10 @@ namespace chosen {
             chosen::Room staffRoom = {"staffRoom", "Staff Room"};
             chosen::Room library = {"library", "The Library"};
             chosen::Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
+            chosen::Room eastHallRoom = {"eastHallRoom", "Room East to the Hall"};
+            chosen::Room throneEntrance = {"throneEntrance", "Entrance to the Throne Room"};
+            chosen::Room hiddenRoom = {"hiddenRoom", "Hidden Room"};
+            chosen::Room throneRoom = {"throneRoom", "Throne Room"};
 
             chosen::Link cellarLadder = {"cellarLadder", true};
             chosen::Link ladderHallDoor = {"ladderHallDoor", true};
@@ -39,6 +43,10 @@ namespace chosen {
             chosen::Link staffLibraryDoor = {"staffLibraryDoor", true};
             chosen::Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor", true};
             chosen::Link libraryEntranceHallDoor = {"libraryEntranceHallDoor", true};
+            chosen::Link hallEastHallDoor = {"hallEastHallDoor", true};
+            chosen::Link eastHallThroneEntranceDoor = {"eastHallThroneEntranceDoor", true};
+            chosen::Link hiddenRoomLink = {"hiddenRoomLink", false};
+            chosen::Link throneDoor = {"throneDoor", true};
 
             void initWorld();
             void initLoop();
