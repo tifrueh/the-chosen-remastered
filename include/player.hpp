@@ -6,7 +6,7 @@
 #pragma once
 
 #include <string>
-#include <array>
+#include <vector>
 #include "world.hpp"
 #include "gameentity.hpp"
 
@@ -22,7 +22,7 @@ namespace chosen {
             Room *getLocation();
             std::string getLocationName();
             std::string getLocationDescription();
-            std::array<std::string, 4> getFullLocationDescription();
+            std::vector<std::string> getFullLocationDescription();
 
             void move(const int &direction);
     };

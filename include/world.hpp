@@ -7,12 +7,15 @@
 
 #include <string>
 #include <array>
+#include <vector>
 #include "gameentity.hpp"
 
 #define NORTH 0
 #define EAST 1
 #define SOUTH 2
 #define WEST 3
+#define UP 4
+#define DOWN 5
 
 namespace chosen {
 
@@ -22,16 +25,17 @@ namespace chosen {
     class Room : public GameEntity {
         private:
             std::string description;
-            std::array<Link*, 4> links;
-            std::array<bool, 4> hasDirection;
+            std::array<Link*, 6> links;
+            std::array<bool, 6> hasDirection;
 
             std::string getDoorString();
+            std::string getLadderString();
         
         public:
             Room(const std::string &id, const std::string &name);
             void setDescription(const std::string &description);
             std::string getDescription();
-            std::array<std::string, 4> getFullDescription();
+            std::vector<std::string> getFullDescription();
             void addLink(Link &link, const int &direction);
             Link *getLink(const int &direction);
             bool hasLinkToDirection(const int &direction);

@@ -8,6 +8,7 @@
 #include <ncurses.h>
 #include <string>
 #include <array>
+#include <vector>
 
 namespace ctui {
 
@@ -39,6 +40,7 @@ namespace ctui {
             void waitForInput();
             void waitForInput(const std::string &prompt);
             void tuiPrint(const std::string &input);
+            void tuiPrint(const std::vector<std::string> &input);
             void tuiPrintNewline();
             void setLocation(const std::string &location);
             void updateScore(const int &score);

@@ -11,7 +11,7 @@
 
 chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, name, "GameEntity:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
-    hasDirection = {false, false, false, false};
+    hasDirection = {false, false, false, false, false, false};
 }
 
 std::string chosen::Room::getDoorString() {
@@ -47,6 +47,27 @@ std::string chosen::Room::getDoorString() {
     }
 }
 
+std::string chosen::Room::getLadderString() {
+    std::vector<std::string> directions;
+
+    if (hasDirection[UP]) {
+        directions.push_back("up");
+    }
+    if (hasDirection[DOWN]) {
+        directions.push_back("down");
+    }
+
+    if (directions.size() == 1) {
+        return "There is a ladder leading " + directions[0] + ".";
+    }
+    else if (directions.size() == 2) {
+        return "There is a ladder leading both up and down.";
+    }
+    else {
+        return "";
+    }
+}
+
 void chosen::Room::setDescription(const std::string &description) {
     this->description = description;
 }
@@ -55,12 +76,13 @@ std::string chosen::Room::getDescription() {
     return description;
 }
 
-std::array<std::string, 4> chosen::Room::getFullDescription() {
-    std::array<std::string, 4> out;
-    out[0] = name;
-    out[1] = std::string(name.size(), '-');
-    out[2] = description;
-    out[3] = getDoorString();
+std::vector<std::string> chosen::Room::getFullDescription() {
+    std::vector<std::string> out;
+    out.push_back(name);
+    out.push_back(std::string(name.size(), '-'));
+    out.push_back(description);
+    out.push_back(getDoorString());
+    out.push_back(getLadderString());
 
     return out;
 }

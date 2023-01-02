@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <string>
 #include <array>
+#include <vector>
 #include "tui.hpp"
 #include "customstring.hpp"
 
@@ -140,6 +141,12 @@ void ctui::TUI::tuiPrint(const std::string &input) {
     const char *str = out.c_str();
     waddstr(outWin, str);
     wrefresh(outWin);
+}
+
+void ctui::TUI::tuiPrint(const std::vector<std::string> &input) {
+    for (std::string string : input) {
+        tuiPrint(string);
+    }
 }
 
 void ctui::TUI::tuiPrintNewline() {

@@ -31,7 +31,7 @@ std::string chosen::Player::getLocationDescription() {
     return location->getDescription();
 }
 
-std::array<std::string, 4> chosen::Player::getFullLocationDescription() {
+std::vector<std::string> chosen::Player::getFullLocationDescription() {
     return location->getFullDescription();
 }
 
