@@ -15,67 +15,15 @@ chosen::Game::Game() {
     score = 0;
     moves = 0;
 
-    cellar.setDescription(crsrc::cellar_txt);
-    cellar.addLink(cellarLadder, UP);
-    
-    cellarLadderRoom.setDescription(crsrc::cellar_ladder_txt);
-    cellarLadderRoom.addLink(cellarLadder, DOWN);
-    cellarLadderRoom.addLink(ladderHallDoor, NORTH);
-
-    hall.setDescription(crsrc::hall_txt);
-    hall.addLink(ladderHallDoor, SOUTH);
-    hall.addLink(hallWestHallDoor, WEST);
-    hall.addLink(libraryEntranceHallDoor, NORTH);
-
-    westHallRoom.setDescription(crsrc::west_hall_room_txt);
-    westHallRoom.addLink(hallWestHallDoor, EAST);
-    westHallRoom.addLink(westHallTrophyDoor, WEST);
-
-    trophyRoom.setDescription(crsrc::trophy_room_txt);
-    trophyRoom.addLink(westHallTrophyDoor, EAST);
-    trophyRoom.addLink(trophyNSPassagewayDoor, NORTH);
-
-    nsPassageway.setDescription(crsrc::ns_passageway_txt);
-    nsPassageway.addLink(trophyNSPassagewayDoor, SOUTH);
-    nsPassageway.addLink(nsPassagewayStaffDoor, NORTH);
-
-    staffRoom.setDescription(crsrc::staff_room_txt);
-    staffRoom.addLink(nsPassagewayStaffDoor, SOUTH);
-    staffRoom.addLink(staffLibraryDoor, EAST);
-
-    library.setDescription(crsrc::library_txt);
-    library.addLink(staffLibraryDoor, WEST);
-    library.addLink(libraryLibraryEntranceDoor, SOUTH);
-
-    libraryEntrance.setDescription(crsrc::library_entrance_txt);
-    libraryEntrance.addLink(libraryLibraryEntranceDoor, NORTH);
-    libraryEntrance.addLink(libraryEntranceHallDoor, SOUTH);
-
+    initWorld();
 }
 
 void chosen::Game::gameloop() {
+    
+    initLoop();
+
     std::string command;
 
-    tui.setLocation("Unknown location");
-
-    tui.tuiPrint<11>(crsrc::welcome_message_txt);
-
-    std::string playerName;
-    playerName = tui.tuiInput("\nWhat is your name?\n");
-    cstr::trim(playerName);
-
-    while (playerName == "") {
-        playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
-    }
-
-    player.setName(playerName);
-
-    tui.tuiPrint("You look around.\n");
-
-    player.setLocation(cellar);
-    tui.setLocation(player.getLocationName());
-
-    tui.tuiPrint(player.getFullLocationDescription());
 
     while (state == 0) {
         command = tui.tuiInput();
@@ -166,6 +114,68 @@ void chosen::Game::gameloop() {
     }
 }
 
+void chosen::Game::initWorld() {
+
+    cellar.setDescription(crsrc::cellar_txt);
+    cellar.addLink(cellarLadder, UP);
+    
+    cellarLadderRoom.setDescription(crsrc::cellar_ladder_txt);
+    cellarLadderRoom.addLink(cellarLadder, DOWN);
+    cellarLadderRoom.addLink(ladderHallDoor, NORTH);
+
+    hall.setDescription(crsrc::hall_txt);
+    hall.addLink(ladderHallDoor, SOUTH);
+    hall.addLink(hallWestHallDoor, WEST);
+    hall.addLink(libraryEntranceHallDoor, NORTH);
+
+    westHallRoom.setDescription(crsrc::west_hall_room_txt);
+    westHallRoom.addLink(hallWestHallDoor, EAST);
+    westHallRoom.addLink(westHallTrophyDoor, WEST);
+
+    trophyRoom.setDescription(crsrc::trophy_room_txt);
+    trophyRoom.addLink(westHallTrophyDoor, EAST);
+    trophyRoom.addLink(trophyNSPassagewayDoor, NORTH);
+
+    nsPassageway.setDescription(crsrc::ns_passageway_txt);
+    nsPassageway.addLink(trophyNSPassagewayDoor, SOUTH);
+    nsPassageway.addLink(nsPassagewayStaffDoor, NORTH);
+
+    staffRoom.setDescription(crsrc::staff_room_txt);
+    staffRoom.addLink(nsPassagewayStaffDoor, SOUTH);
+    staffRoom.addLink(staffLibraryDoor, EAST);
+
+    library.setDescription(crsrc::library_txt);
+    library.addLink(staffLibraryDoor, WEST);
+    library.addLink(libraryLibraryEntranceDoor, SOUTH);
+
+    libraryEntrance.setDescription(crsrc::library_entrance_txt);
+    libraryEntrance.addLink(libraryLibraryEntranceDoor, NORTH);
+    libraryEntrance.addLink(libraryEntranceHallDoor, SOUTH);
+}
+
+void chosen::Game::initLoop() {
+    tui.setLocation("Unknown location");
+
+    tui.tuiPrint<11>(crsrc::welcome_message_txt);
+
+    std::string playerName;
+    playerName = tui.tuiInput("\nWhat is your name?\n");
+    cstr::trim(playerName);
+
+    while (playerName == "") {
+        playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
+    }
+
+    player.setName(playerName);
+
+    tui.tuiPrint("You look around.\n");
+
+    player.setLocation(cellar);
+    tui.setLocation(player.getLocationName());
+
+    tui.tuiPrint(player.getFullLocationDescription());
+}
+
 void chosen::Game::cmdTalkTo() {
     tui.tuiPrint("cmd: talk to someone");
 }
@@ -204,6 +214,27 @@ void chosen::Game::cmdLock() {
 
 void chosen::Game::cmdUnlock() {
     tui.tuiPrint("cmd: unlock a door");
+}
+
+void chosen::Game::movePlayer(const int &direction) {
+    
+    if (!player.getLocation()->hasLinkToDirection(direction)) {
+
+        if (direction == UP) {
+            tui.tuiPrint("You jump. Nothing happens. Do you expect me to applaud?");
+        } 
+        else if (direction == DOWN) {
+            tui.tuiPrint("You kneel down and examine the floor. There doesn't seem to be a way down.");
+        }
+        else {
+            tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
+        }
+
+        return;
+    }
+
+    player.move(direction);
+    tui.tuiPrint(player.getFullLocationDescription());
 }
 
 void chosen::Game::cmdNorth() {
@@ -256,25 +287,4 @@ void chosen::Game::cmdExit() {
         state = 1;
         tui.waitForInput("\n[Hit any key to exit]");
     }
-}
-
-void chosen::Game::movePlayer(const int &direction) {
-    
-    if (!player.getLocation()->hasLinkToDirection(direction)) {
-
-        if (direction == UP) {
-            tui.tuiPrint("You jump. Nothing happens. Do you expect me to applaud?");
-        } 
-        else if (direction == DOWN) {
-            tui.tuiPrint("You kneel down and examine the floor. There doesn't seem to be a way down.");
-        }
-        else {
-            tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
-        }
-
-        return;
-    }
-
-    player.move(direction);
-    tui.tuiPrint(player.getFullLocationDescription());
 }

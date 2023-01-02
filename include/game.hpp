@@ -40,6 +40,9 @@ namespace chosen {
             chosen::Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor"};
             chosen::Link libraryEntranceHallDoor = {"libraryEntranceHallDoor"};
 
+            void initWorld();
+            void initLoop();
+
             void cmdTalkTo();
             void cmdTalk();
             void cmdFight();
@@ -50,20 +53,21 @@ namespace chosen {
             void cmdClose();
             void cmdLock();
             void cmdUnlock();
+
+            void movePlayer(const int &direction);
             void cmdNorth();
             void cmdEast();
             void cmdSouth();
             void cmdWest();
             void cmdUp();
             void cmdDown();
+            
             void cmdScream();
             void cmdHelp();
             void cmdInventory();
             void cmdLook();
             void cmdClear();
             void cmdExit();
-
-            void movePlayer(const int &direction);
 
         public:
             Game();
