@@ -109,7 +109,7 @@ chosen::Link* chosen::Room::getLink(const int &direction) {
         return links[direction];
     }
     else {
-        throw std::out_of_range("This room has no link to this direction");
+        return nullptr;
     }
 }
 
