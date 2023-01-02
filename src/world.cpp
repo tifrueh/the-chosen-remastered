@@ -72,7 +72,12 @@ void chosen::Room::addDoor(Door &door, const int &direction) {
 }
 
 chosen::Door* chosen::Room::getDoor(const int &direction) {
-    return doors[direction];
+    if (hasDirection[direction]) {
+        return doors[direction];
+    }
+    else {
+        throw std::out_of_range("This room has no door to this direction");
+    }
 }
 
 bool chosen::Room::hasDoorToDirection(const int &direction) {
