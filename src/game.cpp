@@ -121,7 +121,7 @@ void chosen::Game::initWorld() {
     
     cellarLadderRoom.setDescription(crsrc::cellar_ladder_txt);
     cellarLadderRoom.addLink(cellarLadder, DOWN);
-    cellarLadderRoom.addLink(ladderHallDoor, NORTH);
+    cellarLadderRoom.addLink(ladderHallDoor, DOWN);
 
     hall.setDescription(crsrc::hall_txt);
     hall.addLink(ladderHallDoor, SOUTH);

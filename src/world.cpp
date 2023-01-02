@@ -88,6 +88,11 @@ std::vector<std::string> chosen::Room::getFullDescription() {
 }
 
 void chosen::Room::addLink(Link &link, const int &direction) {
+
+    if (hasDirection[direction]) {
+        throw std::logic_error("This room already has a link to this direction");
+    }
+
     links[direction] = &link;
     hasDirection[direction] = true;
     link.addRoom(this);
