@@ -82,10 +82,10 @@ void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
     char strC[2] = {(char)iC, '\0'};
 
     while (iC != KEY_ENTER && iC != '\n' && iC != '\r') {
-        if (iC == KEY_BACKSPACE || iC == '\a' || iC == '\b') {
+        if (iC == KEY_BACKSPACE || iC == KEY_DC || iC == 127) {
             str[strlen(str) - 1] = '\0';
         } 
-        else if (isalnum(iC) || iC == ' ') {
+        else if (isalnum(strC[0]) || iC == ' ') {
             strcat(str, strC);
         }
 
