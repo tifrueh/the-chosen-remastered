@@ -37,7 +37,7 @@ std::string chosen::Room::getDoorString() {
         return "There are doors to the " + directions[0] + " and to the " + directions[1] + ".";
     }
     else if (directions.size() == 3) {
-        return "There are doors to the " + directions[0] + " , to the " + directions[1] + " and to the " + directions[2] + ".";
+        return "There are doors to the " + directions[0] + ", to the " + directions[1] + " and to the " + directions[2] + ".";
     }
     else if (directions.size() == 4) {
         return "There are doors to all directions.";
