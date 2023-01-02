@@ -27,9 +27,9 @@ MAKE_OBJ = $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c
 MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET_PATH)
 
 
-all : $(TARGET)
+all : $(TARGET_PATH)
 
-$(TARGET) : $(OBJS)
+$(TARGET_PATH) : $(OBJS)
 	$(MAKE_LINK) $(OBJS)
 
 build/%.o : src/%.cpp
@@ -44,7 +44,7 @@ clean :
 distclean : 
 	-rm $(TARGET_PATH)
 
-install : $(TARGET)
+install : all
 	@install -d $(DESTDIR_BIN)
 	@install $(TARGET_PATH) $(DESTDIR_BIN)
 	@echo "$(TARGET) was installed to $(DESTDIR)"
