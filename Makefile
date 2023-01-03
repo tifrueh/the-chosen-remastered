@@ -38,8 +38,8 @@ all : $(LOCAL_BIN_PATH)
 $(LOCAL_BIN_PATH) : $(OBJS)
 	$(MAKE_LINK) $(OBJS)
 
-$(BUILDDIR)/%.o : src/%.cpp
-	$(MAKE_OBJ) src/$*.cpp -o $@
+$(BUILDDIR)/%.o : $(SRCDIR)/%.cpp
+	$(MAKE_OBJ) $(SRCDIR)/$*.cpp -o $@
 
 
 .PHONY : clean distclean install uninstall
