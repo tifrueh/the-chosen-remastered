@@ -7,7 +7,7 @@ override CXXFLAGS += -g -std=c++17 -Wall
 override LDFLAGS += -g -lncurses
 
 LOCAL_BIN = the-chosen-remastered
-LOCAL_BIN_PATH = build/$(LOCAL_BIN)
+LOCAL_BIN_PATH = $(BUILDDIR)/$(LOCAL_BIN)
 
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
