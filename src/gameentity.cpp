@@ -4,6 +4,7 @@
 
 
 #include <string>
+#include <vector>
 #include "customstring.hpp"
 #include "gameentity.hpp"
 
@@ -12,6 +13,7 @@ chosen::GameEntity::GameEntity(const std::string &id, const std::string &article
     this->id = id;
     this->name = name;
     this->article = article;
+    aliases.push_back(cstr::lowercaseToNew(name));
 
     if (article == "") {
         articleName = name;
@@ -58,4 +60,17 @@ std::string chosen::GameEntity::getTheName() {
 
 std::string chosen::GameEntity::getCTheName() {
     return cTheName;
+}
+
+void chosen::GameEntity::addAlias(const std::string &alias) {
+    aliases.push_back(cstr::lowercaseToNew(alias));
+}
+
+bool chosen::GameEntity::hasAlias(const std::string &alias) {
+    for (std::string aliasN : aliases) {
+        if (aliasN == alias) {
+            return true;
+        }
+        return false;
+    }
 }
