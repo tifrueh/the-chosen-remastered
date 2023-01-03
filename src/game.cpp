@@ -169,6 +169,9 @@ void chosen::Game::initWorld() {
     throneRoom.addLink(throneDoor, SOUTH);
 
     hiddenRoomLink.setMessage("As you lay your hand upon the wall, you pass through it and emerge on the other side.");
+    
+    longsword.setDescription(crsrc::longword_txt);
+    cellar.addItem(longsword);
 }
 
 void chosen::Game::initLoop() {

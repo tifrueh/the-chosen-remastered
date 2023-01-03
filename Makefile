@@ -28,7 +28,8 @@ SRCS = $(SRCDIR)/main.cpp \
 	   $(SRCDIR)/parser.cpp \
 	   $(SRCDIR)/game.cpp \
 	   $(SRCDIR)/world.cpp \
-	   $(SRCDIR)/player.cpp
+	   $(SRCDIR)/player.cpp \
+	   $(SRCDIR)/item.cpp
 
 OBJS = $(subst $(SRCDIR),$(BUILDDIR),$(subst .cpp,.o,$(SRCS)))
 

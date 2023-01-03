@@ -48,6 +48,8 @@ namespace chosen {
             chosen::Link hiddenRoomLink = {"hiddenRoomLink", false};
             chosen::Link throneDoor = {"throneDoor", true};
 
+            chosen::Item longsword = {"longsword", "a", "sword"};
+
             void initWorld();
             void initLoop();
 

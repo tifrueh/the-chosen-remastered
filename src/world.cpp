@@ -7,6 +7,7 @@
 #include <array>
 #include <vector>
 #include <stdexcept>
+#include "item.hpp"
 #include "world.hpp"
 
 chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, "", name, "GameEntity:Room") {
@@ -85,6 +86,10 @@ std::vector<std::string> chosen::Room::getFullDescription() {
     out.push_back(getDoorString());
     out.push_back(getLadderString());
 
+    for (chosen::Item *item : items) {
+        out.push_back(item->getDescriptionLine());
+    }
+
     return out;
 }
 
@@ -119,6 +124,10 @@ bool chosen::Room::hasLinkToDirection(const int &direction) {
 
 bool chosen::Room::hasVisibleLinkToDirection(const int &direction) {
     return hasVisibleDirection[direction];
+}
+
+void chosen::Room::addItem(chosen::Item &item) {
+    items.push_back(&item);
 }
 
 
