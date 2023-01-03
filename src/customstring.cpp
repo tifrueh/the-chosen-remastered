@@ -7,8 +7,14 @@
 #include <algorithm>
 #include "customstring.hpp"
 
-void cstr::to_lower(std::string &string) {
+void cstr::lowercase(std::string &string) {
     std::transform(string.begin(), string.end(), string.begin(), ::tolower);
+}
+
+std::string cstr::lowercaseToNew(const std::string &string) {
+    std::string out = string;
+    lowercase(out);
+    return out;
 }
 
 void cstr::trim(std::string &string) {

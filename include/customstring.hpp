@@ -8,7 +8,8 @@
 #include <string>
 
 namespace cstr {
-    void to_lower(std::string &string);
+    void lowercase(std::string &string);
+    std::string lowercaseToNew(const std::string &string);
     void trim(std::string &string);
     void wrap(std::string &string, const int &width);
     void capitalise(std::string &string);

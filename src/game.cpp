@@ -34,7 +34,7 @@ void chosen::Game::gameloop() {
 
         tui.tuiPrint("\n> " + command);
 
-        cstr::to_lower(command);
+        cstr::lowercase(command);
 
         if (cprs::isCommand(command, "talk to")) {
             cmdTalkTo();
