@@ -8,7 +8,7 @@
 #include "player.hpp"
 
 chosen::Player::Player() : GameEntity("player", "", "Adventurer", "GameEntity:Player") {
-    location = NULL;
+    location = nullptr;
 }
 
 void chosen::Player::setName(const std::string &name) {
