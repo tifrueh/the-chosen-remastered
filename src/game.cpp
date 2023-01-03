@@ -5,6 +5,8 @@
 
 #include <string>
 #include "tui.hpp"
+#include "world.hpp"
+#include "player.hpp"
 #include "customstring.hpp"
 #include "parser.hpp"
 #include "resources.hpp"
