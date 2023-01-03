@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include "world.hpp"
 
-chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, name, "GameEntity:Room") {
+chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, "", name, "GameEntity:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false, false, false};
     hasVisibleDirection = {false, false, false, false, false, false};
@@ -122,7 +122,7 @@ bool chosen::Room::hasVisibleLinkToDirection(const int &direction) {
 }
 
 
-chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "Link", "GameEntity:Link") {
+chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link", "GameEntity:Link") {
     roomsConnected = 0;
     this->visible = visible;
     message = "";

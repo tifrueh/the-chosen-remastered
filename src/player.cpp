@@ -7,7 +7,7 @@
 #include "world.hpp"
 #include "player.hpp"
 
-chosen::Player::Player() : GameEntity("player", "Adventurer", "GameEntity:Player") {
+chosen::Player::Player() : GameEntity("player", "", "Adventurer", "GameEntity:Player") {
     location = NULL;
 }
 

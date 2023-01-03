@@ -28,6 +28,17 @@ void cstr::trim(std::string &string) {
     string = string.substr(begin, count);
 }
 
+void cstr::capitalise(std::string &string) {
+    long unsigned int firstLetter = string.find_first_not_of(" ");
+    string.at(firstLetter) = toupper(string.at(firstLetter));
+}
+
+std::string cstr::capitaliseToNew(const std::string &string) {
+    std::string out = string;
+    capitalise(out);
+    return out;
+}
+
 void cstr::wrap(std::string &string, const int &width) {
     long unsigned int pos = 0;
 

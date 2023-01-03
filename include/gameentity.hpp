@@ -13,12 +13,23 @@ namespace chosen {
             std::string classId;
             std::string id;
             std::string name;
-            GameEntity(const std::string &id, const std::string &name, const std::string &classId);
+            std::string article;
+
+            std::string articleName;
+            std::string cArticleName;
+            std::string theName;
+            std::string cTheName;
+
+            GameEntity(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
         
         public:
-            GameEntity(const std::string &id, const std::string &name);
+            GameEntity(const std::string &id, const std::string &article, const std::string &name);
             std::string getClassId();
             std::string getId();
             std::string getName();
+            std::string getArticleName();
+            std::string getCArticleName();
+            std::string getTheName();
+            std::string getCTheName();
     };
 }

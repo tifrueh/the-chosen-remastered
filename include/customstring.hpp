@@ -11,6 +11,8 @@ namespace cstr {
     void to_lower(std::string &string);
     void trim(std::string &string);
     void wrap(std::string &string, const int &width);
+    void capitalise(std::string &string);
+    std::string capitaliseToNew(const std::string &string);
     int count_words(const std::string &string);
     int count(const std::string &str, const char &c);
     std::string int_to_string(int number, int numberOfDigits);
