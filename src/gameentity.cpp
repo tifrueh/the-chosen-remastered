@@ -71,6 +71,6 @@ bool chosen::GameEntity::hasAlias(const std::string &alias) {
         if (aliasN == alias) {
             return true;
         }
-        return false;
     }
+    return false;
 }
