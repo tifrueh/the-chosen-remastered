@@ -9,7 +9,6 @@
 #include <array>
 #include <vector>
 #include "item.hpp"
-#include "gameentity.hpp"
 
 #define NORTH 0
 #define EAST 1
@@ -23,13 +22,12 @@ namespace chosen {
     class Room;
     class Link;
 
-    class Room : public GameEntity {
+    class Room : public GameEntityWithInventory {
         private:
             std::string description;
             std::array<Link*, 6> links;
             std::array<bool, 6> hasDirection;
             std::array<bool, 6> hasVisibleDirection;
-            std::vector<chosen::Item*> items;
 
             std::string getDoorString();
             std::string getLadderString();
@@ -43,7 +41,6 @@ namespace chosen {
             Link *getLink(const int &direction);
             bool hasLinkToDirection(const int &direction);
             bool hasVisibleLinkToDirection(const int &direction);
-            void addItem(chosen::Item &item);
     };
 
     class Link : public GameEntity {

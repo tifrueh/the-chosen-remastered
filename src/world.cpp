@@ -10,7 +10,7 @@
 #include "item.hpp"
 #include "world.hpp"
 
-chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, "", name, "GameEntity:Room") {
+chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityWithInventory(id, "", name, "GameEntity:GameEntityWithInventory:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false, false, false};
     hasVisibleDirection = {false, false, false, false, false, false};
@@ -125,11 +125,6 @@ bool chosen::Room::hasLinkToDirection(const int &direction) {
 bool chosen::Room::hasVisibleLinkToDirection(const int &direction) {
     return hasVisibleDirection[direction];
 }
-
-void chosen::Room::addItem(chosen::Item &item) {
-    items.push_back(&item);
-}
-
 
 chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link", "GameEntity:Link") {
     roomsConnected = 0;

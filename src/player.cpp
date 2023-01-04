@@ -4,10 +4,11 @@
 
 
 #include <stdexcept>
+#include "item.hpp"
 #include "world.hpp"
 #include "player.hpp"
 
-chosen::Player::Player() : GameEntity("player", "", "Adventurer", "GameEntity:Player") {
+chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer", "GameEntity:Player") {
     location = nullptr;
 }
 

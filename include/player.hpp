@@ -7,11 +7,12 @@
 
 #include <string>
 #include <vector>
+#include "item.hpp"
 #include "world.hpp"
 #include "gameentity.hpp"
 
 namespace chosen {
-    class Player : public GameEntity {
+    class Player : public GameEntityWithInventory {
         private:
             chosen::Room *location;
         
