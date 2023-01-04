@@ -13,8 +13,6 @@ chosen::GameEntity::GameEntity(const std::string &id, const std::string &article
     this->id = id;
     this->name = name;
     this->article = article;
-    aliases.push_back(cstr::lowercaseToNew(name));
-
     if (article == "") {
         articleName = name;
         cArticleName = name;
@@ -27,6 +25,10 @@ chosen::GameEntity::GameEntity(const std::string &id, const std::string &article
         theName = "the " + name;
         cTheName = "The " + name;
     }
+
+    aliases.push_back(cstr::lowercaseToNew(name));
+    aliases.push_back(cstr::lowercaseToNew(articleName));
+    aliases.push_back(cstr::lowercaseToNew(theName));
 
 }
 
