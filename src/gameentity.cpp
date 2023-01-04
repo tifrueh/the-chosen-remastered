@@ -31,7 +31,7 @@ chosen::GameEntity::GameEntity(const std::string &id, const std::string &article
 }
 
 chosen::GameEntity::GameEntity(const std::string &id, const std::string &article, const std::string &name) {
-    GameEntity(id, name, "GameEntity");
+    GameEntity(id, article, name, "GameEntity");
 }
 
 std::string chosen::GameEntity::getClassId() {
