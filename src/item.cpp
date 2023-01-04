@@ -51,15 +51,6 @@ bool chosen::GameEntityWithInventory::hasItem(chosen::Item &item) {
     }
 }
 
-bool chosen::GameEntityWithInventory::hasItem(const std::string &alias) {
-    if (getItemByAlias(alias) == nullptr) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
 void chosen::GameEntityWithInventory::addItem(chosen::Item &item) {
     items.push_back(&item);
 }
@@ -73,9 +64,4 @@ void chosen::GameEntityWithInventory::removeItem(chosen::Item &item) {
     }
 
     items.erase(itemIterator);
-}
-
-void chosen::GameEntityWithInventory::removeItem(const std::string &alias) {
-    chosen::Item *item = getItemByAlias(alias);
-    removeItem(*item);
 }

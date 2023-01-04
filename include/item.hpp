@@ -23,16 +23,14 @@ namespace chosen {
     class GameEntityWithInventory : public GameEntity {
         protected:
             std::vector<Item*> items;
-            Item* getItemByAlias(const std::string &alias);
 
             GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
         
         public:
             GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name);
             bool hasItem(chosen::Item &item);
-            bool hasItem(const std::string &alias);
             void addItem(chosen::Item &item);
             void removeItem(chosen::Item &item);
-            void removeItem(const std::string &alias);
+            Item* getItemByAlias(const std::string &alias);
     };
 }
