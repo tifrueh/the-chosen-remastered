@@ -36,5 +36,6 @@ namespace chosen {
             std::string getCTheName();
             void addAlias(const std::string &alias);
             bool hasAlias(const std::string &alias);
+            std::vector<std::string> getAliases();
     };
 }

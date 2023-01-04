@@ -74,3 +74,7 @@ bool chosen::GameEntity::hasAlias(const std::string &alias) {
     }
     return false;
 }
+
+std::vector<std::string> chosen::GameEntity::getAliases() {
+    return aliases;
+}
