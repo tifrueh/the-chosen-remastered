@@ -47,3 +47,13 @@ void chosen::Player::move(const int &direction) {
     Room *newLocation = location->getLink(direction)->getOtherRoom(location);
     setLocation(*newLocation);
 }
+
+void chosen::Player::take(chosen::Item &item) {
+    location->removeItem(item);
+    this->addItem(item);
+}
+
+void chosen::Player::drop(chosen::Item &item) {
+    this->removeItem(item);
+    location->addItem(item);
+}

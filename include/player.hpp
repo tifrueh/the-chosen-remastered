@@ -26,5 +26,7 @@ namespace chosen {
             std::vector<std::string> getFullLocationDescription();
 
             void move(const int &direction);
+            void take(chosen::Item &item);
+            void drop(chosen::Item &item);
     };
 }
