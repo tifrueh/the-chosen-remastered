@@ -24,6 +24,7 @@ namespace chosen {
 
     class Room : public GameEntityWithInventory {
         private:
+            bool visited;
             std::string description;
             std::array<Link*, 6> links;
             std::array<bool, 6> hasDirection;
@@ -37,10 +38,13 @@ namespace chosen {
             void setDescription(const std::string &description);
             std::string getDescription();
             std::vector<std::string> getFullDescription();
+            std::vector<std::string> getShortDescription();
             void addLink(Link &link, const int &direction);
             Link *getLink(const int &direction);
             bool hasLinkToDirection(const int &direction);
             bool hasVisibleLinkToDirection(const int &direction);
+            bool wasVisited();
+            void registerVisit();
     };
 
     class Link : public GameEntity {

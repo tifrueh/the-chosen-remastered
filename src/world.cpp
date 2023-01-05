@@ -14,6 +14,7 @@ chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityW
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false, false, false};
     hasVisibleDirection = {false, false, false, false, false, false};
+    visited = false;
 }
 
 std::string chosen::Room::getDoorString() {
@@ -93,6 +94,20 @@ std::vector<std::string> chosen::Room::getFullDescription() {
     return out;
 }
 
+std::vector<std::string> chosen::Room::getShortDescription() {
+    std::vector<std::string> out;
+    out.push_back(name);
+
+    for (chosen::Item *item : items) {
+        out.push_back(item->getDescription());
+    }
+
+    out.push_back(getDoorString());
+    out.push_back(getLadderString());
+
+    return out;
+}
+
 void chosen::Room::addLink(Link &link, const int &direction) {
 
     if (hasDirection[direction]) {
@@ -130,6 +145,14 @@ chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, 
     roomsConnected = 0;
     this->visible = visible;
     message = "";
+}
+
+bool chosen::Room::wasVisited() {
+    return visited;
+}
+
+void chosen::Room::registerVisit() {
+    visited = true;
 }
 
 bool chosen::Link::isVisible() {

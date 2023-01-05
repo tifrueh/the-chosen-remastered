@@ -36,6 +36,10 @@ std::vector<std::string> chosen::Player::getFullLocationDescription() {
     return location->getFullDescription();
 }
 
+std::vector<std::string> chosen::Player::getShortLocationDescription() {
+    return location->getShortDescription();
+}
+
 void chosen::Player::move(const int &direction) {
     if (!location->hasLinkToDirection(direction)) {
         throw std::logic_error("Movement through nonexisting link");
@@ -45,6 +49,7 @@ void chosen::Player::move(const int &direction) {
     }
 
     Room *newLocation = location->getLink(direction)->getOtherRoom(location);
+    newLocation->registerVisit();
     setLocation(*newLocation);
 }
 

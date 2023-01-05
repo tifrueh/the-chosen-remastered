@@ -336,7 +336,13 @@ void chosen::Game::movePlayer(const int &direction) {
     }
 
     player.move(direction);
-    tui.tuiPrint(player.getFullLocationDescription());
+
+    if (player.getLocation()->wasVisited()) {
+        tui.tuiPrint(player.getShortLocationDescription());
+    }
+    else {
+        tui.tuiPrint(player.getFullLocationDescription());
+    }
 }
 
 void chosen::Game::cmdNorth() {

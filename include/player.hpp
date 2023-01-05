@@ -24,6 +24,7 @@ namespace chosen {
             std::string getLocationName();
             std::string getLocationDescription();
             std::vector<std::string> getFullLocationDescription();
+            std::vector<std::string> getShortLocationDescription();
 
             void move(const int &direction);
             void take(chosen::Item &item);
