@@ -179,6 +179,7 @@ void chosen::Game::initWorld() {
     hiddenRoomLink.setMessage("As you lay your hand upon the wall, you pass through it and emerge on the other side.");
     
     longsword.setDescription(crsrc::longword_txt);
+    longsword.setExaminationDescription(crsrc::longsword_ex_txt);
     cellar.addItem(longsword);
 }
 
