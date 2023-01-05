@@ -213,11 +213,21 @@ void chosen::Game::cmdFight() {
     tui.tuiPrint("cmd: fight someone");
 }
 
-void chosen::Game::cmdTake(const std::string &item) {
-    chosen::Item* itemPtr = player.getLocation()->getItemByAlias(item);
+void chosen::Game::cmdTake(std::string item) {
 
     if (!player.getLocation()->hasAnyItem()) {
         tui.tuiPrint("There is nothing here to take.");
+        return;
+    }
+    else if (item == "") {
+        item = tui.tuiInput("What do you want to take?");
+    }
+
+    chosen::Item* itemPtr = player.getLocation()->getItemByAlias(item);
+
+    if (item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
     }
     else if (itemPtr == nullptr) {
         tui.tuiPrint("There is no item called " + item + " here.");
@@ -228,18 +238,27 @@ void chosen::Game::cmdTake(const std::string &item) {
     }
 }
 
-void chosen::Game::cmdDrop(const std::string &item) {
-    chosen::Item* itemPtr = player.getItemByAlias(item);
-
+void chosen::Game::cmdDrop(std::string item) {
 
     if (!player.hasAnyItem()) {
         tui.tuiPrint("You do not have anything to drop.");
+        return;
+    }
+    else if (item == "") {
+        item = tui.tuiInput("What do you want to drop?");
+    }
+
+    chosen::Item* itemPtr = player.getItemByAlias(item);
+
+    if (item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
     }
     else if (itemPtr == nullptr) {
-        tui.tuiPrint("You do not have any item called " + item + ".");
+        tui.tuiPrint("You do not have any item called " + item + " here.");
     }
     else {
-        player.drop(*itemPtr);
+        player.take(*itemPtr);
         tui.tuiPrint("Dropped.");
     }
 }
