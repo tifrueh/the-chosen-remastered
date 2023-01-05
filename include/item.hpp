@@ -29,6 +29,7 @@ namespace chosen {
         public:
             GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name);
             bool hasItem(chosen::Item &item);
+            bool hasAnyItem();
             void addItem(chosen::Item &item);
             void removeItem(chosen::Item &item);
             Item* getItemByAlias(const std::string &alias);

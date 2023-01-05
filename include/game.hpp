@@ -56,8 +56,8 @@ namespace chosen {
             void cmdTalkTo();
             void cmdTalk();
             void cmdFight();
-            void cmdTake();
-            void cmdDrop();
+            void cmdTake(const std::string &item);
+            void cmdDrop(const std::string &item);
             void cmdHug();
             void cmdOpen();
             void cmdClose();

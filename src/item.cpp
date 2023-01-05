@@ -51,6 +51,10 @@ bool chosen::GameEntityWithInventory::hasItem(chosen::Item &item) {
     }
 }
 
+bool chosen::GameEntityWithInventory::hasAnyItem() {
+    return items.size() != 0;
+}
+
 void chosen::GameEntityWithInventory::addItem(chosen::Item &item) {
     items.push_back(&item);
 }
