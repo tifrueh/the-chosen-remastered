@@ -39,4 +39,5 @@ namespace crsrc {
     const std::string air_demon_kill_txt = "You can't reach the demon, as it is flying high above your head. It might have been beneficial to use a weapon with more range. The demon reaches out with its long claws plunges them into your chest.\nYou die ...";
     const std::string longword_txt = "A simple sword is lying on the floor.";
     const std::string longsword_ex_txt = "You notice that the sword is glowing faintly, indicating that a spell has been cast on it.";
+    const std::string longsword_init_txt = "Beside the rotting corpse you notice a sword, placed just where the reach of the chained thing must have ended when it was still alive. Quite cruel, if you think about it.";
 }
