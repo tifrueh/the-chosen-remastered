@@ -10,11 +10,20 @@
 #include "item.hpp"
 
 chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name, "GameEntity:Item") {
-    description = "";
+    description = ".";
+    examinationDescription = "There is nothing special about " + theName + ".";
 }
 
 void chosen::Item::setDescription(const std::string &description) {
     this->description = description;
+}
+
+void chosen::Item::setExaminationDescription(const std::string &description) {
+    this->examinationDescription = description;
+}
+
+std::string chosen::Item::getExaminationDescription() {
+    return(examinationDescription);
 }
 
 std::string chosen::Item::getDescriptionLine() {

@@ -53,6 +53,10 @@ void chosen::Game::gameloop() {
             std::string drop = cprs::parseCommand(command, "drop");
             cmdDrop(drop);
         }
+        else if (cprs::isCommand(command, "examine")) {
+            std::string examine = cprs::parseCommand(command, "examine");
+            cmdExamine(examine);
+        }
         else if (cprs::isCommand(command, "hug")) {
             cmdHug();
         }
@@ -260,6 +264,30 @@ void chosen::Game::cmdDrop(std::string item) {
     else {
         player.drop(*itemPtr);
         tui.tuiPrint("Dropped.");
+    }
+}
+
+void chosen::Game::cmdExamine(std::string item) {
+
+    if (!player.hasAnyItem()) {
+        tui.tuiPrint("You do not have anything to examine.");
+        return;
+    }
+    else if (item == "") {
+        item = tui.tuiInput("What do you want to examine?");
+    }
+
+    chosen::Item* itemPtr = player.getItemByAlias(item);
+
+    if (item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (itemPtr == nullptr) {
+        tui.tuiPrint("You do not have any item called " + item + ".");
+    }
+    else {
+        tui.tuiPrint(player.examine(*itemPtr));
     }
 }
 

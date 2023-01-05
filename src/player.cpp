@@ -58,6 +58,10 @@ void chosen::Player::drop(chosen::Item &item) {
     location->addItem(item);
 }
 
+std::string chosen::Player::examine(chosen::Item &item) {
+    return item.getExaminationDescription();
+}
+
 std::vector<std::string> chosen::Player::getInventory() {
     std::vector<std::string> out;
 
