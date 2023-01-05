@@ -259,7 +259,7 @@ void chosen::Game::cmdDrop(std::string item) {
         return;
     }
     else if (itemPtr == nullptr) {
-        tui.tuiPrint("You do not have any item called " + item + " here.");
+        tui.tuiPrint("You do not have any item called " + item + ".");
     }
     else {
         player.drop(*itemPtr);
