@@ -43,12 +43,7 @@ bool chosen::GameEntityWithInventory::hasItem(chosen::Item &item) {
     std::vector<chosen::Item*>::iterator itemIterator;
     itemIterator = std::find(items.begin(), items.end(), &item);
 
-    if (itemIterator == items.end()) {
-        return false;
-    }
-    else {
-        return true;
-    }
+    return itemIterator != items.end();
 }
 
 bool chosen::GameEntityWithInventory::hasAnyItem() {
