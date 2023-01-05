@@ -20,7 +20,7 @@ namespace chosen {
             void setDescription(const std::string &description);
             void setExaminationDescription(const std::string &description);
             std::string getExaminationDescription();
-            std::string getDescriptionLine();
+            std::string getDescription();
     };
 
     class GameEntityWithInventory : public GameEntity {

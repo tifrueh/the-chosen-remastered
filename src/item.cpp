@@ -10,7 +10,7 @@
 #include "item.hpp"
 
 chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name, "GameEntity:Item") {
-    description = ".";
+    description = cArticleName + " is here.";
     examinationDescription = "There is nothing special about " + theName + ".";
 }
 
@@ -26,8 +26,8 @@ std::string chosen::Item::getExaminationDescription() {
     return(examinationDescription);
 }
 
-std::string chosen::Item::getDescriptionLine() {
-    return cArticleName + " is here, " + description;
+std::string chosen::Item::getDescription() {
+    return description;
 }
 
 chosen::Item* chosen::GameEntityWithInventory::getItemByAlias(const std::string &alias) {

@@ -37,5 +37,5 @@ namespace crsrc {
     const std::string hidden_room_txt = "You are standing in a simple square room with wooden walls and a single lantern hanging from the ceiling.";
     const std::string throne_room_txt = "You are in a magnificent throne room. Everywhere you look you see nothing but gold, red and purple velvet and in the center of it all you see an indescribably marvellous throne, rising upon marble steps, carefully crafted by the most skillful architects in the kingdom.";
     const std::string air_demon_kill_txt = "You can't reach the demon, as it is flying high above your head. It might have been beneficial to use a weapon with more range. The demon reaches out with its long claws plunges them into your chest.\nYou die ...";
-    const std::string longword_txt = "a simple one, but it is glowing faintly, indicating that a spell has been cast on it.";
+    const std::string longword_txt = "A simple sword is lying on the floor.";
 }

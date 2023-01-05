@@ -87,7 +87,7 @@ std::vector<std::string> chosen::Room::getFullDescription() {
     out.push_back(getLadderString());
 
     for (chosen::Item *item : items) {
-        out.push_back(item->getDescriptionLine());
+        out.push_back(item->getDescription());
     }
 
     return out;
