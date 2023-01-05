@@ -28,5 +28,6 @@ namespace chosen {
             void move(const int &direction);
             void take(chosen::Item &item);
             void drop(chosen::Item &item);
+            std::vector<std::string> getInventory();
     };
 }

@@ -323,7 +323,7 @@ void chosen::Game::cmdHelp() {
 }
 
 void chosen::Game::cmdInventory() {
-    tui.tuiPrint("cmd: open your inventory");
+    tui.tuiPrint(player.getInventory());
 }
 
 void chosen::Game::cmdLook() {

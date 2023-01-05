@@ -57,3 +57,20 @@ void chosen::Player::drop(chosen::Item &item) {
     this->removeItem(item);
     location->addItem(item);
 }
+
+std::vector<std::string> chosen::Player::getInventory() {
+    std::vector<std::string> out;
+
+    if (!hasAnyItem()) {
+        out.push_back("You are empty-handed.");
+        return out;
+    }
+
+    out.push_back("You are carrying:");
+
+    for (chosen::Item* item : items) {
+        out.push_back("- " + item->getCArticleName());
+    }
+    
+    return out;
+}
