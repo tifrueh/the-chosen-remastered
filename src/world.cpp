@@ -81,7 +81,6 @@ std::string chosen::Room::getDescription() {
 std::vector<std::string> chosen::Room::getFullDescription() {
     std::vector<std::string> out;
     out.push_back(name);
-    out.push_back(std::string(name.size(), '-'));
     out.push_back(description);
 
     for (chosen::Item *item : items) {
