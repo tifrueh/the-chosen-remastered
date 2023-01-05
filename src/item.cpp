@@ -11,11 +11,17 @@
 
 chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name, "GameEntity:Item") {
     description = cArticleName + " is here.";
+    initialDescription = description;
+    isInInitialPosition = true;
     examinationDescription = "There is nothing special about " + theName + ".";
 }
 
 void chosen::Item::setDescription(const std::string &description) {
     this->description = description;
+}
+
+void chosen::Item::setInitialDescription(const std::string &description) {
+    this->initialDescription = description;
 }
 
 void chosen::Item::setExaminationDescription(const std::string &description) {
@@ -27,7 +33,16 @@ std::string chosen::Item::getExaminationDescription() {
 }
 
 std::string chosen::Item::getDescription() {
-    return description;
+    if (isInInitialPosition) {
+        return initialDescription;
+    }
+    else {
+        return description;
+    }
+}
+
+void chosen::Item::registerPickup() {
+    isInInitialPosition = false;
 }
 
 chosen::Item* chosen::GameEntityWithInventory::getItemByAlias(const std::string &alias) {

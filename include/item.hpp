@@ -13,14 +13,18 @@ namespace chosen {
     class Item : public GameEntity {
         protected:
             std::string description;
+            bool isInInitialPosition;
+            std::string initialDescription;
             std::string examinationDescription;
 
         public:
             Item(const std::string &id, const std::string &article, const std::string &name);
             void setDescription(const std::string &description);
+            void setInitialDescription(const std::string &description);
             void setExaminationDescription(const std::string &description);
             std::string getExaminationDescription();
             std::string getDescription();
+            void registerPickup();
     };
 
     class GameEntityWithInventory : public GameEntity {

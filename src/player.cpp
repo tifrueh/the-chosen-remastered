@@ -51,6 +51,7 @@ void chosen::Player::move(const int &direction) {
 void chosen::Player::take(chosen::Item &item) {
     location->removeItem(item);
     this->addItem(item);
+    item.registerPickup();
 }
 
 void chosen::Player::drop(chosen::Item &item) {
