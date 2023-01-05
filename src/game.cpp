@@ -258,7 +258,7 @@ void chosen::Game::cmdDrop(std::string item) {
         tui.tuiPrint("You do not have any item called " + item + " here.");
     }
     else {
-        player.take(*itemPtr);
+        player.drop(*itemPtr);
         tui.tuiPrint("Dropped.");
     }
 }
