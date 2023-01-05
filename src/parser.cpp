@@ -13,7 +13,7 @@ std::string cprs::parseCommand(const std::string &input, const std::string &comm
     long unsigned int cmdEnd = cmdPos + command.size();
 
     if (cmdPos == std::string::npos) {
-        return input;
+        return "";
     }
 
     std::string out = input.substr(cmdEnd, input.size() - cmdEnd);
