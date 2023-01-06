@@ -57,6 +57,9 @@ void chosen::Game::gameloop() {
             std::string examine = cprs::parseCommand(command, "examine");
             cmdExamine(examine);
         }
+        else if (cprs::isCommand(command, "say")) {
+            tui.tuiPrint("Talking to yourself is said to be a sign of impending mental collapse.");
+        }
         else if (cprs::isCommand(command, "hug")) {
             cmdHug();
         }
