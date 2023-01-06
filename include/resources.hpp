@@ -8,8 +8,19 @@
 #include <string>
 #include <array>
 
+#define VERSION "0.0.1-dev"
+#define REVISION "Revision " VERSION
+
 namespace crsrc {
-    const std::array<std::string, 11> welcome_message_txt = {
+    const std::array<std::string, 6> welcomeMessage = {
+        "The Chosen (Remastered): At Night's End",
+        REVISION,
+        "Copyright (C) 2022-2023 Timo Frueh",
+        "This program comes with ABSOLUTELY NO WARRANTY.",
+        "This is free software, and you are welcome to redistribute it under certain conditions.",
+        "See the GNU General Public License (GPL-3.0) for more details."
+    };
+    const std::array<std::string, 11> intro = {
         "You slowly open your eyes and wake up. You can't remember anything.",
         "No, wait, there is something ...",
         "Suddenly, a clear thought springs into your mind.",

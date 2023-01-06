@@ -216,7 +216,12 @@ void chosen::Game::initWorld() {
 void chosen::Game::initLoop() {
     tui.setLocation("Unknown location");
 
-    tui.tuiPrint<11>(crsrc::welcome_message_txt);
+    tui.tuiPrint<6>(crsrc::welcomeMessage);
+
+    tui.tuiNapMs(4000);
+    tui.tuiPrintNewline();
+
+    tui.tuiPrint<11>(crsrc::intro);
 
     std::string playerName;
     playerName = tui.tuiInput("\nWhat is your name?\n");
