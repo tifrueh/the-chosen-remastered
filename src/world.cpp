@@ -90,6 +90,10 @@ std::vector<std::string> chosen::Room::getFullDescription() {
         out.back() += " " + item->getDescription();
     }
 
+    for (chosen::Character *character : characters) {
+        out.back() += " " + character->getDescription();
+    }
+
     out.push_back(getDoorString());
     out.push_back(getLadderString());
 
