@@ -76,6 +76,8 @@ namespace chosen {
             void cmdUnlock();
 
             void movePlayer(const int &direction);
+            void cmdGo(std::string direction);
+            void cmdClimb(std::string direction);
 
             void cmdScream();
             void cmdHelp();

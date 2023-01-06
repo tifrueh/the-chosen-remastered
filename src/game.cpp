@@ -78,6 +78,14 @@ void chosen::Game::gameloop() {
         else if (cprs::isCommand(command, "unlock")) {
             cmdUnlock();
         }
+        else if (cprs::isCommand(command, "go")) {
+            std::string go = cprs::parseCommand(command, "go");
+            cmdGo(go);
+        }
+        else if (cprs::isCommand(command, "climb")) {
+            std::string climb = cprs::parseCommand(command, "climb");
+            cmdClimb(climb);
+        }
         else if (command == "north" || command == "n") {
             movePlayer(NORTH);
         }
@@ -426,6 +434,56 @@ void chosen::Game::movePlayer(const int &direction) {
     else {
         tui.tuiPrint(player.getFullLocationDescription());
         player.getLocation()->registerVisit();
+    }
+}
+
+void chosen::Game::cmdGo(std::string direction) {
+    if (direction == "") {
+        direction = tui.tuiInput("Go where?\n");
+    }
+
+    if (direction == "") {
+        tui.tuiPrint("Never mind.");
+    }
+    else if (direction == "north") {
+        movePlayer(NORTH);
+    }
+    else if (direction == "east") {
+        movePlayer(EAST);
+    }
+    else if (direction == "south") {
+        movePlayer(SOUTH);
+    }
+    else if (direction == "west") {
+        movePlayer(WEST);
+    }
+    else if (direction == "up") {
+        movePlayer(UP);
+    }
+    else if (direction == "down") {
+        movePlayer(DOWN);
+    }
+    else {
+        tui.tuiPrint("You should supply a direction!");
+    }
+}
+
+void chosen::Game::cmdClimb(std::string direction) {
+    if (direction == "") {
+        direction = tui.tuiInput("Climb where?\n");
+    }
+
+    if (direction == "") {
+        tui.tuiPrint("Never mind.");
+    }
+    else if (direction == "up") {
+        movePlayer(UP);
+    }
+    else if (direction == "down") {
+        movePlayer(DOWN);
+    }
+    else {
+        tui.tuiPrint("You should supply a direction!");
     }
 }
 
