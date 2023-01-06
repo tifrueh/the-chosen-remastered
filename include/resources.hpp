@@ -61,4 +61,10 @@ namespace crsrc {
     const std::string holyWaterDesc = "A bottle of holy water is lying on the floor.";
     const std::string holyWaterExDesc = "There are runes on the bottom of the bottle. They say: \"Refills automatically (neat, isn't it?)\".";
     const std::string holyWaterInitDesc = "On the desk, beside the books, stands a bottle of water. No ... holy water, taking into account the blueish glow of the substance.";
+    const std::string strangerDesc = "There is a stranger leaning against the far end of the wall, examining you with cold, blue eyes.";
+    const std::vector<std::string> strangerConversation = {
+        "Hm. Another one. The world is going mad .... And what do you do? You wave around your sword as if you were able to do something. This is all pointless!",
+        "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable ... I must be getting old ...",
+        "Would you please leave me alone? I'd appreciate that greatly."
+    };
 }

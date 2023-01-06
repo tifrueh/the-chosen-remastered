@@ -10,6 +10,7 @@
 #include "customstring.hpp"
 #include "parser.hpp"
 #include "resources.hpp"
+#include "character.hpp"
 #include "game.hpp"
 
 chosen::Game::Game() {
@@ -214,6 +215,10 @@ void chosen::Game::initWorld() {
     holyWater.addAlias("holy water");
     holyWater.addAlias("bottle");
     library.addItem(holyWater);
+
+    stranger.setDescription(crsrc::strangerDesc);
+    stranger.setConversation(crsrc::strangerConversation);
+    hall.addCharacter(stranger);
 }
 
 void chosen::Game::initLoop() {

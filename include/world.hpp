@@ -9,6 +9,7 @@
 #include <array>
 #include <vector>
 #include "item.hpp"
+#include "character.hpp"
 
 #define NORTH 0
 #define EAST 1
@@ -29,6 +30,7 @@ namespace chosen {
             std::array<Link*, 6> links;
             std::array<bool, 6> hasDirection;
             std::array<bool, 6> hasVisibleDirection;
+            std::vector<Character*> characters;
 
             std::string getDoorString();
             std::string getLadderString();
@@ -43,6 +45,11 @@ namespace chosen {
             Link *getLink(const int &direction);
             bool hasLinkToDirection(const int &direction);
             bool hasVisibleLinkToDirection(const int &direction);
+            void addCharacter(Character &character);
+            bool hasCharacter(Character &character);
+            bool hasAnyCharacter();
+            void removeCharacter(Character &character);
+            Character* getCharacterByAlias(const std::string &alias);
             bool wasVisited();
             void registerVisit();
     };

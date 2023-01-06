@@ -7,6 +7,7 @@
 #include <array>
 #include <vector>
 #include <stdexcept>
+#include <algorithm>
 #include "item.hpp"
 #include "world.hpp"
 
@@ -141,6 +142,41 @@ bool chosen::Room::hasLinkToDirection(const int &direction) {
 
 bool chosen::Room::hasVisibleLinkToDirection(const int &direction) {
     return hasVisibleDirection[direction];
+}
+
+void chosen::Room::addCharacter(Character &character) {
+    characters.push_back(&character);
+}
+
+bool chosen::Room::hasCharacter(Character &character) {
+    std::vector<Character*>::iterator characterIterator;
+    characterIterator = std::find(characters.begin(), characters.end(), &character);
+
+    return characterIterator != characters.end();
+}
+
+bool chosen::Room::hasAnyCharacter() {
+    return characters.size() != 0;
+}
+
+void chosen::Room::removeCharacter(Character &character) {
+    std::vector<chosen::Character*>::iterator characterIterator;
+    characterIterator = std::find(characters.begin(), characters.end(), &character);
+
+    if (characterIterator == characters.end()) {
+        throw std::logic_error("Room doesn't have character that was tried to remove");
+    }
+
+    characters.erase(characterIterator);
+}
+
+chosen::Character* chosen::Room::getCharacterByAlias(const std::string &alias) {
+    for (chosen::Character* character : characters) {
+        if (character->hasAlias(alias)) {
+            return character;
+        }
+    }
+    return nullptr;
 }
 
 chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link", "GameEntity:Link") {

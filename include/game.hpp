@@ -8,6 +8,8 @@
 #include "world.hpp"
 #include "player.hpp"
 #include "tui.hpp"
+#include "item.hpp"
+#include "character.hpp"
 
 namespace chosen {
     class Game {
@@ -53,6 +55,8 @@ namespace chosen {
             chosen::Item swordsODD = {"swordsODD", "the", "Swords of Dusk and Dawn"};
             chosen::Item fireWand = {"fireWand", "a", "wand of fire"};
             chosen::Item holyWater = {"holyWater", "a", "bottle of holy water"};
+
+            chosen::Character stranger = {"stranger", "a", "stranger"};
 
             void initWorld();
             void initLoop();
