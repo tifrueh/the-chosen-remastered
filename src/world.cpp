@@ -1,5 +1,5 @@
 // the-chosen-remastered: A short ZORK-like text adventure
-// Copyright (C) 2022  Timo Früh
+// Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in main.cpp
 
 
@@ -7,26 +7,30 @@
 #include <array>
 #include <vector>
 #include <stdexcept>
+#include <algorithm>
+#include "item.hpp"
 #include "world.hpp"
 
-chosen::Room::Room(const std::string &id, const std::string &name) : GameEntity(id, name, "GameEntity:Room") {
+chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityWithInventory(id, "", name, "GameEntity:GameEntityWithInventory:Room") {
     this->description = "[THIS ROOM HAS NO DESCRIPTION]";
-    hasDirection = {false, false, false, false};
+    hasDirection = {false, false, false, false, false, false};
+    hasVisibleDirection = {false, false, false, false, false, false};
+    visited = false;
 }
 
 std::string chosen::Room::getDoorString() {
     std::vector<std::string> directions;
 
-    if (hasDirection[NORTH] == true) {
+    if (hasVisibleDirection[NORTH]) {
         directions.push_back("north");
     } 
-    if (hasDirection[EAST] == true) {
+    if (hasVisibleDirection[EAST]) {
         directions.push_back("east");
     }
-    if (hasDirection[SOUTH] == true) {
+    if (hasVisibleDirection[SOUTH]) {
         directions.push_back("south");
     }
-    if (hasDirection[WEST] == true) {
+    if (hasVisibleDirection[WEST]) {
         directions.push_back("west");
     }
 
@@ -37,10 +41,31 @@ std::string chosen::Room::getDoorString() {
         return "There are doors to the " + directions[0] + " and to the " + directions[1] + ".";
     }
     else if (directions.size() == 3) {
-        return "There are doors to the " + directions[0] + " , to the " + directions[1] + " and to the " + directions[2] + ".";
+        return "There are doors to the " + directions[0] + ", to the " + directions[1] + " and to the " + directions[2] + ".";
     }
     else if (directions.size() == 4) {
         return "There are doors to all directions.";
+    }
+    else {
+        return "";
+    }
+}
+
+std::string chosen::Room::getLadderString() {
+    std::vector<std::string> directions;
+
+    if (hasVisibleDirection[UP]) {
+        directions.push_back("up");
+    }
+    if (hasVisibleDirection[DOWN]) {
+        directions.push_back("down");
+    }
+
+    if (directions.size() == 1) {
+        return "There is a ladder leading " + directions[0] + ".";
+    }
+    else if (directions.size() == 2) {
+        return "There is a ladder leading both up and down.";
     }
     else {
         return "";
@@ -55,36 +80,144 @@ std::string chosen::Room::getDescription() {
     return description;
 }
 
-std::array<std::string, 4> chosen::Room::getFullDescription() {
-    std::array<std::string, 4> out;
-    out[0] = name;
-    out[1] = std::string(name.size(), '-');
-    out[2] = description;
-    out[3] = getDoorString();
+std::vector<std::string> chosen::Room::getFullDescription() {
+    std::vector<std::string> out;
+    out.push_back(name);
+    out.push_back(std::string(name.size(), '-'));
+    out.push_back(description);
+
+    for (chosen::Item *item : items) {
+        out.back() += " " + item->getDescription();
+    }
+
+    for (chosen::Character *character : characters) {
+        out.back() += " " + character->getDescription();
+    }
+
+    out.push_back(getDoorString());
+    out.push_back(getLadderString());
 
     return out;
 }
 
-void chosen::Room::addDoor(Door &door, const int &direction) {
-    doors[direction] = &door;
+std::vector<std::string> chosen::Room::getShortDescription() {
+    std::vector<std::string> out;
+    out.push_back(name);
+    out.push_back(std::string(name.size(), '-'));
+
+    if (items.size() > 0 || characters.size() > 0) {
+        out.push_back("");
+    }
+
+    for (chosen::Item *item : items) {
+        out.back() += item->getDescription() + " ";
+    }
+
+    for (chosen::Character *character : characters) {
+        out.back() += character->getDescription() + " ";
+    }
+
+    out.push_back(getDoorString());
+    out.push_back(getLadderString());
+
+    return out;
+}
+
+void chosen::Room::addLink(Link &link, const int &direction) {
+
+    if (hasDirection[direction]) {
+        throw std::logic_error("This room already has a link to this direction");
+    }
+
+    links[direction] = &link;
     hasDirection[direction] = true;
-    door.addRoom(this);
+
+    if (link.isVisible()) {
+        hasVisibleDirection[direction] = true;
+    }
+
+    link.addRoom(this);
 }
 
-chosen::Door* chosen::Room::getDoor(const int &direction) {
-    return doors[direction];
+chosen::Link* chosen::Room::getLink(const int &direction) {
+    if (hasDirection[direction]) {
+        return links[direction];
+    }
+    else {
+        return nullptr;
+    }
 }
 
-bool chosen::Room::hasDoorToDirection(const int &direction) {
+bool chosen::Room::hasLinkToDirection(const int &direction) {
     return hasDirection[direction];
 }
 
-
-chosen::Door::Door(const std::string &id) : GameEntity(id, "Door", "GameEntity:Door") {
-    roomsConnected = 0;
+bool chosen::Room::hasVisibleLinkToDirection(const int &direction) {
+    return hasVisibleDirection[direction];
 }
 
-void chosen::Door::addRoom(Room *room) {
+void chosen::Room::addCharacter(Character &character) {
+    characters.push_back(&character);
+}
+
+bool chosen::Room::hasCharacter(Character &character) {
+    std::vector<Character*>::iterator characterIterator;
+    characterIterator = std::find(characters.begin(), characters.end(), &character);
+
+    return characterIterator != characters.end();
+}
+
+bool chosen::Room::hasAnyCharacter() {
+    return characters.size() != 0;
+}
+
+void chosen::Room::removeCharacter(Character &character) {
+    std::vector<chosen::Character*>::iterator characterIterator;
+    characterIterator = std::find(characters.begin(), characters.end(), &character);
+
+    if (characterIterator == characters.end()) {
+        throw std::logic_error("Room doesn't have character that was tried to remove");
+    }
+
+    characters.erase(characterIterator);
+}
+
+chosen::Character* chosen::Room::getCharacterByAlias(const std::string &alias) {
+    for (chosen::Character* character : characters) {
+        if (character->hasAlias(alias)) {
+            return character;
+        }
+    }
+    return nullptr;
+}
+
+chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link", "GameEntity:Link") {
+    roomsConnected = 0;
+    this->visible = visible;
+    message = "";
+}
+
+bool chosen::Room::wasVisited() {
+    return visited;
+}
+
+void chosen::Room::registerVisit() {
+    visited = true;
+}
+
+bool chosen::Link::isVisible() {
+    return visible;
+}
+
+std::string chosen::Link::getMessage() {
+    return message;
+}
+
+void chosen::Link::setMessage(const std::string &message) {
+    this->message = message;
+}
+
+void chosen::Link::addRoom(Room *room) {
     if (roomsConnected == 0) {
         rooms[0] = room;
         roomsConnected++;
@@ -94,11 +227,11 @@ void chosen::Door::addRoom(Room *room) {
         roomsConnected++;
     }
     else {
-        throw std::out_of_range("A door cannot have more than two rooms");
+        throw std::out_of_range("A link cannot have more than two rooms");
     }
 }
 
-chosen::Room *chosen::Door::getOtherRoom(Room *room) {
+chosen::Room *chosen::Link::getOtherRoom(Room *room) {
     if (rooms[0] == room) {
         return rooms[1];
     }

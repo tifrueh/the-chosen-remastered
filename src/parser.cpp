@@ -1,5 +1,5 @@
 // the-chosen-remastered: A short ZORK-like text adventure
-// Copyright (C) 2022  Timo Früh
+// Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in main.cpp
 
 
@@ -13,7 +13,7 @@ std::string cprs::parseCommand(const std::string &input, const std::string &comm
     long unsigned int cmdEnd = cmdPos + command.size();
 
     if (cmdPos == std::string::npos) {
-        return input;
+        return "";
     }
 
     std::string out = input.substr(cmdEnd, input.size() - cmdEnd);

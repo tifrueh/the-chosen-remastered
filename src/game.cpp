@@ -1,13 +1,16 @@
 // the-chosen-remastered: A short ZORK-like text adventure
-// Copyright (C) 2022  Timo Früh
+// Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in main.cpp
 
 
 #include <string>
 #include "tui.hpp"
+#include "world.hpp"
+#include "player.hpp"
 #include "customstring.hpp"
 #include "parser.hpp"
 #include "resources.hpp"
+#include "character.hpp"
 #include "game.hpp"
 
 chosen::Game::Game() {
@@ -15,59 +18,15 @@ chosen::Game::Game() {
     score = 0;
     moves = 0;
 
-    hall.setDescription(crsrc::hall_txt);
-    hall.addDoor(hallWestHallDoor, WEST);
-    hall.addDoor(libraryEntranceHallDoor, NORTH);
-
-    westHallRoom.setDescription(crsrc::west_hall_room_txt);
-    westHallRoom.addDoor(hallWestHallDoor, EAST);
-    westHallRoom.addDoor(westHallTrophyDoor, WEST);
-
-    trophyRoom.setDescription(crsrc::trophy_room_txt);
-    trophyRoom.addDoor(westHallTrophyDoor, EAST);
-    trophyRoom.addDoor(trophyNSPassagewayDoor, NORTH);
-
-    nsPassageway.setDescription(crsrc::ns_passageway_txt);
-    nsPassageway.addDoor(trophyNSPassagewayDoor, SOUTH);
-    nsPassageway.addDoor(nsPassagewayStaffDoor, NORTH);
-
-    staffRoom.setDescription(crsrc::staff_room_txt);
-    staffRoom.addDoor(nsPassagewayStaffDoor, SOUTH);
-    staffRoom.addDoor(staffLibraryDoor, EAST);
-
-    library.setDescription(crsrc::library_txt);
-    library.addDoor(staffLibraryDoor, WEST);
-    library.addDoor(libraryLibraryEntranceDoor, SOUTH);
-
-    libraryEntrance.setDescription(crsrc::library_entrance_txt);
-    libraryEntrance.addDoor(libraryLibraryEntranceDoor, NORTH);
-    libraryEntrance.addDoor(libraryEntranceHallDoor, SOUTH);
-
+    initWorld();
 }
 
 void chosen::Game::gameloop() {
+    
+    initLoop();
+
     std::string command;
 
-    tui.setLocation("Unknown location");
-
-    tui.tuiPrint<11>(crsrc::welcome_message_txt);
-
-    std::string playerName;
-    playerName = tui.tuiInput("\nWhat is your name?\n");
-    cstr::trim(playerName);
-
-    while (playerName == "") {
-        playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
-    }
-
-    player.setName(playerName);
-
-    tui.tuiPrint("You look around.\n");
-
-    player.setLocation(hall);
-    tui.setLocation(player.getLocationName());
-
-    tui.tuiPrint(player.getFullLocationDescription());
 
     while (state == 0) {
         command = tui.tuiInput();
@@ -76,22 +35,33 @@ void chosen::Game::gameloop() {
 
         tui.tuiPrint("\n> " + command);
 
-        cstr::to_lower(command);
+        cstr::lowercase(command);
 
         if (cprs::isCommand(command, "talk to")) {
-            cmdTalkTo();
+            std::string talk = cprs::parseCommand(command, "talk to");
+            cmdTalk(talk);
         }
         else if (cprs::isCommand(command, "talk")) {
-            cmdTalk();
+            std::string talk = cprs::parseCommand(command, "talk");
+            cmdTalk(talk);
         }
         else if (cprs::isCommand(command, "fight")) {
             cmdFight();
         }
         else if (cprs::isCommand(command, "take")) {
-            cmdTake();
+            std::string take = cprs::parseCommand(command, "take");
+            cmdTake(take);
         }
         else if (cprs::isCommand(command, "drop")) {
-            cmdDrop();
+            std::string drop = cprs::parseCommand(command, "drop");
+            cmdDrop(drop);
+        }
+        else if (cprs::isCommand(command, "examine")) {
+            std::string examine = cprs::parseCommand(command, "examine");
+            cmdExamine(examine);
+        }
+        else if (cprs::isCommand(command, "say")) {
+            tui.tuiPrint("Talking to yourself is said to be a sign of impending mental collapse.");
         }
         else if (cprs::isCommand(command, "hug")) {
             cmdHug();
@@ -108,23 +78,31 @@ void chosen::Game::gameloop() {
         else if (cprs::isCommand(command, "unlock")) {
             cmdUnlock();
         }
-        else if (command == "north") {
-            cmdNorth();
+        else if (cprs::isCommand(command, "go")) {
+            std::string go = cprs::parseCommand(command, "go");
+            cmdGo(go);
         }
-        else if (command == "east") {
-            cmdEast();
+        else if (cprs::isCommand(command, "climb")) {
+            std::string climb = cprs::parseCommand(command, "climb");
+            cmdClimb(climb);
         }
-        else if (command == "south") {
-            cmdSouth();
+        else if (command == "north" || command == "n") {
+            movePlayer(NORTH);
         }
-        else if (command == "west") {
-            cmdWest();
+        else if (command == "east" || command == "e") {
+            movePlayer(EAST);
         }
-        else if (command == "up") {
-            cmdUp();
+        else if (command == "south" || command == "s") {
+            movePlayer(SOUTH);
         }
-        else if (command == "down") {
-            cmdDown();
+        else if (command == "west" || command == "w") {
+            movePlayer(WEST);
+        }
+        else if (command == "up" || command == "u") {
+            movePlayer(UP);
+        }
+        else if (command == "down" || command == "d") {
+            movePlayer(DOWN);
         }
         else if (command == "scream") {
             cmdScream();
@@ -158,24 +136,252 @@ void chosen::Game::gameloop() {
     }
 }
 
-void chosen::Game::cmdTalkTo() {
-    tui.tuiPrint("cmd: talk to someone");
+void chosen::Game::initWorld() {
+
+    cellar.setDescription(crsrc::cellarDesc);
+    cellar.addLink(cellarLadder, UP);
+    
+    cellarLadderRoom.setDescription(crsrc::cellarLadderDesc);
+    cellarLadderRoom.addLink(cellarLadder, DOWN);
+    cellarLadderRoom.addLink(ladderHallDoor, NORTH);
+
+    hall.setDescription(crsrc::hallDesc);
+    hall.addLink(ladderHallDoor, SOUTH);
+    hall.addLink(hallWestHallDoor, WEST);
+    hall.addLink(libraryEntranceHallDoor, NORTH);
+    hall.addLink(hallEastHallDoor, EAST);
+
+    westHallRoom.setDescription(crsrc::westHallRoomDesc);
+    westHallRoom.addLink(hallWestHallDoor, EAST);
+    westHallRoom.addLink(westHallTrophyDoor, WEST);
+
+    trophyRoom.setDescription(crsrc::trophyRoomDesc);
+    trophyRoom.addLink(westHallTrophyDoor, EAST);
+    trophyRoom.addLink(trophyNSPassagewayDoor, NORTH);
+
+    nsPassageway.setDescription(crsrc::nsPassagewayDesc);
+    nsPassageway.addLink(trophyNSPassagewayDoor, SOUTH);
+    nsPassageway.addLink(nsPassagewayStaffDoor, NORTH);
+
+    staffRoom.setDescription(crsrc::staffRoomDesc);
+    staffRoom.addLink(nsPassagewayStaffDoor, SOUTH);
+    staffRoom.addLink(staffLibraryDoor, EAST);
+
+    library.setDescription(crsrc::libraryDesc);
+    library.addLink(staffLibraryDoor, WEST);
+    library.addLink(libraryLibraryEntranceDoor, SOUTH);
+
+    libraryEntrance.setDescription(crsrc::libraryEntranceDesc);
+    libraryEntrance.addLink(libraryLibraryEntranceDoor, NORTH);
+    libraryEntrance.addLink(libraryEntranceHallDoor, SOUTH);
+
+    eastHallRoom.setDescription(crsrc::eastHallRoomDesc);
+    eastHallRoom.addLink(hallEastHallDoor, WEST);
+    eastHallRoom.addLink(eastHallThroneEntranceDoor, EAST);
+
+    throneEntrance.setDescription(crsrc::throneEntranceDesc);
+    throneEntrance.addLink(eastHallThroneEntranceDoor, WEST);
+    throneEntrance.addLink(hiddenRoomLink, SOUTH);
+    throneEntrance.addLink(throneDoor, NORTH);
+
+    hiddenRoom.setDescription(crsrc::hiddenRoomDesc);
+    hiddenRoom.addLink(hiddenRoomLink, NORTH);
+
+    throneRoom.setDescription(crsrc::throneRoomDesc);
+    throneRoom.addLink(throneDoor, SOUTH);
+
+    hiddenRoomLink.setMessage("As you lay your hand upon the wall, you pass through it and emerge on the other side.");
+    
+    longsword.setDescription(crsrc::longswordDesc);
+    longsword.setInitialDescription(crsrc::longswordInitDesc);
+    longsword.setExaminationDescription(crsrc::longswordExDesc);
+    longsword.addAlias("simple sword");
+    cellar.addItem(longsword);
+
+    crossbow.setDescription(crsrc::crossbowDesc);
+    crossbow.setInitialDescription(crsrc::crossbowInitDesc);
+    crossbow.setExaminationDescription(crsrc::crossbowExDesc);
+    crossbow.addAlias("double-winged crossbow");
+    crossbow.addAlias("small crossbow");
+    trophyRoom.addItem(crossbow);
+
+    swordsODD.setDescription(crsrc::swordsOddDescription);
+    swordsODD.setInitialDescription(crsrc::swordsOddInitDescription);
+    swordsODD.setExaminationDescription(crsrc::swordsOddExDescription);
+    swordsODD.addAlias("swords");
+    hiddenRoom.addItem(swordsODD);
+
+    fireWand.setDescription(crsrc::fireWandDesc);
+    fireWand.setInitialDescription(crsrc::fireWandInitDesc);
+    fireWand.setExaminationDescription(crsrc::fireWandExDesc);
+    fireWand.addAlias("wand");
+    fireWand.addAlias("fire wand");
+    hall.addItem(fireWand);
+
+    holyWater.setDescription(crsrc::holyWaterDesc);
+    holyWater.setInitialDescription(crsrc::holyWaterInitDesc);
+    holyWater.setExaminationDescription(crsrc::holyWaterExDesc);
+    holyWater.addAlias("water");
+    holyWater.addAlias("holy water");
+    holyWater.addAlias("bottle");
+    library.addItem(holyWater);
+
+    stranger.setDescription(crsrc::strangerDesc);
+    stranger.setConversation(crsrc::strangerConversation);
+    hall.addCharacter(stranger);
+
+    elliot.setDescription(crsrc::elliotDesc);
+    westHallRoom.addCharacter(elliot);
+
+    hag.setDescription(crsrc::hagDesc);
+    hag.setConversation(crsrc::hagConversation);
+    hag.addAlias("hag");
+    hag.addAlias("woman");
+    hag.addAlias("old woman");
+    staffRoom.addCharacter(hag);
+
+    scholar.setDescription(crsrc::scholarDesc);
+    scholar.setConversation(crsrc::scholarConversation);
+    scholar.addAlias("learned man");
+    library.addCharacter(scholar);
 }
 
-void chosen::Game::cmdTalk() {
-    tui.tuiPrint("cmd: talk to someone (short version)");
+void chosen::Game::initLoop() {
+    tui.setLocation("Unknown location");
+
+    tui.tuiPrint<6>(crsrc::welcomeMessage);
+
+    tui.tuiNapMs(4000);
+    tui.tuiPrintNewline();
+
+    tui.tuiPrint<11>(crsrc::intro);
+
+    std::string playerName;
+    playerName = tui.tuiInput("\nWhat is your name?\n");
+    cstr::trim(playerName);
+
+    while (playerName == "") {
+        playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
+    }
+
+    crsrc::elliotConversation.at(0) = "Hey, " + playerName + "! Long time no see!";
+    elliot.setConversation(crsrc::elliotConversation);
+
+    player.setName(playerName);
+
+    tui.tuiPrint("You look around.\n");
+
+    player.setLocation(cellar);
+    tui.setLocation(player.getLocationName());
+
+    tui.tuiPrint(player.getFullLocationDescription());
+    player.getLocation()->registerVisit();
+}
+
+void chosen::Game::cmdTalk(std::string character) {
+    
+    if (!player.getLocation()->hasAnyCharacter()) {
+        tui.tuiPrint("There is no one here to listen to your beautiful voice.");
+        return;
+    }
+    else if (character == "") {
+        character = tui.tuiInput("To whom to want to talk?");
+    }
+
+    chosen::Character* characterPtr = player.getLocation()->getCharacterByAlias(character);
+
+    if (character == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (characterPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+        return;
+    }
+    else {
+        tui.tuiPrint(player.talk(*characterPtr));
+    }
 }
 
 void chosen::Game::cmdFight() {
     tui.tuiPrint("cmd: fight someone");
 }
 
-void chosen::Game::cmdTake() {
-    tui.tuiPrint("cmd: take something");
+void chosen::Game::cmdTake(std::string item) {
+
+    if (!player.getLocation()->hasAnyItem()) {
+        tui.tuiPrint("There is nothing here to take.");
+        return;
+    }
+    else if (item == "") {
+        item = tui.tuiInput("What do you want to take?");
+    }
+
+    chosen::Item* itemPtr = player.getLocation()->getItemByAlias(item);
+
+    if (item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (itemPtr == nullptr) {
+        tui.tuiPrint("There is no item called " + item + " here.");
+        return;
+    }
+    else {
+        player.take(*itemPtr);
+        tui.tuiPrint("Taken.");
+    }
 }
 
-void chosen::Game::cmdDrop() {
-    tui.tuiPrint("cmd: drop something");
+void chosen::Game::cmdDrop(std::string item) {
+
+    if (!player.hasAnyItem()) {
+        tui.tuiPrint("You do not have anything to drop.");
+        return;
+    }
+    else if (item == "") {
+        item = tui.tuiInput("What do you want to drop?");
+    }
+
+    chosen::Item* itemPtr = player.getItemByAlias(item);
+
+    if (item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (itemPtr == nullptr) {
+        tui.tuiPrint("You do not have any item called " + item + ".");
+        return;
+    }
+    else {
+        player.drop(*itemPtr);
+        tui.tuiPrint("Dropped.");
+    }
+}
+
+void chosen::Game::cmdExamine(std::string item) {
+
+    if (!player.hasAnyItem()) {
+        tui.tuiPrint("You do not have anything to examine.");
+        return;
+    }
+    else if (item == "") {
+        item = tui.tuiInput("What do you want to examine?");
+    }
+
+    chosen::Item* itemPtr = player.getItemByAlias(item);
+
+    if (item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (itemPtr == nullptr) {
+        tui.tuiPrint("You do not have any item called " + item + ".");
+        return;
+    }
+    else {
+        tui.tuiPrint(player.examine(*itemPtr));
+    }
 }
 
 void chosen::Game::cmdHug() {
@@ -198,28 +404,87 @@ void chosen::Game::cmdUnlock() {
     tui.tuiPrint("cmd: unlock a door");
 }
 
-void chosen::Game::cmdNorth() {
-    movePlayer(NORTH);
+void chosen::Game::movePlayer(const int &direction) {
+    
+    if (!player.getLocation()->hasLinkToDirection(direction)) {
+
+        if (direction == UP) {
+            tui.tuiPrint("You jump. Nothing happens. Do you expect me to applaud?");
+        } 
+        else if (direction == DOWN) {
+            tui.tuiPrint("You kneel down and examine the floor. There doesn't seem to be a way down.");
+        }
+        else {
+            tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
+        }
+
+        return;
+    }
+
+    std::string message = player.getLocation()->getLink(direction)->getMessage();
+    if (message != "") {
+        tui.tuiPrint(message + "\n");
+    }
+
+    player.move(direction);
+
+    if (player.getLocation()->wasVisited()) {
+        tui.tuiPrint(player.getShortLocationDescription());
+    }
+    else {
+        tui.tuiPrint(player.getFullLocationDescription());
+        player.getLocation()->registerVisit();
+    }
 }
 
-void chosen::Game::cmdEast() {
-    movePlayer(EAST);
+void chosen::Game::cmdGo(std::string direction) {
+    if (direction == "") {
+        direction = tui.tuiInput("Go where?\n");
+    }
+
+    if (direction == "") {
+        tui.tuiPrint("Never mind.");
+    }
+    else if (direction == "north") {
+        movePlayer(NORTH);
+    }
+    else if (direction == "east") {
+        movePlayer(EAST);
+    }
+    else if (direction == "south") {
+        movePlayer(SOUTH);
+    }
+    else if (direction == "west") {
+        movePlayer(WEST);
+    }
+    else if (direction == "up") {
+        movePlayer(UP);
+    }
+    else if (direction == "down") {
+        movePlayer(DOWN);
+    }
+    else {
+        tui.tuiPrint("You should supply a direction!");
+    }
 }
 
-void chosen::Game::cmdSouth() {
-    movePlayer(SOUTH);
-}
+void chosen::Game::cmdClimb(std::string direction) {
+    if (direction == "") {
+        direction = tui.tuiInput("Climb where?\n");
+    }
 
-void chosen::Game::cmdWest() {
-    movePlayer(WEST);
-}
-
-void chosen::Game::cmdUp() {
-    tui.tuiPrint("cmd: move up");
-}
-
-void chosen::Game::cmdDown() {
-    tui.tuiPrint("cmd: move down");
+    if (direction == "") {
+        tui.tuiPrint("Never mind.");
+    }
+    else if (direction == "up") {
+        movePlayer(UP);
+    }
+    else if (direction == "down") {
+        movePlayer(DOWN);
+    }
+    else {
+        tui.tuiPrint("You should supply a direction!");
+    }
 }
 
 void chosen::Game::cmdScream() {
@@ -231,7 +496,7 @@ void chosen::Game::cmdHelp() {
 }
 
 void chosen::Game::cmdInventory() {
-    tui.tuiPrint("cmd: open your inventory");
+    tui.tuiPrint(player.getInventory());
 }
 
 void chosen::Game::cmdLook() {
@@ -247,15 +512,5 @@ void chosen::Game::cmdExit() {
     if (affirm == "y") {
         state = 1;
         tui.waitForInput("\n[Hit any key to exit]");
-    }
-}
-
-void chosen::Game::movePlayer(const int &direction) {
-    if (player.getLocation()->hasDoorToDirection(direction)) {
-        player.move(direction);
-        tui.tuiPrint(player.getFullLocationDescription());
-    }
-    else {
-        tui.tuiPrint("You run head first into a wall and realize: You can't go that way.");
     }
 }

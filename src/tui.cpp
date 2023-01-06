@@ -1,5 +1,5 @@
 // the-chosen-remastered: A short ZORK-like text adventure
-// Copyright (C) 2022  Timo Früh
+// Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in main.cpp
 
 
@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <string>
 #include <array>
+#include <vector>
 #include "tui.hpp"
 #include "customstring.hpp"
 
@@ -77,14 +78,15 @@ void ctui::TUI::initInWin() {
 }
 
 void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
-    char c = mvwgetch(inWin, 0, 3);
+    int iC = mvwgetch(inWin, 0, 3);
+    char strC[2] = {(char)iC, '\0'};
 
-    while (c != KEY_ENTER && c != '\n' && c != '\r') {
-        if (c == KEY_BACKSPACE || c == '\a' || c == '\b') {
+    while (iC != KEY_ENTER && iC != '\n' && iC != '\r') {
+        if (iC == KEY_BACKSPACE || iC == KEY_DC || iC == 127) {
             str[strlen(str) - 1] = '\0';
         } 
-        else if (isalnum(c) || c == ' ') {
-            strcat(str, &c);
+        else if (isalnum(strC[0]) || iC == ' ') {
+            strcat(str, strC);
         }
 
         wmove(inWin, 0, 3);
@@ -92,7 +94,8 @@ void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
         wprintw(inWin, str);
         wrefresh(inWin);
 
-        c = wgetch(inWin);
+        iC = wgetch(inWin);
+        strC[0] = iC;
     }
 
     wmove(inWin, 0, 3);
@@ -140,6 +143,12 @@ void ctui::TUI::tuiPrint(const std::string &input) {
     const char *str = out.c_str();
     waddstr(outWin, str);
     wrefresh(outWin);
+}
+
+void ctui::TUI::tuiPrint(const std::vector<std::string> &input) {
+    for (std::string string : input) {
+        tuiPrint(string);
+    }
 }
 
 void ctui::TUI::tuiPrintNewline() {

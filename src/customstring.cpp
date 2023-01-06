@@ -1,5 +1,5 @@
 // the-chosen-remastered: A short ZORK-like text adventure
-// Copyright (C) 2022  Timo Früh
+// Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in main.cpp
 
 
@@ -7,8 +7,14 @@
 #include <algorithm>
 #include "customstring.hpp"
 
-void cstr::to_lower(std::string &string) {
+void cstr::lowercase(std::string &string) {
     std::transform(string.begin(), string.end(), string.begin(), ::tolower);
+}
+
+std::string cstr::lowercaseToNew(const std::string &string) {
+    std::string out = string;
+    lowercase(out);
+    return out;
 }
 
 void cstr::trim(std::string &string) {
@@ -26,6 +32,17 @@ void cstr::trim(std::string &string) {
     }
 
     string = string.substr(begin, count);
+}
+
+void cstr::capitalise(std::string &string) {
+    long unsigned int firstLetter = string.find_first_not_of(" ");
+    string.at(firstLetter) = toupper(string.at(firstLetter));
+}
+
+std::string cstr::capitaliseToNew(const std::string &string) {
+    std::string out = string;
+    capitalise(out);
+    return out;
 }
 
 void cstr::wrap(std::string &string, const int &width) {

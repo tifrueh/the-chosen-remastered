@@ -1,38 +1,47 @@
-SRCS = src/main.cpp src/tui.cpp src/customstring.cpp src/gameentity.cpp src/parser.cpp src/game.cpp src/world.cpp src/player.cpp
-OBJS = $(subst src,build,$(subst .cpp,.o,$(SRCS)))
+SHELL = /bin/sh
 
 CXX ?= g++
-CPPFLAGS ?=
-CXXFLAGS ?=
-LDFLAGS ?=
-
-DEBUG ?= n
 
 override CPPFLAGS += -I./include
-override CXXFLAGS += -std=c++17 -Wall
-override LDFLAGS += -lncurses
+override CXXFLAGS += -g -std=c++17 -Wall
+override LDFLAGS += -g -lncurses
 
-DESTDIR ?= /usr/local
-DESTDIR_BIN = $(DESTDIR)/bin
+LOCAL_BIN = the-chosen-remastered
+LOCAL_BIN_PATH = $(BUILDDIR)/$(LOCAL_BIN)
 
-TARGET = build/the-chosen-remastered
+PREFIX ?= /usr/local
+BINDIR = $(PREFIX)/bin
 
-ifeq ($(DEBUG), y)
-	override CXXFLAGS += -g
-	override LDFLAGS += -g
-endif
+DEST_BINDIR = $(DESTDIR)$(BINDIR)
+DEST_BIN_PATH = $(DEST_BINDIR)/$(LOCAL_BIN)
+
+SRCDIR ?= ./src
+BUILDDIR ?= ./build
 
 MAKE_OBJ = $(CXX) $(CPPFLAGS) $(CXXFLAGS) -c
-MAKE_LINK = $(CXX) $(LDFLAGS) -o $(TARGET)
+MAKE_LINK = $(CXX) $(LDFLAGS) -o $(LOCAL_BIN_PATH)
+
+SRCS = $(SRCDIR)/main.cpp \
+       $(SRCDIR)/tui.cpp \
+	   $(SRCDIR)/customstring.cpp \
+	   $(SRCDIR)/gameentity.cpp \
+	   $(SRCDIR)/parser.cpp \
+	   $(SRCDIR)/game.cpp \
+	   $(SRCDIR)/world.cpp \
+	   $(SRCDIR)/player.cpp \
+	   $(SRCDIR)/item.cpp \
+	   $(SRCDIR)/character.cpp
+
+OBJS = $(subst $(SRCDIR),$(BUILDDIR),$(subst .cpp,.o,$(SRCS)))
 
 
-all : $(TARGET)
+all : $(LOCAL_BIN_PATH)
 
-$(TARGET) : $(OBJS)
+$(LOCAL_BIN_PATH) : $(OBJS)
 	$(MAKE_LINK) $(OBJS)
 
-build/%.o : src/%.cpp
-	$(MAKE_OBJ) src/$*.cpp -o $@
+$(BUILDDIR)/%.o : $(SRCDIR)/%.cpp
+	$(MAKE_OBJ) $(SRCDIR)/$*.cpp -o $@
 
 
 .PHONY : clean distclean install uninstall
@@ -41,12 +50,13 @@ clean :
 	-rm $(OBJS)
 
 distclean : 
-	-rm $(TARGET)
+	-rm $(OBJS)
+	-rm $(LOCAL_BIN_PATH)
 
-install : $(TARGET)
-	@install -d $(DESTDIR_BIN)
-	@install $(TARGET) $(DESTDIR_BIN)
-	@echo "$(TARGET) was installed to $(DESTDIR)"
+install : all
+	@mkdir -p $(DEST_BINDIR)
+	@cp $(LOCAL_BIN_PATH) $(DEST_BINDIR)
+	@echo "$(LOCAL_BIN) was installed to $(DEST_BINDIR)"
 
 uninstall :
-	@if [ -f $(DESTDIR_BIN)/$(TARGET) ]; then rm $(DESTDIR_BIN)/$(TARGET); else echo "ERROR: $(TARGET) not installed at location: \"$(DESTDIR_BIN)\" --> please uninstall manually"; fi
+	@if [ -f $(DEST_BIN_PATH) ]; then rm $(DEST_BIN_PATH) && echo "$(DEST_BIN_PATH) was deleted"; else echo "ERROR: $(LOCAL_BIN) not installed at location: \"$(DEST_BIN_PATH)\" --> please uninstall manually"; fi
