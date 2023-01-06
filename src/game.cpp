@@ -234,6 +234,7 @@ void chosen::Game::initLoop() {
     tui.setLocation(player.getLocationName());
 
     tui.tuiPrint(player.getFullLocationDescription());
+    player.getLocation()->registerVisit();
 }
 
 void chosen::Game::cmdTalkTo() {
@@ -371,6 +372,7 @@ void chosen::Game::movePlayer(const int &direction) {
     }
     else {
         tui.tuiPrint(player.getFullLocationDescription());
+        player.getLocation()->registerVisit();
     }
 }
 

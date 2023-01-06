@@ -49,7 +49,6 @@ void chosen::Player::move(const int &direction) {
     }
 
     Room *newLocation = location->getLink(direction)->getOtherRoom(location);
-    newLocation->registerVisit();
     setLocation(*newLocation);
 }
 
