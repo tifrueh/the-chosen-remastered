@@ -299,6 +299,7 @@ void chosen::Game::cmdTake(std::string item) {
     }
     else if (itemPtr == nullptr) {
         tui.tuiPrint("There is no item called " + item + " here.");
+        return;
     }
     else {
         player.take(*itemPtr);
@@ -324,6 +325,7 @@ void chosen::Game::cmdDrop(std::string item) {
     }
     else if (itemPtr == nullptr) {
         tui.tuiPrint("You do not have any item called " + item + ".");
+        return;
     }
     else {
         player.drop(*itemPtr);
@@ -349,6 +351,7 @@ void chosen::Game::cmdExamine(std::string item) {
     }
     else if (itemPtr == nullptr) {
         tui.tuiPrint("You do not have any item called " + item + ".");
+        return;
     }
     else {
         tui.tuiPrint(player.examine(*itemPtr));
