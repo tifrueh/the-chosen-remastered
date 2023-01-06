@@ -35,7 +35,10 @@ void chosen::Character::setConversation(const std::vector<std::string> &conversa
 std::string chosen::Character::getConversation() {
     std::string out = "[" + cTheName + "]:\n";
 
-    if (conversationCounter < conversation.size()) {
+    if (conversation.size() == 0) {
+        out = cTheName + " seemingly does not want to talk to you.";
+    }
+    else if (conversationCounter < conversation.size()) {
         out += conversation.at(conversationCounter);
         conversationCounter++;
     }
