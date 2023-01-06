@@ -72,22 +72,22 @@ void chosen::Game::gameloop() {
         else if (cprs::isCommand(command, "unlock")) {
             cmdUnlock();
         }
-        else if (command == "north") {
+        else if (command == "north" || command == "n") {
             cmdNorth();
         }
-        else if (command == "east") {
+        else if (command == "east" || command == "e") {
             cmdEast();
         }
-        else if (command == "south") {
+        else if (command == "south" || command == "s") {
             cmdSouth();
         }
-        else if (command == "west") {
+        else if (command == "west" || command == "w") {
             cmdWest();
         }
-        else if (command == "up") {
+        else if (command == "up" || command == "u") {
             cmdUp();
         }
-        else if (command == "down") {
+        else if (command == "down" || command == "d") {
             cmdDown();
         }
         else if (command == "scream") {
