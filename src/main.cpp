@@ -1,5 +1,5 @@
 // the-chosen-remastered: A short ZORK-like text adventure
-// Copyright (C) 2022  Timo Früh
+// Copyright (C) 2022-2023 Timo Früh
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
