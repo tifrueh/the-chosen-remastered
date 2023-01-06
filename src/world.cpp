@@ -105,12 +105,16 @@ std::vector<std::string> chosen::Room::getShortDescription() {
     out.push_back(name);
     out.push_back(std::string(name.size(), '-'));
 
+    if (items.size() > 0 || characters.size() > 0) {
+        out.push_back("");
+    }
+
     for (chosen::Item *item : items) {
-        out.push_back(item->getDescription());
+        out.back() += item->getDescription() + " ";
     }
 
     for (chosen::Character *character : characters) {
-        out.back() += " " + character->getDescription();
+        out.back() += character->getDescription() + " ";
     }
 
     out.push_back(getDoorString());
