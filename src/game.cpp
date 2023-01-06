@@ -79,22 +79,22 @@ void chosen::Game::gameloop() {
             cmdUnlock();
         }
         else if (command == "north" || command == "n") {
-            cmdNorth();
+            movePlayer(NORTH);
         }
         else if (command == "east" || command == "e") {
-            cmdEast();
+            movePlayer(EAST);
         }
         else if (command == "south" || command == "s") {
-            cmdSouth();
+            movePlayer(SOUTH);
         }
         else if (command == "west" || command == "w") {
-            cmdWest();
+            movePlayer(WEST);
         }
         else if (command == "up" || command == "u") {
-            cmdUp();
+            movePlayer(UP);
         }
         else if (command == "down" || command == "d") {
-            cmdDown();
+            movePlayer(DOWN);
         }
         else if (command == "scream") {
             cmdScream();
@@ -409,30 +409,6 @@ void chosen::Game::movePlayer(const int &direction) {
         tui.tuiPrint(player.getFullLocationDescription());
         player.getLocation()->registerVisit();
     }
-}
-
-void chosen::Game::cmdNorth() {
-    movePlayer(NORTH);
-}
-
-void chosen::Game::cmdEast() {
-    movePlayer(EAST);
-}
-
-void chosen::Game::cmdSouth() {
-    movePlayer(SOUTH);
-}
-
-void chosen::Game::cmdWest() {
-    movePlayer(WEST);
-}
-
-void chosen::Game::cmdUp() {
-    movePlayer(UP);
-}
-
-void chosen::Game::cmdDown() {
-    movePlayer(DOWN);
 }
 
 void chosen::Game::cmdScream() {

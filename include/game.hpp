@@ -73,12 +73,6 @@ namespace chosen {
             void cmdUnlock();
 
             void movePlayer(const int &direction);
-            void cmdNorth();
-            void cmdEast();
-            void cmdSouth();
-            void cmdWest();
-            void cmdUp();
-            void cmdDown();
 
             void cmdScream();
             void cmdHelp();
