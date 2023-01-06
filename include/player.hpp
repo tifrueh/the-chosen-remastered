@@ -9,6 +9,7 @@
 #include <vector>
 #include "item.hpp"
 #include "world.hpp"
+#include "character.hpp"
 #include "gameentity.hpp"
 
 namespace chosen {
@@ -29,6 +30,7 @@ namespace chosen {
             void move(const int &direction);
             void take(chosen::Item &item);
             void drop(chosen::Item &item);
+            std::string talk(chosen::Character &character);
             std::string examine(chosen::Item &item);
             std::vector<std::string> getInventory();
     };

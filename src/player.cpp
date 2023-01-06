@@ -5,6 +5,7 @@
 
 #include <stdexcept>
 #include "item.hpp"
+#include "character.hpp"
 #include "world.hpp"
 #include "player.hpp"
 
@@ -65,6 +66,10 @@ void chosen::Player::drop(chosen::Item &item) {
 
 std::string chosen::Player::examine(chosen::Item &item) {
     return item.getExaminationDescription();
+}
+
+std::string chosen::Player::talk(chosen::Character &character) {
+    return character.getConversation();
 }
 
 std::vector<std::string> chosen::Player::getInventory() {

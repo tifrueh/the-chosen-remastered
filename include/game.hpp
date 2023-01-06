@@ -61,8 +61,7 @@ namespace chosen {
             void initWorld();
             void initLoop();
 
-            void cmdTalkTo();
-            void cmdTalk();
+            void cmdTalk(std::string character);
             void cmdFight();
             void cmdTake(std::string item);
             void cmdDrop(std::string item);

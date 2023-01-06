@@ -38,10 +38,12 @@ void chosen::Game::gameloop() {
         cstr::lowercase(command);
 
         if (cprs::isCommand(command, "talk to")) {
-            cmdTalkTo();
+            std::string talk = cprs::parseCommand(command, "talk to");
+            cmdTalk(talk);
         }
         else if (cprs::isCommand(command, "talk")) {
-            cmdTalk();
+            std::string talk = cprs::parseCommand(command, "talk");
+            cmdTalk(talk);
         }
         else if (cprs::isCommand(command, "fight")) {
             cmdFight();
@@ -250,12 +252,29 @@ void chosen::Game::initLoop() {
     player.getLocation()->registerVisit();
 }
 
-void chosen::Game::cmdTalkTo() {
-    tui.tuiPrint("cmd: talk to someone");
-}
+void chosen::Game::cmdTalk(std::string character) {
+    
+    if (!player.getLocation()->hasAnyCharacter()) {
+        tui.tuiPrint("There is no one here to listen to your beautiful voice.");
+        return;
+    }
+    else if (character == "") {
+        character = tui.tuiInput("To whom to want to talk?");
+    }
 
-void chosen::Game::cmdTalk() {
-    tui.tuiPrint("cmd: talk to someone (short version)");
+    chosen::Character* characterPtr = player.getLocation()->getCharacterByAlias(character);
+
+    if (character == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (characterPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+        return;
+    }
+    else {
+        tui.tuiPrint(player.talk(*characterPtr));
+    }
 }
 
 void chosen::Game::cmdFight() {
