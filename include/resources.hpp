@@ -8,7 +8,7 @@
 #include <string>
 #include <array>
 
-#define VERSION "0.0.1-dev"
+#define VERSION "0.1.0-dev"
 #define REVISION "Revision " VERSION
 
 namespace crsrc {
