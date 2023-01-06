@@ -33,14 +33,14 @@ void chosen::Character::setConversation(const std::vector<std::string> &conversa
 }
 
 std::string chosen::Character::getConversation() {
-    std::string out;
+    std::string out = "[" + cTheName + "]:\n";
 
     if (conversationCounter < conversation.size()) {
-        out = conversation.at(conversationCounter);
+        out += conversation.at(conversationCounter);
         conversationCounter++;
     }
     else {
-        out = conversation.back();
+        out += conversation.back();
     }
 
     return out;
