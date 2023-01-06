@@ -57,6 +57,9 @@ namespace chosen {
             chosen::Item holyWater = {"holyWater", "a", "bottle of holy water"};
 
             chosen::Character stranger = {"stranger", "a", "stranger"};
+            chosen::Character elliot = {"elliot", "", "Elliot"};
+            chosen::Character hag = {"hag", "an", "old hag"};
+            chosen::Character scholar = {"scholar", "a", "scholar"};
 
             void initWorld();
             void initLoop();

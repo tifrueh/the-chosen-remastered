@@ -221,6 +221,21 @@ void chosen::Game::initWorld() {
     stranger.setDescription(crsrc::strangerDesc);
     stranger.setConversation(crsrc::strangerConversation);
     hall.addCharacter(stranger);
+
+    elliot.setDescription(crsrc::elliotDesc);
+    westHallRoom.addCharacter(elliot);
+
+    hag.setDescription(crsrc::hagDesc);
+    hag.setConversation(crsrc::hagConversation);
+    hag.addAlias("hag");
+    hag.addAlias("woman");
+    hag.addAlias("old woman");
+    staffRoom.addCharacter(hag);
+
+    scholar.setDescription(crsrc::scholarDesc);
+    scholar.setConversation(crsrc::scholarConversation);
+    scholar.addAlias("learned man");
+    library.addCharacter(scholar);
 }
 
 void chosen::Game::initLoop() {
@@ -240,6 +255,9 @@ void chosen::Game::initLoop() {
     while (playerName == "") {
         playerName = tui.tuiInput("The memory of your name has become quite hazy ... But you try again.\nWhat is your name?\n");
     }
+
+    crsrc::elliotConversation.at(0) = "Hey, " + playerName + "! Long time no see!";
+    elliot.setConversation(crsrc::elliotConversation);
 
     player.setName(playerName);
 

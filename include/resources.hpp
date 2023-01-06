@@ -61,10 +61,28 @@ namespace crsrc {
     const std::string holyWaterDesc = "A bottle of holy water is lying on the floor.";
     const std::string holyWaterExDesc = "There are runes on the bottom of the bottle. They say: \"Refills automatically (neat, isn't it?)\".";
     const std::string holyWaterInitDesc = "On the desk, beside the books, stands a bottle of water. No ... holy water, taking into account the blueish glow of the substance.";
-    const std::string strangerDesc = "There is a stranger leaning against the far end of the wall, examining you with cold, blue eyes.";
+    const std::string strangerDesc = "You see a stranger leaning against the far end of the wall, examining you with cold, blue eyes.";
     const std::vector<std::string> strangerConversation = {
         "Hm. Another one. The world is going mad .... And what do you do? You wave around your sword as if you were able to do something. This is all pointless!",
-        "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable ... I must be getting old ...",
+        "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable. I must be getting old ...",
         "Would you please leave me alone? I'd appreciate that greatly."
+    };
+    const std::string elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
+    std::vector<std::string> elliotConversation = {
+        "[NAME LINE PLACEHOLDER]",
+        "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that that you must first prove your worth to those Swords by killing seven of the Demon King's minions. Only then will they obey you. But what do I know!",
+        "Go on, then. Kill the demons, find the swords and kill the King. You can do it, my friend, I'm sure of it."
+    };
+    const std::string hagDesc = "On the bed sits an old hag.";
+    const std::vector<std::string> hagConversation = {
+        "Oooh ... what a fine surprise ... the Chosen is finally here. You know your task already, I suppose? Quick, quick, let me tell you something then: To discover the swords you must find the three burning suns, then turn south and take the daring step. That doesn't help you? Well, this is all I know.",
+        "You want to hear that again? Well, then, listen closely this time: To discover the swords you must find the three burning suns, then turn south and take the daring step. Now, now ... Go and find the Swords, Chosen. It's what you came here for, after all ...",
+        "Go and find the swords, Chosen. It's what you came here for, after all ..."
+    };
+    const std::string scholarDesc = "You spot a scholar, frantically working through the shelves, probably searching for a particular book.";
+    const std::vector<std::string> scholarConversation = {
+        "Gods, how can a book be so difficult to find! Where do you hide yourself, you little rascal ...",
+        "Oh, greetings. Long days and pleasant nights to thee. I didn't notice you there, say sorry. Are you in need of a book? I'm afraid the library doesn't hand them over to strangers ...",
+        "Be cautious out there, okay? Those demons are vicious. They are very strong indeed and each kind can only be killed in one unique way ..."
     };
 }
