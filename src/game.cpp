@@ -124,64 +124,93 @@ void chosen::Game::gameloop() {
 
 void chosen::Game::initWorld() {
 
-    cellar.setDescription(crsrc::cellar_txt);
+    cellar.setDescription(crsrc::cellarDesc);
     cellar.addLink(cellarLadder, UP);
     
-    cellarLadderRoom.setDescription(crsrc::cellar_ladder_txt);
+    cellarLadderRoom.setDescription(crsrc::cellarLadderDesc);
     cellarLadderRoom.addLink(cellarLadder, DOWN);
     cellarLadderRoom.addLink(ladderHallDoor, NORTH);
 
-    hall.setDescription(crsrc::hall_txt);
+    hall.setDescription(crsrc::hallDesc);
     hall.addLink(ladderHallDoor, SOUTH);
     hall.addLink(hallWestHallDoor, WEST);
     hall.addLink(libraryEntranceHallDoor, NORTH);
     hall.addLink(hallEastHallDoor, EAST);
 
-    westHallRoom.setDescription(crsrc::west_hall_room_txt);
+    westHallRoom.setDescription(crsrc::westHallRoomDesc);
     westHallRoom.addLink(hallWestHallDoor, EAST);
     westHallRoom.addLink(westHallTrophyDoor, WEST);
 
-    trophyRoom.setDescription(crsrc::trophy_room_txt);
+    trophyRoom.setDescription(crsrc::trophyRoomDesc);
     trophyRoom.addLink(westHallTrophyDoor, EAST);
     trophyRoom.addLink(trophyNSPassagewayDoor, NORTH);
 
-    nsPassageway.setDescription(crsrc::ns_passageway_txt);
+    nsPassageway.setDescription(crsrc::nsPassagewayDesc);
     nsPassageway.addLink(trophyNSPassagewayDoor, SOUTH);
     nsPassageway.addLink(nsPassagewayStaffDoor, NORTH);
 
-    staffRoom.setDescription(crsrc::staff_room_txt);
+    staffRoom.setDescription(crsrc::staffRoomDesc);
     staffRoom.addLink(nsPassagewayStaffDoor, SOUTH);
     staffRoom.addLink(staffLibraryDoor, EAST);
 
-    library.setDescription(crsrc::library_txt);
+    library.setDescription(crsrc::libraryDesc);
     library.addLink(staffLibraryDoor, WEST);
     library.addLink(libraryLibraryEntranceDoor, SOUTH);
 
-    libraryEntrance.setDescription(crsrc::library_entrance_txt);
+    libraryEntrance.setDescription(crsrc::libraryEntranceDesc);
     libraryEntrance.addLink(libraryLibraryEntranceDoor, NORTH);
     libraryEntrance.addLink(libraryEntranceHallDoor, SOUTH);
 
-    eastHallRoom.setDescription(crsrc::east_hall_room_txt);
+    eastHallRoom.setDescription(crsrc::eastHallRoomDesc);
     eastHallRoom.addLink(hallEastHallDoor, WEST);
     eastHallRoom.addLink(eastHallThroneEntranceDoor, EAST);
 
-    throneEntrance.setDescription(crsrc::throne_entrance_txt);
+    throneEntrance.setDescription(crsrc::throneEntranceDesc);
     throneEntrance.addLink(eastHallThroneEntranceDoor, WEST);
     throneEntrance.addLink(hiddenRoomLink, SOUTH);
     throneEntrance.addLink(throneDoor, NORTH);
 
-    hiddenRoom.setDescription(crsrc::hidden_room_txt);
+    hiddenRoom.setDescription(crsrc::hiddenRoomDesc);
     hiddenRoom.addLink(hiddenRoomLink, NORTH);
 
-    throneRoom.setDescription(crsrc::throne_room_txt);
+    throneRoom.setDescription(crsrc::throneRoomDesc);
     throneRoom.addLink(throneDoor, SOUTH);
 
     hiddenRoomLink.setMessage("As you lay your hand upon the wall, you pass through it and emerge on the other side.");
     
-    longsword.setDescription(crsrc::longword_txt);
-    longsword.setInitialDescription(crsrc::longsword_init_txt);
-    longsword.setExaminationDescription(crsrc::longsword_ex_txt);
+    longsword.setDescription(crsrc::longswordDesc);
+    longsword.setInitialDescription(crsrc::longswordInitDesc);
+    longsword.setExaminationDescription(crsrc::longswordExDesc);
+    longsword.addAlias("simple sword");
     cellar.addItem(longsword);
+
+    crossbow.setDescription(crsrc::crossbowDesc);
+    crossbow.setInitialDescription(crsrc::crossbowInitDesc);
+    crossbow.setExaminationDescription(crsrc::crossbowExDesc);
+    crossbow.addAlias("double-winged crossbow");
+    crossbow.addAlias("small crossbow");
+    trophyRoom.addItem(crossbow);
+
+    swordsODD.setDescription(crsrc::swordsOddDescription);
+    swordsODD.setInitialDescription(crsrc::swordsOddInitDescription);
+    swordsODD.setExaminationDescription(crsrc::swordsOddExDescription);
+    swordsODD.addAlias("swords");
+    hiddenRoom.addItem(swordsODD);
+
+    fireWand.setDescription(crsrc::fireWandDesc);
+    fireWand.setInitialDescription(crsrc::fireWandInitDesc);
+    fireWand.setExaminationDescription(crsrc::fireWandExDesc);
+    fireWand.addAlias("wand");
+    fireWand.addAlias("fire wand");
+    hall.addItem(fireWand);
+
+    holyWater.setDescription(crsrc::holyWaterDesc);
+    holyWater.setInitialDescription(crsrc::holyWaterInitDesc);
+    holyWater.setExaminationDescription(crsrc::holyWaterExDesc);
+    holyWater.addAlias("water");
+    holyWater.addAlias("holy water");
+    holyWater.addAlias("bottle");
+    library.addItem(holyWater);
 }
 
 void chosen::Game::initLoop() {

@@ -49,6 +49,10 @@ namespace chosen {
             chosen::Link throneDoor = {"throneDoor", true};
 
             chosen::Item longsword = {"longsword", "a", "sword"};
+            chosen::Item crossbow = {"crossbow", "a", "crossbow"};
+            chosen::Item swordsODD = {"swordsODD", "the", "Swords of Dusk and Dawn"};
+            chosen::Item fireWand = {"fireWand", "a", "wand of fire"};
+            chosen::Item holyWater = {"holyWater", "a", "bottle of holy water"};
 
             void initWorld();
             void initLoop();
