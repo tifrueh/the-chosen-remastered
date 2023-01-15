@@ -22,6 +22,14 @@ void chosen::Player::setLocation(chosen::Room &room) {
     location = &room;
 }
 
+void chosen::Player::setDeathMessage(chosen::Item &item, chosen::Character &character, const std::string &message) {
+    deathMessages.at(&item).at(&character) = message;
+}
+
+void chosen::Player::setVictoryMessage(chosen::Item &item, chosen::Character &character, const std::string &message) {
+    victoryMessages.at(&item).at(&character) = message;
+}
+
 chosen::Room *chosen::Player::getLocation() {
     return location;
 }
@@ -40,6 +48,24 @@ std::vector<std::string> chosen::Player::getFullLocationDescription() {
 
 std::vector<std::string> chosen::Player::getShortLocationDescription() {
     return location->getShortDescription();
+}
+
+std::string chosen::Player::getDeathMessage(chosen::Item &item, chosen::Character &character) {
+    try {
+        return deathMessages.at(&item).at(&character);
+    }
+    catch (std::out_of_range const&) {
+        return "You start a fight with " + character.getTheName() + ". You lose.\nYou die ...";
+    }
+}
+
+std::string chosen::Player::getVictoryMessage(chosen::Item &item, chosen::Character &character) {
+    try {
+        return victoryMessages.at(&item).at(&character);
+    }
+    catch (std::out_of_range const&) {
+        return "You kill " + character.getTheName() + " with " + item.getTheName() + ".";
+    }
 }
 
 void chosen::Player::move(const int &direction) {
