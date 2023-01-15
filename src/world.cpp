@@ -137,7 +137,7 @@ void chosen::Room::addLink(Link &link, const int &direction) {
         hasVisibleDirection[direction] = true;
     }
 
-    link.addRoom(this);
+    link.addRoom(*this);
 }
 
 chosen::Link* chosen::Room::getLink(const int &direction) {
@@ -219,13 +219,13 @@ void chosen::Link::setMessage(const std::string &message) {
     this->message = message;
 }
 
-void chosen::Link::addRoom(Room *room) {
+void chosen::Link::addRoom(Room &room) {
     if (roomsConnected == 0) {
-        rooms[0] = room;
+        rooms[0] = &room;
         roomsConnected++;
     }
     else if (roomsConnected == 1) {
-        rooms[1] = room;
+        rooms[1] = &room;
         roomsConnected++;
     }
     else {
@@ -233,11 +233,11 @@ void chosen::Link::addRoom(Room *room) {
     }
 }
 
-chosen::Room *chosen::Link::getOtherRoom(Room *room) {
-    if (rooms[0] == room) {
+chosen::Room *chosen::Link::getOtherRoom(Room &room) {
+    if (rooms[0] == &room) {
         return rooms[1];
     }
-    else if (rooms[1] == room) {
+    else if (rooms[1] == &room) {
         return rooms[0];
     }
     else {

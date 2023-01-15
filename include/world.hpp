@@ -66,7 +66,7 @@ namespace chosen {
             bool isVisible();
             std::string getMessage();
             void setMessage(const std::string &message);
-            void addRoom(Room *room);
-            Room *getOtherRoom(Room *room);
+            void addRoom(Room &room);
+            Room *getOtherRoom(Room &room);
     };
 }
