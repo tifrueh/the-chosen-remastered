@@ -20,46 +20,46 @@ namespace chosen {
 
             ctui::TUI tui;
 
-            chosen::Player player;
+            Player player;
 
-            chosen::Room cellar = {"cellar", "Cellar"};
-            chosen::Room cellarLadderRoom = {"cellarLadder", "Ladder to the Cellar"};
-            chosen::Room hall = {"hall", "The Hall"};
-            chosen::Room westHallRoom = {"westHallRoom", "Room West to the Hall"};
-            chosen::Room trophyRoom = {"trophyRoom", "Trophy Room"};
-            chosen::Room nsPassageway = {"nsPassageway", "N/S Passageway"};
-            chosen::Room staffRoom = {"staffRoom", "Staff Room"};
-            chosen::Room library = {"library", "The Library"};
-            chosen::Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
-            chosen::Room eastHallRoom = {"eastHallRoom", "Room East to the Hall"};
-            chosen::Room throneEntrance = {"throneEntrance", "Entrance to the Throne Room"};
-            chosen::Room hiddenRoom = {"hiddenRoom", "Hidden Room"};
-            chosen::Room throneRoom = {"throneRoom", "Throne Room"};
+            Room cellar = {"cellar", "Cellar"};
+            Room cellarLadderRoom = {"cellarLadder", "Ladder to the Cellar"};
+            Room hall = {"hall", "The Hall"};
+            Room westHallRoom = {"westHallRoom", "Room West to the Hall"};
+            Room trophyRoom = {"trophyRoom", "Trophy Room"};
+            Room nsPassageway = {"nsPassageway", "N/S Passageway"};
+            Room staffRoom = {"staffRoom", "Staff Room"};
+            Room library = {"library", "The Library"};
+            Room libraryEntrance = {"libraryEntrance", "Library Entrance"};
+            Room eastHallRoom = {"eastHallRoom", "Room East to the Hall"};
+            Room throneEntrance = {"throneEntrance", "Entrance to the Throne Room"};
+            Room hiddenRoom = {"hiddenRoom", "Hidden Room"};
+            Room throneRoom = {"throneRoom", "Throne Room"};
 
-            chosen::Link cellarLadder = {"cellarLadder", true};
-            chosen::Link ladderHallDoor = {"ladderHallDoor", true};
-            chosen::Link hallWestHallDoor = {"hallWestHallDoor", true};
-            chosen::Link westHallTrophyDoor = {"westHallTrophyDoor", true};
-            chosen::Link trophyNSPassagewayDoor = {"trophyNSPassagewayDoor", true};
-            chosen::Link nsPassagewayStaffDoor = {"nsPassagewayStaffDoor", true};
-            chosen::Link staffLibraryDoor = {"staffLibraryDoor", true};
-            chosen::Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor", true};
-            chosen::Link libraryEntranceHallDoor = {"libraryEntranceHallDoor", true};
-            chosen::Link hallEastHallDoor = {"hallEastHallDoor", true};
-            chosen::Link eastHallThroneEntranceDoor = {"eastHallThroneEntranceDoor", true};
-            chosen::Link hiddenRoomLink = {"hiddenRoomLink", false};
-            chosen::Link throneDoor = {"throneDoor", true};
+            Link cellarLadder = {"cellarLadder", true};
+            Link ladderHallDoor = {"ladderHallDoor", true};
+            Link hallWestHallDoor = {"hallWestHallDoor", true};
+            Link westHallTrophyDoor = {"westHallTrophyDoor", true};
+            Link trophyNSPassagewayDoor = {"trophyNSPassagewayDoor", true};
+            Link nsPassagewayStaffDoor = {"nsPassagewayStaffDoor", true};
+            Link staffLibraryDoor = {"staffLibraryDoor", true};
+            Link libraryLibraryEntranceDoor {"libraryLibraryEntranceDoor", true};
+            Link libraryEntranceHallDoor = {"libraryEntranceHallDoor", true};
+            Link hallEastHallDoor = {"hallEastHallDoor", true};
+            Link eastHallThroneEntranceDoor = {"eastHallThroneEntranceDoor", true};
+            Link hiddenRoomLink = {"hiddenRoomLink", false};
+            Link throneDoor = {"throneDoor", true};
 
-            chosen::Item longsword = {"longsword", "a", "sword"};
-            chosen::Item crossbow = {"crossbow", "a", "crossbow"};
-            chosen::Item swordsODD = {"swordsODD", "the", "Swords of Dusk and Dawn"};
-            chosen::Item fireWand = {"fireWand", "a", "wand of fire"};
-            chosen::Item holyWater = {"holyWater", "a", "bottle of holy water"};
+            Item longsword = {"longsword", "a", "sword"};
+            Item crossbow = {"crossbow", "a", "crossbow"};
+            Item swordsODD = {"swordsODD", "the", "Swords of Dusk and Dawn"};
+            Item fireWand = {"fireWand", "a", "wand of fire"};
+            Item holyWater = {"holyWater", "a", "bottle of holy water"};
 
-            chosen::Character stranger = {"stranger", "a", "stranger"};
-            chosen::Character elliot = {"elliot", "", "Elliot"};
-            chosen::Character hag = {"hag", "an", "old hag"};
-            chosen::Character scholar = {"scholar", "a", "scholar"};
+            Character stranger = {"stranger", "a", "stranger"};
+            Character elliot = {"elliot", "", "Elliot"};
+            Character hag = {"hag", "an", "old hag"};
+            Character scholar = {"scholar", "a", "scholar"};
 
             void initWorld();
             void initLoop();
