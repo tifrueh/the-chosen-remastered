@@ -66,12 +66,6 @@ void chosen::Game::gameloop() {
         else if (cprs::isCommand(command, "hug")) {
             cmdHug();
         }
-        else if (cprs::isCommand(command, "open")) {
-            cmdOpen();
-        }
-        else if (cprs::isCommand(command, "close")) {
-            cmdClose();
-        }
         else if (cprs::isCommand(command, "lock")) {
             cmdLock();
         }
