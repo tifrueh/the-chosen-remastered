@@ -9,7 +9,8 @@
 #include "world.hpp"
 #include "player.hpp"
 
-chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer", "GameEntity:Player") {
+chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer") {
+    classId = "GameEntity:GameEntityWithInventory:Player";
     location = nullptr;
 }
 

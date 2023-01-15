@@ -16,9 +16,7 @@ namespace chosen {
             std::string description;
             std::vector<std::string> conversation;
             std::string hugMessage;
-        
-            Character(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
-        
+                
         public:
             Character(const std::string &id, const std::string &article, const std::string &name);
             void setDescription(const std::string &description);

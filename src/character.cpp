@@ -5,22 +5,14 @@
 
 #include "character.hpp"
 
-chosen::Character::Character(const std::string &id, 
-                             const std::string &article, 
-                             const std::string &name, 
-                             const std::string &classId) : GameEntityWithInventory(id, article, name, classId) {
-                                conversationCounter = 0;
-                                description = cArticleName + " is here.";
-                                hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
-}
-
 chosen::Character::Character(const std::string &id,
                              const std::string &article,
-                             const std::string &name) : GameEntityWithInventory(id, article, name, "GameEntity:GameEntityWithInventory:Character") {
-                                conversationCounter = 0;
-                                description = cArticleName + " is here.";
-                                hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
-                             }
+                             const std::string &name) : GameEntityWithInventory(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory:Character";
+    conversationCounter = 0;
+    description = cArticleName + " is here.";
+    hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
+}
 
 void chosen::Character::setDescription(const std::string &description) {
     this->description = description;

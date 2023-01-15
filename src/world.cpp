@@ -11,8 +11,9 @@
 #include "item.hpp"
 #include "world.hpp"
 
-chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityWithInventory(id, "", name, "GameEntity:GameEntityWithInventory:Room") {
-    this->description = "[THIS ROOM HAS NO DESCRIPTION]";
+chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityWithInventory(id, "", name) {
+    classId = "GameEntity:GameEntityWithInventory:Room";
+    description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false, false, false};
     hasVisibleDirection = {false, false, false, false, false, false};
     visited = false;
@@ -191,7 +192,8 @@ chosen::Character* chosen::Room::getCharacterByAlias(const std::string &alias) {
     return nullptr;
 }
 
-chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link", "GameEntity:Link") {
+chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link") {
+    classId = "GameEntity:Link";
     roomsConnected = 0;
     this->visible = visible;
     message = "";

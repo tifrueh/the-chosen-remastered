@@ -22,8 +22,6 @@ namespace chosen {
             std::string cTheName;
 
             std::vector<std::string> aliases;
-
-            GameEntity(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
         
         public:
             GameEntity(const std::string &id, const std::string &article, const std::string &name);

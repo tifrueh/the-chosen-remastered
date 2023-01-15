@@ -30,8 +30,6 @@ namespace chosen {
     class GameEntityWithInventory : public GameEntity {
         protected:
             std::vector<Item*> items;
-
-            GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
         
         public:
             GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name);

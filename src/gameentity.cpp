@@ -8,8 +8,8 @@
 #include "customstring.hpp"
 #include "gameentity.hpp"
 
-chosen::GameEntity::GameEntity(const std::string &id, const std::string &article, const std::string &name, const std::string &classId) {
-    this->classId = classId;
+chosen::GameEntity::GameEntity(const std::string &id, const std::string &article, const std::string &name) {
+    this->classId = "GameEntity";
     this->id = id;
     this->name = name;
     this->article = article;
@@ -29,11 +29,6 @@ chosen::GameEntity::GameEntity(const std::string &id, const std::string &article
     aliases.push_back(cstr::lowercaseToNew(name));
     aliases.push_back(cstr::lowercaseToNew(articleName));
     aliases.push_back(cstr::lowercaseToNew(theName));
-
-}
-
-chosen::GameEntity::GameEntity(const std::string &id, const std::string &article, const std::string &name) {
-    GameEntity(id, article, name, "GameEntity");
 }
 
 std::string chosen::GameEntity::getClassId() {

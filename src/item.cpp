@@ -9,7 +9,8 @@
 #include <stdexcept>
 #include "item.hpp"
 
-chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name, "GameEntity:Item") {
+chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name) {
+    classId = "GameEntity:Item";
     description = cArticleName + " is here.";
     initialDescription = description;
     isInInitialPosition = true;
@@ -56,12 +57,9 @@ chosen::Item* chosen::GameEntityWithInventory::getItemByAlias(const std::string 
 
 chosen::GameEntityWithInventory::GameEntityWithInventory(const std::string &id, 
                                                          const std::string &article, 
-                                                         const std::string &name,
-                                                         const std::string &classId) : GameEntity(id, article, name, classId) {}
-
-chosen::GameEntityWithInventory::GameEntityWithInventory(const std::string &id, 
-                                                         const std::string &article, 
-                                                         const std::string &name) : GameEntity(id, article, name, "GameEntity:GameEntityWithInventory") {}
+                                                         const std::string &name) : GameEntity(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory";
+}
 
 bool chosen::GameEntityWithInventory::hasItem(chosen::Item &item) {
     std::vector<chosen::Item*>::iterator itemIterator;
