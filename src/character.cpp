@@ -50,3 +50,11 @@ void chosen::Character::setHugMessage(const std::string &message) {
 std::string chosen::Character::getHugMessage(){
     return hugMessage;
 }
+
+void chosen::Character::makeInvincible() {
+    isKillable = false;
+}
+
+bool chosen::Character::evaluateFight(chosen::Item &weapon) {
+    return isKillable;
+}

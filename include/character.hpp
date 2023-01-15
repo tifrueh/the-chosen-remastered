@@ -13,6 +13,7 @@ namespace chosen {
     class Character : public GameEntityWithInventory {
         protected:
             long unsigned int conversationCounter;
+            bool isKillable;
             std::string description;
             std::vector<std::string> conversation;
             std::string hugMessage;
@@ -25,5 +26,7 @@ namespace chosen {
             std::string getConversation();
             void setHugMessage(const std::string &message);
             std::string getHugMessage();
+            void makeInvincible();
+            virtual bool evaluateFight(Item &weapon);
     };
 }

@@ -22,12 +22,12 @@ void chosen::Player::setLocation(chosen::Room &room) {
     location = &room;
 }
 
-void chosen::Player::setDeathMessage(chosen::Item &item, chosen::Character &character, const std::string &message) {
-    deathMessages.at(&item).at(&character) = message;
+void chosen::Player::setDeathMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
+    deathMessages.at(&character).at(&item) = message;
 }
 
-void chosen::Player::setVictoryMessage(chosen::Item &item, chosen::Character &character, const std::string &message) {
-    victoryMessages.at(&item).at(&character) = message;
+void chosen::Player::setVictoryMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
+    victoryMessages.at(&character).at(&item) = message;
 }
 
 chosen::Room *chosen::Player::getLocation() {
@@ -50,18 +50,18 @@ std::vector<std::string> chosen::Player::getShortLocationDescription() {
     return location->getShortDescription();
 }
 
-std::string chosen::Player::getDeathMessage(chosen::Item &item, chosen::Character &character) {
+std::string chosen::Player::getDeathMessage(chosen::Character &character, chosen::Item &item) {
     try {
-        return deathMessages.at(&item).at(&character);
+        return deathMessages.at(&character).at(&item);
     }
     catch (std::out_of_range const&) {
         return "You start a fight with " + character.getTheName() + ". You lose.\nYou die ...";
     }
 }
 
-std::string chosen::Player::getVictoryMessage(chosen::Item &item, chosen::Character &character) {
+std::string chosen::Player::getVictoryMessage(chosen::Character &character, chosen::Item &item) {
     try {
-        return victoryMessages.at(&item).at(&character);
+        return victoryMessages.at(&character).at(&item);
     }
     catch (std::out_of_range const&) {
         return "You kill " + character.getTheName() + " with " + item.getTheName() + ".";
@@ -89,6 +89,16 @@ void chosen::Player::take(chosen::Item &item) {
 void chosen::Player::drop(chosen::Item &item) {
     this->removeItem(item);
     location->addItem(item);
+}
+
+bool chosen::Player::fight(chosen::Character &character, chosen::Item &item) {
+    bool victory = character.evaluateFight(item);
+
+    if (victory) {
+        location->removeCharacter(character);
+    }
+
+    return victory;
 }
 
 std::string chosen::Player::examine(chosen::Item &item) {

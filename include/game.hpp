@@ -65,7 +65,7 @@ namespace chosen {
             void initLoop();
 
             void cmdTalk(std::string character);
-            void cmdFight();
+            void cmdFight(std::string character, std::string item);
             void cmdTake(std::string item);
             void cmdDrop(std::string item);
             void cmdExamine(std::string item);

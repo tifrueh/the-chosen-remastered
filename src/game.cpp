@@ -4,6 +4,7 @@
 
 
 #include <string>
+#include <array>
 #include "tui.hpp"
 #include "world.hpp"
 #include "player.hpp"
@@ -46,7 +47,8 @@ void chosen::Game::gameloop() {
             cmdTalk(talk);
         }
         else if (cprs::isCommand(command, "fight")) {
-            cmdFight();
+            std::array<std::string, 2> fight = cprs::parseCommand(command, "fight", "with");
+            cmdFight(fight[0], fight[1]);
         }
         else if (cprs::isCommand(command, "take")) {
             std::string take = cprs::parseCommand(command, "take");
@@ -129,6 +131,8 @@ void chosen::Game::gameloop() {
         tui.updateScore(score);
         tui.setLocation(player.getLocationName());
     }
+
+    tui.waitForInput("\n[Hit any key to exit.]");
 }
 
 void chosen::Game::initWorld() {
@@ -223,6 +227,7 @@ void chosen::Game::initWorld() {
 
     stranger.setDescription(crsrc::strangerDesc);
     stranger.setConversation(crsrc::strangerConversation);
+    stranger.makeInvincible();
     hall.addCharacter(stranger);
 
     elliot.setDescription(crsrc::elliotDesc);
@@ -299,8 +304,50 @@ void chosen::Game::cmdTalk(std::string character) {
     }
 }
 
-void chosen::Game::cmdFight() {
-    tui.tuiPrint("cmd: fight someone");
+void chosen::Game::cmdFight(std::string character, std::string item) {
+    bool victory = true;
+
+    if (!player.getLocation()->hasAnyCharacter()) {
+        tui.tuiPrint("There is no one here whom you could fight.");
+        return;
+    } 
+    else if (!player.hasAnyItem()) {
+        tui.tuiPrint("You do not have anything to fight with.");
+        return;
+    }
+    else if (character == "") {
+        character = tui.tuiInput("Whom do you want to fight?");
+    }
+    else if (item == "") {
+        item = tui.tuiInput("With what do you want to fight?");
+    }
+
+    chosen::Character *characterPtr = player.getLocation()->getCharacterByAlias(character);
+    chosen::Item *itemPtr = player.getItemByAlias(item);
+
+    if (character == "" || item == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (characterPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+        return;
+    }
+    else if (itemPtr == nullptr) {
+        tui.tuiPrint("You do not have any item called " + item + ".");
+        return;
+    }
+    else {
+        victory = player.fight(*characterPtr, *itemPtr);
+    }
+
+    if (victory) {
+        tui.tuiPrint(player.getVictoryMessage(*characterPtr, *itemPtr));
+    } 
+    else {
+        tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
+        state = 1;
+    }
 }
 
 void chosen::Game::cmdTake(std::string item) {
@@ -526,6 +573,5 @@ void chosen::Game::cmdExit() {
     std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
     if (affirm == "y") {
         state = 1;
-        tui.waitForInput("\n[Hit any key to exit]");
     }
 }
