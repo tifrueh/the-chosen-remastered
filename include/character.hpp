@@ -29,7 +29,7 @@ namespace chosen {
             void setHugMessage(const std::string &message);
             std::string getHugMessage();
             void makeInvincible();
-            virtual bool evaluateFight(Item &weapon);
+            bool evaluateFight(Item &weapon);
             void setDefaultDeathMessage(const std::string &message);
             std::string getDefaultDeathMessage();
             void setDefaultVictoryMessage(const std::string &message);
