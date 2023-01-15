@@ -72,6 +72,10 @@ std::string chosen::Player::talk(chosen::Character &character) {
     return character.getConversation();
 }
 
+std::string chosen::Player::hug(chosen::Character &character) {
+    return character.getHugMessage();
+}
+
 std::vector<std::string> chosen::Player::getInventory() {
     std::vector<std::string> out;
 

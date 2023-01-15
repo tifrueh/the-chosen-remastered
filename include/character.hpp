@@ -15,6 +15,7 @@ namespace chosen {
             long unsigned int conversationCounter;
             std::string description;
             std::vector<std::string> conversation;
+            std::string hugMessage;
         
             Character(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
         
@@ -24,5 +25,7 @@ namespace chosen {
             std::string getDescription();
             void setConversation(const std::vector<std::string> &conversation);
             std::string getConversation();
+            void setHugMessage(const std::string &message);
+            std::string getHugMessage();
     };
 }

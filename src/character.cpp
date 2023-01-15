@@ -11,6 +11,7 @@ chosen::Character::Character(const std::string &id,
                              const std::string &classId) : GameEntityWithInventory(id, article, name, classId) {
                                 conversationCounter = 0;
                                 description = cArticleName + " is here.";
+                                hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
 }
 
 chosen::Character::Character(const std::string &id,
@@ -18,6 +19,7 @@ chosen::Character::Character(const std::string &id,
                              const std::string &name) : GameEntityWithInventory(id, article, name, "GameEntity:GameEntityWithInventory:Character") {
                                 conversationCounter = 0;
                                 description = cArticleName + " is here.";
+                                hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
                              }
 
 void chosen::Character::setDescription(const std::string &description) {
@@ -47,4 +49,12 @@ std::string chosen::Character::getConversation() {
     }
 
     return out;
+}
+
+void chosen::Character::setHugMessage(const std::string &message) {
+    this->hugMessage = message;
+}
+
+std::string chosen::Character::getHugMessage(){
+    return hugMessage;
 }

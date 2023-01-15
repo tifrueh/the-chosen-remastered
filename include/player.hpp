@@ -31,6 +31,7 @@ namespace chosen {
             void take(chosen::Item &item);
             void drop(chosen::Item &item);
             std::string talk(chosen::Character &character);
+            std::string hug(chosen::Character &character);
             std::string examine(chosen::Item &item);
             std::vector<std::string> getInventory();
     };

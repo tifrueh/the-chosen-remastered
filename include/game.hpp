@@ -69,7 +69,7 @@ namespace chosen {
             void cmdTake(std::string item);
             void cmdDrop(std::string item);
             void cmdExamine(std::string item);
-            void cmdHug();
+            void cmdHug(std::string character);
             void cmdOpen();
             void cmdClose();
             void cmdLock();

@@ -64,7 +64,8 @@ void chosen::Game::gameloop() {
             tui.tuiPrint("Talking to yourself is said to be a sign of impending mental collapse.");
         }
         else if (cprs::isCommand(command, "hug")) {
-            cmdHug();
+            std::string hug = cprs::parseCommand(command, "hug");
+            cmdHug(hug);
         }
         else if (cprs::isCommand(command, "lock")) {
             cmdLock();
@@ -225,6 +226,7 @@ void chosen::Game::initWorld() {
     hall.addCharacter(stranger);
 
     elliot.setDescription(crsrc::elliotDesc);
+    elliot.setHugMessage(crsrc::elliotHug);
     westHallRoom.addCharacter(elliot);
 
     hag.setDescription(crsrc::hagDesc);
@@ -378,8 +380,27 @@ void chosen::Game::cmdExamine(std::string item) {
     }
 }
 
-void chosen::Game::cmdHug() {
-    tui.tuiPrint("cmd: hug someone");
+void chosen::Game::cmdHug(std::string character) {
+    if (!player.getLocation()->hasAnyCharacter()) {
+        tui.tuiPrint("There is no one here to receive your warm embrace.");
+        return;
+    }
+    else if (character == "") {
+        character = tui.tuiInput("Whom do you want to hug?");
+    }
+
+    chosen::Character *chPtr = player.getLocation()->getCharacterByAlias(character);
+
+    if (character == "") {
+        tui.tuiPrint("Never mind.");
+        return;
+    }
+    else if (chPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+    }
+    else {
+        tui.tuiPrint(player.hug(*chPtr));
+    }
 }
 
 void chosen::Game::cmdOpen() {
