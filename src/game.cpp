@@ -5,6 +5,7 @@
 
 #include <string>
 #include <array>
+#include <map>
 #include "tui.hpp"
 #include "world.hpp"
 #include "player.hpp"
@@ -231,6 +232,7 @@ void chosen::Game::initWorld() {
     stranger.setDefaultVictoryMessage(crsrc::strangerDefVictoryMsg);
     stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
     hall.addCharacter(stranger);
+    player.setDeathMessage(stranger, longsword, crsrc::deathStrangerLongsword);
 
     elliot.setDescription(crsrc::elliotDesc);
     elliot.setHugMessage(crsrc::elliotHug);

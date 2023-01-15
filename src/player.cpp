@@ -23,11 +23,11 @@ void chosen::Player::setLocation(chosen::Room &room) {
 }
 
 void chosen::Player::setDeathMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
-    deathMessages.at(&character).at(&item) = message;
+    deathMessages[&character][&item] = message;
 }
 
 void chosen::Player::setVictoryMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
-    victoryMessages.at(&character).at(&item) = message;
+    victoryMessages[&character][&item] = message;
 }
 
 chosen::Room *chosen::Player::getLocation() {
