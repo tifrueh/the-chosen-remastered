@@ -67,6 +67,8 @@ namespace crsrc {
         "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable. I must be getting old ...",
         "Would you please leave me alone? I'd appreciate that greatly."
     };
+    const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
+    const std::string strangerDefDeathMsg = "The stranger did not wish you harm. But you already started the fight and cannot stop. You kill the stranger, watching the light fading from his piercingly blue eyes.";
     const std::string elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
     std::vector<std::string> elliotConversation = {
         "[NAME LINE PLACEHOLDER]",

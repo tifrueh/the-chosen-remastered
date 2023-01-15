@@ -17,6 +17,8 @@ namespace chosen {
             std::string description;
             std::vector<std::string> conversation;
             std::string hugMessage;
+            std::string defaultDeathMessage;
+            std::string defaultVictoryMessage;
                 
         public:
             Character(const std::string &id, const std::string &article, const std::string &name);
@@ -28,5 +30,9 @@ namespace chosen {
             std::string getHugMessage();
             void makeInvincible();
             virtual bool evaluateFight(Item &weapon);
+            void setDefaultDeathMessage(const std::string &message);
+            std::string getDefaultDeathMessage();
+            void setDefaultVictoryMessage(const std::string &message);
+            std::string getDefaultVictoryMessage();
     };
 }

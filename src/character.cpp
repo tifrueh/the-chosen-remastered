@@ -12,6 +12,8 @@ chosen::Character::Character(const std::string &id,
     conversationCounter = 0;
     description = cArticleName + " is here.";
     hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
+    defaultDeathMessage = "You kill " + theName + ".";
+    defaultVictoryMessage = "You start a fight with " + theName + ". You lose ...\nYou die ...";
 }
 
 void chosen::Character::setDescription(const std::string &description) {
@@ -57,4 +59,20 @@ void chosen::Character::makeInvincible() {
 
 bool chosen::Character::evaluateFight(chosen::Item &weapon) {
     return isKillable;
+}
+
+void chosen::Character::setDefaultDeathMessage(const std::string &message) {
+    defaultDeathMessage = message;
+}
+
+std::string chosen::Character::getDefaultDeathMessage() {
+    return defaultDeathMessage;
+}
+
+void chosen::Character::setDefaultVictoryMessage(const std::string &message) {
+    defaultVictoryMessage = message;
+}
+
+std::string chosen::Character::getDefaultVictoryMessage() {
+    return defaultVictoryMessage;
 }

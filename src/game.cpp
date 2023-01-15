@@ -228,6 +228,8 @@ void chosen::Game::initWorld() {
     stranger.setDescription(crsrc::strangerDesc);
     stranger.setConversation(crsrc::strangerConversation);
     stranger.makeInvincible();
+    stranger.setDefaultVictoryMessage(crsrc::strangerDefVictoryMsg);
+    stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
     hall.addCharacter(stranger);
 
     elliot.setDescription(crsrc::elliotDesc);

@@ -55,7 +55,7 @@ std::string chosen::Player::getDeathMessage(chosen::Character &character, chosen
         return deathMessages.at(&character).at(&item);
     }
     catch (std::out_of_range const&) {
-        return "You start a fight with " + character.getTheName() + ". You lose.\nYou die ...";
+        return character.getDefaultVictoryMessage();
     }
 }
 
@@ -64,7 +64,7 @@ std::string chosen::Player::getVictoryMessage(chosen::Character &character, chos
         return victoryMessages.at(&character).at(&item);
     }
     catch (std::out_of_range const&) {
-        return "You kill " + character.getTheName() + " with " + item.getTheName() + ".";
+        return character.getDefaultDeathMessage();
     }
 }
 
