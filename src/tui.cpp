@@ -27,7 +27,7 @@ ctui::TUI::~TUI() {
 
 void ctui::TUI::init(const std::string &initialLocation) {
     initscr();
-    raw();
+    cbreak();
     noecho();
     curs_set(0);
     setlocale(LC_ALL, "");
