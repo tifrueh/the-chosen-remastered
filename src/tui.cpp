@@ -114,6 +114,7 @@ WINDOW *ctui::TUI::createBox(int height, int width, int yPos, int xPos) {
 
 void ctui::TUI::tuiNapMs(const int &ms) {
     napms(ms);
+    flushinp();
 }
 
 void ctui::TUI::waitForInput() {
