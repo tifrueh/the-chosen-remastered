@@ -1,6 +1,8 @@
-project('the-chosen-remastered', 'cpp',
+project(
+        'the-chosen-remastered', 'cpp',
         default_options: ['cpp_std=c++17'],
-        version: '0.1.0-dev')
+        version: '0.1.0-dev'
+)
 
 incdir = include_directories('include')
 
@@ -17,6 +19,10 @@ srcs = ['src/character.cpp',
 
 ncurses = dependency('ncurses')
 
-executable('the-chosen', srcs, 
-           include_directories: incdir,
-           dependencies: ncurses)
+executable(
+        meson.project_name(), 
+        srcs, 
+        include_directories: incdir,
+        dependencies: ncurses,
+        install: true
+)
