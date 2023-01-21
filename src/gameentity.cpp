@@ -61,6 +61,8 @@ std::string chosen::GameEntity::getCTheName() {
 
 void chosen::GameEntity::addAlias(const std::string &alias) {
     aliases.push_back(cstr::lowercaseToNew(alias));
+    aliases.push_back("a " + cstr::lowercaseToNew(alias));
+    aliases.push_back("the " + cstr::lowercaseToNew(alias));
 }
 
 bool chosen::GameEntity::hasAlias(const std::string &alias) {
