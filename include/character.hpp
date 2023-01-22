@@ -19,6 +19,7 @@ namespace chosen {
             std::string hugMessage;
             std::string defaultDeathMessage;
             std::string defaultVictoryMessage;
+            std::vector<Item*> immunities;
                 
         public:
             Character(const std::string &id, const std::string &article, const std::string &name);
@@ -34,5 +35,7 @@ namespace chosen {
             std::string getDefaultDeathMessage();
             void setDefaultVictoryMessage(const std::string &message);
             std::string getDefaultVictoryMessage();
+            void addImmunity(Item &item);
+            bool isImmuneAgaints(Item &item);
     };
 }

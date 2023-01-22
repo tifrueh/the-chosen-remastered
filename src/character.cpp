@@ -10,6 +10,7 @@ chosen::Character::Character(const std::string &id,
                              const std::string &name) : GameEntityWithInventory(id, article, name) {
     classId = "GameEntity:GameEntityWithInventory:Character";
     conversationCounter = 0;
+    isKillable = true;
     description = cArticleName + " is here.";
     hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
     defaultDeathMessage = "You kill " + theName + ".";
@@ -58,7 +59,11 @@ void chosen::Character::makeInvincible() {
 }
 
 bool chosen::Character::evaluateFight(chosen::Item &weapon) {
-    return isKillable;
+    if (isKillable == false) {
+        return false;
+    }
+
+    return !isImmuneAgaints(weapon);
 }
 
 void chosen::Character::setDefaultDeathMessage(const std::string &message) {
@@ -75,4 +80,20 @@ void chosen::Character::setDefaultVictoryMessage(const std::string &message) {
 
 std::string chosen::Character::getDefaultVictoryMessage() {
     return defaultVictoryMessage;
+}
+
+void chosen::Character::addImmunity(chosen::Item &item) {
+    immunities.push_back(&item);
+}
+
+bool chosen::Character::isImmuneAgaints(chosen::Item &item) {
+    bool immune = false;
+
+    for (chosen::Item *nItem : immunities) {
+        if (nItem == &item) {
+            immune = true;
+        }
+    }
+
+    return immune;
 }
