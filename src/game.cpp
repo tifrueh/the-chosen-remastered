@@ -252,12 +252,13 @@ void chosen::Game::initWorld() {
 }
 
 void chosen::Game::initLoop() {
-    tui.setLocation("Unknown location");
+    tui.setLocation("Copyright");
 
     tui.tuiPrint<6>(crsrc::welcomeMessage);
+    tui.waitForInput();
+    tui.clear();
 
-    tui.tuiNapMs(4000);
-    tui.tuiPrintNewline();
+    tui.setLocation("Unknown location");
 
     tui.tuiPrint<11>(crsrc::intro);
 
