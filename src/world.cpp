@@ -88,11 +88,11 @@ std::vector<std::string> chosen::Room::getFullDescription() {
     out.push_back(description);
 
     for (chosen::Item *item : items) {
-        out.back() += " " + item->getDescription();
+        out.push_back(item->getDescription());
     }
 
     for (chosen::Character *character : characters) {
-        out.back() += " " + character->getDescription();
+        out.push_back(character->getDescription());
     }
 
     out.push_back(getDoorString());
