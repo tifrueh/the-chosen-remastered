@@ -19,7 +19,6 @@ namespace chosen {
             std::string hugMessage;
             std::string defaultDeathMessage;
             std::string defaultVictoryMessage;
-            std::vector<Item*> immunities;
                 
         public:
             Character(const std::string &id, const std::string &article, const std::string &name);
@@ -30,12 +29,32 @@ namespace chosen {
             void setHugMessage(const std::string &message);
             std::string getHugMessage();
             void makeInvincible();
-            bool evaluateFight(Item &weapon);
+            virtual bool evaluateFight(Item &weapon);
             void setDefaultDeathMessage(const std::string &message);
             std::string getDefaultDeathMessage();
             void setDefaultVictoryMessage(const std::string &message);
             std::string getDefaultVictoryMessage();
+    };
+
+    class NPC : public Character {
+        protected:
+            std::vector<Item*> immunities;
+        
+        public:
+            NPC(const std::string &id, const std::string &article, const std::string &name);
             void addImmunity(Item &item);
-            bool isImmuneAgaints(Item &item);
+            bool isImmuneAgainst(Item &item);
+            bool evaluateFight(Item &weapon);
+    };
+
+    class Enemy : public Character {
+        protected:
+            std::vector<Item*> vulnerabilities;
+
+        public:
+            Enemy(const std::string &id, const std::string &article, const std::string &name);
+            void addVulnerability(Item &item);
+            bool isVulnerableAgainst(Item &item);
+            bool evaluateFight(Item &weapon);
     };
 }

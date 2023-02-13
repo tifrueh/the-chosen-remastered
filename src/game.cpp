@@ -228,9 +228,9 @@ void chosen::Game::initWorld() {
 
     stranger.setDescription(crsrc::strangerDesc);
     stranger.setConversation(crsrc::strangerConversation);
-    stranger.makeInvincible();
     stranger.setDefaultVictoryMessage(crsrc::strangerDefVictoryMsg);
     stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
+    stranger.addVulnerability(swordsODD);
     hall.addCharacter(stranger);
     player.setDeathMessage(stranger, longsword, crsrc::deathStrangerLongsword);
 

@@ -59,11 +59,7 @@ void chosen::Character::makeInvincible() {
 }
 
 bool chosen::Character::evaluateFight(chosen::Item &weapon) {
-    if (isKillable == false) {
-        return false;
-    }
-
-    return !isImmuneAgaints(weapon);
+    return isKillable;
 }
 
 void chosen::Character::setDefaultDeathMessage(const std::string &message) {
@@ -82,11 +78,17 @@ std::string chosen::Character::getDefaultVictoryMessage() {
     return defaultVictoryMessage;
 }
 
-void chosen::Character::addImmunity(chosen::Item &item) {
+chosen::NPC::NPC(const std::string &id, 
+                 const std::string &article, 
+                 const std::string &name) : chosen::Character(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory:Character:NPC";
+}
+
+void chosen::NPC::addImmunity(chosen::Item &item) {
     immunities.push_back(&item);
 }
 
-bool chosen::Character::isImmuneAgaints(chosen::Item &item) {
+bool chosen::NPC::isImmuneAgainst(chosen::Item &item) {
     bool immune = false;
 
     for (chosen::Item *nItem : immunities) {
@@ -96,4 +98,42 @@ bool chosen::Character::isImmuneAgaints(chosen::Item &item) {
     }
 
     return immune;
+}
+
+bool chosen::NPC::evaluateFight(chosen::Item &item) {
+    if (!isKillable) {
+        return false;
+    }
+
+    return !isImmuneAgainst(item);
+}
+
+chosen::Enemy::Enemy(const std::string &id, 
+                     const std::string &article, 
+                     const std::string &name) : chosen::Character(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory:Character:Enemy";
+}
+
+void chosen::Enemy::addVulnerability(chosen::Item &item) {
+    vulnerabilities.push_back(&item);
+}
+
+bool chosen::Enemy::isVulnerableAgainst(chosen::Item &item) {
+    bool vulnerable = false;
+
+    for (chosen::Item *nItem : vulnerabilities) {
+        if (nItem == &item) {
+            vulnerable = true;
+        }
+    }
+
+    return vulnerable;
+}
+
+bool chosen::Enemy::evaluateFight(chosen::Item &weapon) {
+    if (!isKillable) {
+        return false;
+    }
+
+    return isVulnerableAgainst(weapon);
 }
