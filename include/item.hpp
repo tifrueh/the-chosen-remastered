@@ -16,6 +16,8 @@ namespace chosen {
             bool isInInitialPosition;
             std::string initialDescription;
             std::string examinationDescription;
+            std::string reqUnmetMessage;
+            int scoreRequirement;
 
         public:
             Item(const std::string &id, const std::string &article, const std::string &name);
@@ -25,6 +27,10 @@ namespace chosen {
             std::string getExaminationDescription();
             std::string getDescription();
             void registerPickup();
+            void setScoreRequirement(const int &score);
+            bool wieldable(Item &item, const int &score);
+            void setReqUnmetMessage(const std::string &message);
+            std::string getReqUnmetMessage();
     };
 
     class GameEntityWithInventory : public GameEntity {

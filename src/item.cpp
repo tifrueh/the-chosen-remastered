@@ -15,6 +15,7 @@ chosen::Item::Item(const std::string &id, const std::string &article, const std:
     initialDescription = description;
     isInInitialPosition = true;
     examinationDescription = "There is nothing special about " + theName + ".";
+    scoreRequirement = 0;
 }
 
 void chosen::Item::setDescription(const std::string &description) {
@@ -44,6 +45,22 @@ std::string chosen::Item::getDescription() {
 
 void chosen::Item::registerPickup() {
     isInInitialPosition = false;
+}
+
+void chosen::Item::setScoreRequirement(const int &score) {
+    scoreRequirement = score;
+}
+
+bool chosen::Item::wieldable(chosen::Item &item, const int &score) {
+    return score >= scoreRequirement;
+}
+
+void chosen::Item::setReqUnmetMessage(const std::string &message) {
+    reqUnmetMessage = message;
+}
+
+std::string chosen::Item::getReqUnmetMessage() {
+    return reqUnmetMessage;
 }
 
 chosen::Item* chosen::GameEntityWithInventory::getItemByAlias(const std::string &alias) {
