@@ -216,6 +216,8 @@ void chosen::Game::initWorld() {
     fireWand.setExaminationDescription(crsrc::fireWandExDesc);
     fireWand.addAlias("wand");
     fireWand.addAlias("fire wand");
+    fireWand.addAlias("wood");
+    fireWand.addAlias("piece of wood");
     hall.addItem(fireWand);
 
     holyWater.setDescription(crsrc::holyWaterDesc);
