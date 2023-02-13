@@ -51,7 +51,7 @@ void chosen::Item::setScoreRequirement(const int &score) {
     scoreRequirement = score;
 }
 
-bool chosen::Item::wieldable(chosen::Item &item, const int &score) {
+bool chosen::Item::wieldable(const int &score) {
     return score >= scoreRequirement;
 }
 

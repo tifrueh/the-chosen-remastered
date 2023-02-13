@@ -28,7 +28,7 @@ namespace chosen {
             std::string getDescription();
             void registerPickup();
             void setScoreRequirement(const int &score);
-            bool wieldable(Item &item, const int &score);
+            bool wieldable(const int &score);
             void setReqUnmetMessage(const std::string &message);
             std::string getReqUnmetMessage();
     };
