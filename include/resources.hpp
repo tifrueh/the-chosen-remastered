@@ -7,8 +7,9 @@
 
 #include <string>
 #include <array>
+#include <vector>
 
-#define VERSION "0.1.0-dev"
+#define VERSION "1.0.0-dev"
 #define REVISION "Revision " VERSION
 
 namespace crsrc {
@@ -25,9 +26,9 @@ namespace crsrc {
         "No, wait, there is something ...",
         "Suddenly, a clear thought springs into your mind.",
         "Is it a memory? A vision? You speak it out loud:",
-        "",
+        " ",
         "Greetings, adventurer. Are you aware of the difficulty of the task ahead? I suppose it is not so, for you would not be here if it were. So let me tell about your Quest: You must find the legendary Swords of Dusk and Dawn in order to kill the Demon King and thus finally end his cruel reign and free the land from the clutches of his demons. Fare thee well!",
-        "",
+        " ",
         "Not a memory, then, but a message.",
         "You once again try to think back with all force you can muster ...",
         "And a name pops into your memory. Anyone's name?",
@@ -55,6 +56,7 @@ namespace crsrc {
     const std::string swordsOddDescription = "The Swords of Dusk and Dawn are lying on the floor, both glowing faintly.";
     const std::string swordsOddExDescription = "You hold both swords closer to your eyes and below the silver glow of Dusk and the crimson one of Dawn, you notice a multitude of runes, engraved in both blades. You cannot decipher them, however.";
     const std::string swordsOddInitDescription = "Inside of the case lie the Swords of Dusk and Dawn, both shining brilliantly, Dusk silver and Dawn crimson.";
+    const std::string swordsOddReqUnmetMessage = "As you try to swing the Swords, they become increasingly heavy, compromising your balance. It seems you are not yet worthy of them.";
     const std::string fireWandDesc = "A wand of fire is lying on the floor.";
     const std::string fireWandExDesc = "As you trace your finger over the wood, the runes light up in a fiery glow.";
     const std::string fireWandInitDesc = "On the table lies a twisted piece of dark wood, one end cast in leather straps, forming a grip. There are runes carved in to the wood. You know their meaning: \"Wand of Fire\".";
@@ -67,12 +69,15 @@ namespace crsrc {
         "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable. I must be getting old ...",
         "Would you please leave me alone? I'd appreciate that greatly."
     };
+    const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
+    const std::string strangerDefDeathMsg = "The stranger did not wish you harm. But you already started the fight and cannot stop. You kill the stranger, watching the light fade from his piercingly blue eyes.";
     const std::string elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
     std::vector<std::string> elliotConversation = {
         "[NAME LINE PLACEHOLDER]",
         "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that that you must first prove your worth to those Swords by killing seven of the Demon King's minions. Only then will they obey you. But what do I know!",
         "Go on, then. Kill the demons, find the swords and kill the King. You can do it, my friend, I'm sure of it."
     };
+    const std::string elliotHug = "Elliot hugs you back.";
     const std::string hagDesc = "On the bed sits an old hag.";
     const std::vector<std::string> hagConversation = {
         "Oooh ... what a fine surprise ... the Chosen is finally here. You know your task already, I suppose? Quick, quick, let me tell you something then: To discover the swords you must find the three burning suns, then turn south and take the daring step. That doesn't help you? Well, this is all I know.",
@@ -85,4 +90,5 @@ namespace crsrc {
         "Oh, greetings. Long days and pleasant nights to thee. I didn't notice you there, say sorry. Are you in need of a book? I'm afraid the library doesn't hand them over to strangers ...",
         "Be cautious out there, okay? Those demons are vicious. They are very strong indeed and each kind can only be killed in one unique way ..."
     };
+    const std::string deathStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.\nYou die ...";
 }

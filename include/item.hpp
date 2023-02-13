@@ -16,6 +16,8 @@ namespace chosen {
             bool isInInitialPosition;
             std::string initialDescription;
             std::string examinationDescription;
+            std::string reqUnmetMessage;
+            int scoreRequirement;
 
         public:
             Item(const std::string &id, const std::string &article, const std::string &name);
@@ -25,20 +27,22 @@ namespace chosen {
             std::string getExaminationDescription();
             std::string getDescription();
             void registerPickup();
+            void setScoreRequirement(const int &score);
+            bool wieldable(const int &score);
+            void setReqUnmetMessage(const std::string &message);
+            std::string getReqUnmetMessage();
     };
 
     class GameEntityWithInventory : public GameEntity {
         protected:
             std::vector<Item*> items;
-
-            GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name, const std::string &classId);
         
         public:
             GameEntityWithInventory(const std::string &id, const std::string &article, const std::string &name);
-            bool hasItem(chosen::Item &item);
+            bool hasItem(Item &item);
             bool hasAnyItem();
-            void addItem(chosen::Item &item);
-            void removeItem(chosen::Item &item);
+            void addItem(Item &item);
+            void removeItem(Item &item);
             Item* getItemByAlias(const std::string &alias);
     };
 }

@@ -27,7 +27,7 @@ ctui::TUI::~TUI() {
 
 void ctui::TUI::init(const std::string &initialLocation) {
     initscr();
-    raw();
+    cbreak();
     noecho();
     curs_set(0);
     setlocale(LC_ALL, "");
@@ -114,6 +114,7 @@ WINDOW *ctui::TUI::createBox(int height, int width, int yPos, int xPos) {
 
 void ctui::TUI::tuiNapMs(const int &ms) {
     napms(ms);
+    flushinp();
 }
 
 void ctui::TUI::waitForInput() {

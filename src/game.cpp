@@ -4,6 +4,8 @@
 
 
 #include <string>
+#include <array>
+#include <map>
 #include "tui.hpp"
 #include "world.hpp"
 #include "player.hpp"
@@ -46,7 +48,8 @@ void chosen::Game::gameloop() {
             cmdTalk(talk);
         }
         else if (cprs::isCommand(command, "fight")) {
-            cmdFight();
+            std::array<std::string, 2> fight = cprs::parseCommand(command, "fight", "with");
+            cmdFight(fight[0], fight[1]);
         }
         else if (cprs::isCommand(command, "take")) {
             std::string take = cprs::parseCommand(command, "take");
@@ -64,13 +67,8 @@ void chosen::Game::gameloop() {
             tui.tuiPrint("Talking to yourself is said to be a sign of impending mental collapse.");
         }
         else if (cprs::isCommand(command, "hug")) {
-            cmdHug();
-        }
-        else if (cprs::isCommand(command, "open")) {
-            cmdOpen();
-        }
-        else if (cprs::isCommand(command, "close")) {
-            cmdClose();
+            std::string hug = cprs::parseCommand(command, "hug");
+            cmdHug(hug);
         }
         else if (cprs::isCommand(command, "lock")) {
             cmdLock();
@@ -134,6 +132,8 @@ void chosen::Game::gameloop() {
         tui.updateScore(score);
         tui.setLocation(player.getLocationName());
     }
+
+    tui.waitForInput("\n[Hit any key to exit.]");
 }
 
 void chosen::Game::initWorld() {
@@ -209,6 +209,8 @@ void chosen::Game::initWorld() {
     swordsODD.setInitialDescription(crsrc::swordsOddInitDescription);
     swordsODD.setExaminationDescription(crsrc::swordsOddExDescription);
     swordsODD.addAlias("swords");
+    swordsODD.setScoreRequirement(7);
+    swordsODD.setReqUnmetMessage(crsrc::swordsOddReqUnmetMessage);
     hiddenRoom.addItem(swordsODD);
 
     fireWand.setDescription(crsrc::fireWandDesc);
@@ -216,6 +218,8 @@ void chosen::Game::initWorld() {
     fireWand.setExaminationDescription(crsrc::fireWandExDesc);
     fireWand.addAlias("wand");
     fireWand.addAlias("fire wand");
+    fireWand.addAlias("wood");
+    fireWand.addAlias("piece of wood");
     hall.addItem(fireWand);
 
     holyWater.setDescription(crsrc::holyWaterDesc);
@@ -228,9 +232,14 @@ void chosen::Game::initWorld() {
 
     stranger.setDescription(crsrc::strangerDesc);
     stranger.setConversation(crsrc::strangerConversation);
+    stranger.setDefaultVictoryMessage(crsrc::strangerDefVictoryMsg);
+    stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
+    stranger.addVulnerability(swordsODD);
     hall.addCharacter(stranger);
+    player.setDeathMessage(stranger, longsword, crsrc::deathStrangerLongsword);
 
     elliot.setDescription(crsrc::elliotDesc);
+    elliot.setHugMessage(crsrc::elliotHug);
     westHallRoom.addCharacter(elliot);
 
     hag.setDescription(crsrc::hagDesc);
@@ -247,12 +256,13 @@ void chosen::Game::initWorld() {
 }
 
 void chosen::Game::initLoop() {
-    tui.setLocation("Unknown location");
+    tui.setLocation("Copyright");
 
     tui.tuiPrint<6>(crsrc::welcomeMessage);
+    tui.waitForInput();
+    tui.clear();
 
-    tui.tuiNapMs(4000);
-    tui.tuiPrintNewline();
+    tui.setLocation("Unknown location");
 
     tui.tuiPrint<11>(crsrc::intro);
 
@@ -284,17 +294,25 @@ void chosen::Game::cmdTalk(std::string character) {
         tui.tuiPrint("There is no one here to listen to your beautiful voice.");
         return;
     }
-    else if (character == "") {
+    
+    if (character == "") {
+
         character = tui.tuiInput("To whom to want to talk?");
+
+        if (character == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + character);
+        }
     }
+
 
     chosen::Character* characterPtr = player.getLocation()->getCharacterByAlias(character);
 
-    if (character == "") {
-        tui.tuiPrint("Never mind.");
-        return;
-    }
-    else if (characterPtr == nullptr) {
+    if (characterPtr == nullptr) {
         tui.tuiPrint("There is no one called " + character + " here.");
         return;
     }
@@ -303,8 +321,78 @@ void chosen::Game::cmdTalk(std::string character) {
     }
 }
 
-void chosen::Game::cmdFight() {
-    tui.tuiPrint("cmd: fight someone");
+void chosen::Game::cmdFight(std::string character, std::string item) {
+    bool victory = true;
+
+    if (!player.getLocation()->hasAnyCharacter()) {
+        tui.tuiPrint("There is no one here whom you could fight.");
+        return;
+    } 
+    else if (!player.hasAnyItem()) {
+        tui.tuiPrint("You do not have anything to fight with.");
+        return;
+    }
+    
+    if (character == "") {
+
+        character = tui.tuiInput("Whom do you want to fight?");
+
+        if (character == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + character);
+        }
+    }
+
+    if (item == "") {
+
+        item = tui.tuiInput("With what do you want to fight?");
+
+        if (item == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + item);
+        }
+    }
+
+    chosen::Character *characterPtr = player.getLocation()->getCharacterByAlias(character);
+    chosen::Item *itemPtr = player.getItemByAlias(item);
+
+    if (characterPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+        return;
+    }
+    else if (itemPtr == nullptr) {
+        tui.tuiPrint("You do not have any item called " + item + ".");
+        return;
+    }
+    else if (itemPtr->wieldable(score)){
+        victory = player.fight(*characterPtr, *itemPtr);
+    }
+    else {
+        tui.tuiPrint(itemPtr->getReqUnmetMessage());
+        victory = false;
+    }
+
+    if (victory) {
+        tui.tuiPrint(player.getVictoryMessage(*characterPtr, *itemPtr));
+
+        if (characterPtr->getClassId() == "GameEntity:GameEntityWithInventory:Character:Enemy") {
+            score += 1;
+        }
+    } 
+    else {
+        if (characterPtr->getClassId() != "GameEntity:GameEntityWithInventory:Character:NPC") {
+            tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
+            state = 1;
+        }
+    }
 }
 
 void chosen::Game::cmdTake(std::string item) {
@@ -313,17 +401,24 @@ void chosen::Game::cmdTake(std::string item) {
         tui.tuiPrint("There is nothing here to take.");
         return;
     }
-    else if (item == "") {
+    
+    if (item == "") {
+        
         item = tui.tuiInput("What do you want to take?");
+
+        if (item == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + item);
+        }
     }
 
     chosen::Item* itemPtr = player.getLocation()->getItemByAlias(item);
 
-    if (item == "") {
-        tui.tuiPrint("Never mind.");
-        return;
-    }
-    else if (itemPtr == nullptr) {
+    if (itemPtr == nullptr) {
         tui.tuiPrint("There is no item called " + item + " here.");
         return;
     }
@@ -339,17 +434,24 @@ void chosen::Game::cmdDrop(std::string item) {
         tui.tuiPrint("You do not have anything to drop.");
         return;
     }
-    else if (item == "") {
+    
+    if (item == "") {
+
         item = tui.tuiInput("What do you want to drop?");
+
+        if (item == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + item);
+        }
     }
 
     chosen::Item* itemPtr = player.getItemByAlias(item);
 
-    if (item == "") {
-        tui.tuiPrint("Never mind.");
-        return;
-    }
-    else if (itemPtr == nullptr) {
+    if (itemPtr == nullptr) {
         tui.tuiPrint("You do not have any item called " + item + ".");
         return;
     }
@@ -365,17 +467,24 @@ void chosen::Game::cmdExamine(std::string item) {
         tui.tuiPrint("You do not have anything to examine.");
         return;
     }
-    else if (item == "") {
+    
+    if (item == "") {
+
         item = tui.tuiInput("What do you want to examine?");
+
+        if (item == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + item);
+        }
     }
 
     chosen::Item* itemPtr = player.getItemByAlias(item);
 
-    if (item == "") {
-        tui.tuiPrint("Never mind.");
-        return;
-    }
-    else if (itemPtr == nullptr) {
+    if (itemPtr == nullptr) {
         tui.tuiPrint("You do not have any item called " + item + ".");
         return;
     }
@@ -384,8 +493,34 @@ void chosen::Game::cmdExamine(std::string item) {
     }
 }
 
-void chosen::Game::cmdHug() {
-    tui.tuiPrint("cmd: hug someone");
+void chosen::Game::cmdHug(std::string character) {
+    if (!player.getLocation()->hasAnyCharacter()) {
+        tui.tuiPrint("There is no one here to receive your warm embrace.");
+        return;
+    }
+    
+    if (character == "") {
+
+        character = tui.tuiInput("Whom do you want to hug?");
+
+        if (character == "") {
+            tui.tuiPrint("Never mind.");
+            return;
+        }
+        else {
+            tui.tuiPrintNewline();
+            tui.tuiPrint("> " + character);
+        }
+    }
+
+    chosen::Character *chPtr = player.getLocation()->getCharacterByAlias(character);
+
+    if (chPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+    }
+    else {
+        tui.tuiPrint(player.hug(*chPtr));
+    }
 }
 
 void chosen::Game::cmdOpen() {
@@ -511,6 +646,5 @@ void chosen::Game::cmdExit() {
     std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
     if (affirm == "y") {
         state = 1;
-        tui.waitForInput("\n[Hit any key to exit]");
     }
 }

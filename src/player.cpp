@@ -9,7 +9,8 @@
 #include "world.hpp"
 #include "player.hpp"
 
-chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer", "GameEntity:Player") {
+chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer") {
+    classId = "GameEntity:GameEntityWithInventory:Player";
     location = nullptr;
 }
 
@@ -19,6 +20,14 @@ void chosen::Player::setName(const std::string &name) {
 
 void chosen::Player::setLocation(chosen::Room &room) {
     location = &room;
+}
+
+void chosen::Player::setDeathMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
+    deathMessages[&character][&item] = message;
+}
+
+void chosen::Player::setVictoryMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
+    victoryMessages[&character][&item] = message;
 }
 
 chosen::Room *chosen::Player::getLocation() {
@@ -41,15 +50,33 @@ std::vector<std::string> chosen::Player::getShortLocationDescription() {
     return location->getShortDescription();
 }
 
+std::string chosen::Player::getDeathMessage(chosen::Character &character, chosen::Item &item) {
+    try {
+        return deathMessages.at(&character).at(&item);
+    }
+    catch (std::out_of_range const&) {
+        return character.getDefaultVictoryMessage();
+    }
+}
+
+std::string chosen::Player::getVictoryMessage(chosen::Character &character, chosen::Item &item) {
+    try {
+        return victoryMessages.at(&character).at(&item);
+    }
+    catch (std::out_of_range const&) {
+        return character.getDefaultDeathMessage();
+    }
+}
+
 void chosen::Player::move(const int &direction) {
     if (!location->hasLinkToDirection(direction)) {
         throw std::logic_error("Movement through nonexisting link");
     }
-    else if (location->getLink(direction)->getOtherRoom(location) == nullptr) {
+    else if (location->getLink(direction)->getOtherRoom(*location) == nullptr) {
         throw std::logic_error("Movement through link with only one room");
     }
 
-    Room *newLocation = location->getLink(direction)->getOtherRoom(location);
+    Room *newLocation = location->getLink(direction)->getOtherRoom(*location);
     setLocation(*newLocation);
 }
 
@@ -64,12 +91,26 @@ void chosen::Player::drop(chosen::Item &item) {
     location->addItem(item);
 }
 
+bool chosen::Player::fight(chosen::Character &character, chosen::Item &item) {
+    bool victory = character.evaluateFight(item);
+
+    if (victory) {
+        location->removeCharacter(character);
+    }
+
+    return victory;
+}
+
 std::string chosen::Player::examine(chosen::Item &item) {
     return item.getExaminationDescription();
 }
 
 std::string chosen::Player::talk(chosen::Character &character) {
     return character.getConversation();
+}
+
+std::string chosen::Player::hug(chosen::Character &character) {
+    return character.getHugMessage();
 }
 
 std::vector<std::string> chosen::Player::getInventory() {

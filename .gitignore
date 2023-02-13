@@ -39,8 +39,5 @@
 # Visual Studio Code
 .vscode
 
-# Executable
-the-chosen-remastered
-
 # macOS
 .DS_Store

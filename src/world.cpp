@@ -11,8 +11,9 @@
 #include "item.hpp"
 #include "world.hpp"
 
-chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityWithInventory(id, "", name, "GameEntity:GameEntityWithInventory:Room") {
-    this->description = "[THIS ROOM HAS NO DESCRIPTION]";
+chosen::Room::Room(const std::string &id, const std::string &name) : GameEntityWithInventory(id, "", name) {
+    classId = "GameEntity:GameEntityWithInventory:Room";
+    description = "[THIS ROOM HAS NO DESCRIPTION]";
     hasDirection = {false, false, false, false, false, false};
     hasVisibleDirection = {false, false, false, false, false, false};
     visited = false;
@@ -87,11 +88,11 @@ std::vector<std::string> chosen::Room::getFullDescription() {
     out.push_back(description);
 
     for (chosen::Item *item : items) {
-        out.back() += " " + item->getDescription();
+        out.push_back(item->getDescription());
     }
 
     for (chosen::Character *character : characters) {
-        out.back() += " " + character->getDescription();
+        out.push_back(character->getDescription());
     }
 
     out.push_back(getDoorString());
@@ -105,16 +106,12 @@ std::vector<std::string> chosen::Room::getShortDescription() {
     out.push_back(name);
     out.push_back(std::string(name.size(), '-'));
 
-    if (items.size() > 0 || characters.size() > 0) {
-        out.push_back("");
-    }
-
     for (chosen::Item *item : items) {
-        out.back() += item->getDescription() + " ";
+        out.push_back(item->getDescription());
     }
 
     for (chosen::Character *character : characters) {
-        out.back() += character->getDescription() + " ";
+        out.push_back(character->getDescription());
     }
 
     out.push_back(getDoorString());
@@ -136,7 +133,7 @@ void chosen::Room::addLink(Link &link, const int &direction) {
         hasVisibleDirection[direction] = true;
     }
 
-    link.addRoom(this);
+    link.addRoom(*this);
 }
 
 chosen::Link* chosen::Room::getLink(const int &direction) {
@@ -191,7 +188,8 @@ chosen::Character* chosen::Room::getCharacterByAlias(const std::string &alias) {
     return nullptr;
 }
 
-chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link", "GameEntity:Link") {
+chosen::Link::Link(const std::string &id, const bool &visible) : GameEntity(id, "", "Link") {
+    classId = "GameEntity:Link";
     roomsConnected = 0;
     this->visible = visible;
     message = "";
@@ -217,13 +215,13 @@ void chosen::Link::setMessage(const std::string &message) {
     this->message = message;
 }
 
-void chosen::Link::addRoom(Room *room) {
+void chosen::Link::addRoom(Room &room) {
     if (roomsConnected == 0) {
-        rooms[0] = room;
+        rooms[0] = &room;
         roomsConnected++;
     }
     else if (roomsConnected == 1) {
-        rooms[1] = room;
+        rooms[1] = &room;
         roomsConnected++;
     }
     else {
@@ -231,11 +229,11 @@ void chosen::Link::addRoom(Room *room) {
     }
 }
 
-chosen::Room *chosen::Link::getOtherRoom(Room *room) {
-    if (rooms[0] == room) {
+chosen::Room *chosen::Link::getOtherRoom(Room &room) {
+    if (rooms[0] == &room) {
         return rooms[1];
     }
-    else if (rooms[1] == room) {
+    else if (rooms[1] == &room) {
         return rooms[0];
     }
     else {

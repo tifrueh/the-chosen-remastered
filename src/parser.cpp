@@ -27,15 +27,18 @@ std::array<std::string, 2> cprs::parseCommand(const std::string &input, const st
     long unsigned int cmdPos = input.find(command + " ");
     long unsigned int cmdEnd = cmdPos + command.size();
     
-    long unsigned int delPos = input.find(" " + delimiter + " ") + 1;
-    long unsigned int delEnd = delPos + delimiter.size();
+    long unsigned int delPos = input.find(" " + delimiter + " ");
+    long unsigned int delEnd = delPos + 1 + delimiter.size();
 
     if (cmdPos == std::string::npos) {
-        out[0] = input;
+        out[0] = "";
+        out[1] = "";
         return out;
     } 
     else if (delPos == std::string::npos) {
         out[0] = input.substr(cmdEnd, input.size() - cmdEnd);
+        cstr::trim(out[0]);
+        out[1] = "";
         return out;
     }
 

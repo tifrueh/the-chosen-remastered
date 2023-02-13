@@ -9,11 +9,14 @@
 #include <stdexcept>
 #include "item.hpp"
 
-chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name, "GameEntity:Item") {
+chosen::Item::Item(const std::string &id, const std::string &article, const std::string &name) : GameEntity(id, article, name) {
+    classId = "GameEntity:Item";
     description = cArticleName + " is here.";
     initialDescription = description;
     isInInitialPosition = true;
     examinationDescription = "There is nothing special about " + theName + ".";
+    scoreRequirement = 0;
+    reqUnmetMessage = "Score requirements for this weapon are not met.";
 }
 
 void chosen::Item::setDescription(const std::string &description) {
@@ -45,6 +48,22 @@ void chosen::Item::registerPickup() {
     isInInitialPosition = false;
 }
 
+void chosen::Item::setScoreRequirement(const int &score) {
+    scoreRequirement = score;
+}
+
+bool chosen::Item::wieldable(const int &score) {
+    return score >= scoreRequirement;
+}
+
+void chosen::Item::setReqUnmetMessage(const std::string &message) {
+    reqUnmetMessage = message;
+}
+
+std::string chosen::Item::getReqUnmetMessage() {
+    return reqUnmetMessage;
+}
+
 chosen::Item* chosen::GameEntityWithInventory::getItemByAlias(const std::string &alias) {
     for (chosen::Item* item : items) {
         if (item->hasAlias(alias)) {
@@ -56,12 +75,9 @@ chosen::Item* chosen::GameEntityWithInventory::getItemByAlias(const std::string 
 
 chosen::GameEntityWithInventory::GameEntityWithInventory(const std::string &id, 
                                                          const std::string &article, 
-                                                         const std::string &name,
-                                                         const std::string &classId) : GameEntity(id, article, name, classId) {}
-
-chosen::GameEntityWithInventory::GameEntityWithInventory(const std::string &id, 
-                                                         const std::string &article, 
-                                                         const std::string &name) : GameEntity(id, article, name, "GameEntity:GameEntityWithInventory") {}
+                                                         const std::string &name) : GameEntity(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory";
+}
 
 bool chosen::GameEntityWithInventory::hasItem(chosen::Item &item) {
     std::vector<chosen::Item*>::iterator itemIterator;
