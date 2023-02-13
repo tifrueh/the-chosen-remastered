@@ -16,6 +16,7 @@ chosen::Item::Item(const std::string &id, const std::string &article, const std:
     isInInitialPosition = true;
     examinationDescription = "There is nothing special about " + theName + ".";
     scoreRequirement = 0;
+    reqUnmetMessage = "Score requirements for this weapon are not met.";
 }
 
 void chosen::Item::setDescription(const std::string &description) {
