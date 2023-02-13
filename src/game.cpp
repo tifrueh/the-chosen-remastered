@@ -209,6 +209,8 @@ void chosen::Game::initWorld() {
     swordsODD.setInitialDescription(crsrc::swordsOddInitDescription);
     swordsODD.setExaminationDescription(crsrc::swordsOddExDescription);
     swordsODD.addAlias("swords");
+    swordsODD.setScoreRequirement(7);
+    swordsODD.setReqUnmetMessage(crsrc::swordsOddReqUnmetMessage);
     hiddenRoom.addItem(swordsODD);
 
     fireWand.setDescription(crsrc::fireWandDesc);
@@ -370,16 +372,26 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
         tui.tuiPrint("You do not have any item called " + item + ".");
         return;
     }
-    else {
+    else if (itemPtr->wieldable(score)){
         victory = player.fight(*characterPtr, *itemPtr);
+    }
+    else {
+        tui.tuiPrint(itemPtr->getReqUnmetMessage());
+        victory = false;
     }
 
     if (victory) {
         tui.tuiPrint(player.getVictoryMessage(*characterPtr, *itemPtr));
+
+        if (characterPtr->getClassId() == "GameEntity:GameEntityWithInventory:Character:Enemy") {
+            score += 1;
+        }
     } 
     else {
-        tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
-        state = 1;
+        if (characterPtr->getClassId() != "GameEntity:GameEntityWithInventory:Character:NPC") {
+            tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
+            state = 1;
+        }
     }
 }
 

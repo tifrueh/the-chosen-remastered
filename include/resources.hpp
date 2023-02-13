@@ -56,6 +56,7 @@ namespace crsrc {
     const std::string swordsOddDescription = "The Swords of Dusk and Dawn are lying on the floor, both glowing faintly.";
     const std::string swordsOddExDescription = "You hold both swords closer to your eyes and below the silver glow of Dusk and the crimson one of Dawn, you notice a multitude of runes, engraved in both blades. You cannot decipher them, however.";
     const std::string swordsOddInitDescription = "Inside of the case lie the Swords of Dusk and Dawn, both shining brilliantly, Dusk silver and Dawn crimson.";
+    const std::string swordsOddReqUnmetMessage = "As you try to swing the Swords, they become increasingly heavy, compromising your balance. It seems you are not yet worthy of them.";
     const std::string fireWandDesc = "A wand of fire is lying on the floor.";
     const std::string fireWandExDesc = "As you trace your finger over the wood, the runes light up in a fiery glow.";
     const std::string fireWandInitDesc = "On the table lies a twisted piece of dark wood, one end cast in leather straps, forming a grip. There are runes carved in to the wood. You know their meaning: \"Wand of Fire\".";
