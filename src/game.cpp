@@ -133,6 +133,21 @@ void chosen::Game::gameloop() {
         tui.setLocation(player.getLocationName());
     }
 
+    tui.tuiPrintNewline();
+
+    switch (score) {
+        case 0:
+            tui.tuiPrint("You vanquished not a single enemy during the game.");
+            break;
+        
+        case 1:
+            tui.tuiPrint("You vanquished 1 enemy during the game.");
+            break;
+        
+        default:
+            tui.tuiPrint("You vanquished " + std::to_string(score) + " enemies during the game.");
+    }
+
     tui.waitForInput("\n[Hit any key to exit.]");
 }
 
