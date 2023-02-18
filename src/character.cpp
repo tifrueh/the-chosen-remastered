@@ -14,7 +14,7 @@ chosen::Character::Character(const std::string &id,
     description = cArticleName + " is here.";
     hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
     defaultDeathMessage = "You kill " + theName + ".";
-    defaultVictoryMessage = "You start a fight with " + theName + ". You lose ...\nYou die ...";
+    defaultVictoryMessage = theName + " lands a fatal blow. \nYou die ...";
 }
 
 void chosen::Character::setDescription(const std::string &description) {
