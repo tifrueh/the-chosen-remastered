@@ -246,6 +246,11 @@ void chosen::Game::initWorld() {
     hall.addCharacter(stranger);
     player.setDefeatMessage(stranger, longsword, crsrc::defeatStrangerLongsword);
 
+    warrioress.setDescription(crsrc::warrioressDesc);
+    warrioress.setConversation(crsrc::warrioressConversation);
+    warrioress.addVulnerability(fireWand);
+    nsPassageway.addCharacter(warrioress);
+
     elliot.setDescription(crsrc::elliotDesc);
     elliot.setHugMessage(crsrc::elliotHug);
     elliot.setDefaultDeathMessage(crsrc::elliotDefDeathMsg);

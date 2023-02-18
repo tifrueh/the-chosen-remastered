@@ -61,7 +61,8 @@ namespace chosen {
             NPC scholar = {"scholar", "a", "scholar"};
 
             FighterNPC stranger = {"stranger", "a", "stranger"};
-            
+            FighterNPC warrioress = {"warrioress", "a", "warrioress"};
+
             Enemy demonKing = {"demonKing", "", "An-Harat"};
 
             void initWorld();

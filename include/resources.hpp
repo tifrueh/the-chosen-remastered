@@ -73,6 +73,12 @@ namespace crsrc {
     const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
     const std::string strangerDefDeathMsg = "The stranger did not wish you harm. But you already started the fight and cannot stop. You kill the stranger, watching the light fade from his piercingly blue eyes.";
     const std::string defeatStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.\nYou die ...";
+    const std::string warrioressDesc = "You see a warrioress here, seeming a bit lost but eying you with obvious distrust.";
+    const std::vector<std::string> warrioressConversation = {
+        "What? Do you have nothing better to do?",
+        "*to herself* Damn this demon of earth. I can't get through its skin. Maybe I need something sharper as my trusty club.",
+        "What? Do you have nothing better to do?"
+    };
     const std::string elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
     std::vector<std::string> elliotConversation = {
         "[NAME LINE PLACEHOLDER]",
