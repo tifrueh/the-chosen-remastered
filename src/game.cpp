@@ -384,7 +384,8 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
         tui.tuiPrint("You do not have any item called " + item + ".");
         return;
     }
-    else if (itemPtr->wieldable(score)){
+    
+    if (itemPtr->wieldable(score)){
         victory = player.fight(*characterPtr, *itemPtr);
     }
     else {
