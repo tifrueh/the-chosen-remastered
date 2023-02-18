@@ -78,6 +78,7 @@ namespace crsrc {
         "Go on, then. Kill the demons, find the swords and kill the King. You can do it, my friend, I'm sure of it."
     };
     const std::string elliotHug = "Elliot hugs you back.";
+    const std::string elliotDefDeathMsg = "You land a fatal blow. But before Elliot takes his last breath, he manages to say: \"Why?\". The look in his fading eyes almost breaks your heart. This wasn't right ...";
     const std::string hagDesc = "On the bed sits an old hag.";
     const std::vector<std::string> hagConversation = {
         "Oooh ... what a fine surprise ... the Chosen is finally here. You know your task already, I suppose? Quick, quick, let me tell you something then: To discover the swords you must find the three burning suns, then turn south and take the daring step. That doesn't help you? Well, this is all I know.",

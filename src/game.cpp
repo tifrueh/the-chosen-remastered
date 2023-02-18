@@ -241,6 +241,7 @@ void chosen::Game::initWorld() {
 
     elliot.setDescription(crsrc::elliotDesc);
     elliot.setHugMessage(crsrc::elliotHug);
+    elliot.setDefaultDeathMessage(crsrc::elliotDefDeathMsg);
     westHallRoom.addCharacter(elliot);
 
     hag.setDescription(crsrc::hagDesc);
