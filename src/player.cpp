@@ -52,7 +52,7 @@ std::vector<std::string> chosen::Player::getShortLocationDescription() {
     return location->getShortDescription();
 }
 
-std::string chosen::Player::getDeathMessage(chosen::Character &character, chosen::Item &item) {
+std::string chosen::Player::getDefeatMessage(chosen::Character &character, chosen::Item &item) {
     try {
         return deathMessages.at(&character).at(&item);
     }

@@ -437,7 +437,7 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
     } 
     else {
         if (characterPtr->getClassId() != "GameEntity:GameEntityWithInventory:Character:NPC") {
-            tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
+            tui.tuiPrint(player.getDefeatMessage(*characterPtr, *itemPtr));
             player.die();
         }
     }

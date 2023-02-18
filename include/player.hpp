@@ -33,7 +33,7 @@ namespace chosen {
             std::string getLocationDescription();
             std::vector<std::string> getFullLocationDescription();
             std::vector<std::string> getShortLocationDescription();
-            std::string getDeathMessage(Character &character, Item &item);
+            std::string getDefeatMessage(Character &character, Item &item);
             std::string getVictoryMessage(Character &character, Item &item);
             void die();
             void win();
