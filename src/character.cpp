@@ -83,6 +83,7 @@ chosen::NPC::NPC(const std::string &id,
                  const std::string &name) : chosen::Character(id, article, name) {
     classId = "GameEntity:GameEntityWithInventory:Character:NPC";
     defaultDeathMessage = "You kill " + theName + ".\nThis wasn't right ... You feel sorry for " + theName + ".";
+    defaultVictoryMessage = theName + " looks at you and seems quite bewildered.";
 }
 
 void chosen::NPC::addImmunity(chosen::Item &item) {
