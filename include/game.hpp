@@ -61,6 +61,8 @@ namespace chosen {
             NPC hag = {"hag", "an", "old hag"};
             NPC scholar = {"scholar", "a", "scholar"};
 
+            Enemy demonKing = {"demonKing", "", "An-Harat"};
+
             void initWorld();
             void initLoop();
 

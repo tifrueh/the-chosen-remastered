@@ -254,6 +254,16 @@ void chosen::Game::initWorld() {
     scholar.setConversation(crsrc::scholarConversation);
     scholar.addAlias("learned man");
     library.addCharacter(scholar);
+
+    demonKing.setDescription(crsrc::demonKingDesc);
+    demonKing.setConversation(crsrc::demonKingConversation);
+    demonKing.setHugMessage(crsrc::demonKingHugMessage);
+    demonKing.setDefaultVictoryMessage(crsrc::demonKingDefVictoryMsg);
+    demonKing.addAlias("demon king");
+    demonKing.addAlias("king");
+    demonKing.addVulnerability(swordsODD);
+    throneRoom.addCharacter(demonKing);
+    player.setVictoryMessage(demonKing, swordsODD, crsrc::victoryDemonKingSwords);
 }
 
 void chosen::Game::initLoop() {
