@@ -93,7 +93,7 @@ namespace crsrc {
         "Oh, greetings. Long days and pleasant nights to thee. I didn't notice you there, say sorry. Are you in need of a book? I'm afraid the library doesn't hand them over to strangers ...",
         "Be cautious out there, okay? Those demons are vicious. They are very strong indeed and each kind can only be killed in one unique way ..."
     };
-    const std::string deathStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.\nYou die ...";
+    const std::string defeatStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.\nYou die ...";
     const std::string demonKingDesc = "You see An-Harat, the Demon King, sitting on his magnificent throne and looking incredibly menacing.";
     const std::vector<std::string> demonKingConversation = {
         "Aah, greetings, Chosen. You are here at last. What took you so long? My demons certainly were no challenge for you, for you are in the possession of the legendary Swords of Dusk and Dawn, is that not so? Even as powerful a servant as Mandrak would not have been able to withstand those dreadful blades of yours, the bringers of death and destruction. Are you here to kill me, then? Do you want to take my throne? You want to take my world from me, because you think it belongs to you mortals? You want to end my eternal reign and rid the world of my kind? Come on then, try to ban me from my realm, try to destroy my immortal soul with these weapons you carry, and I'll behead you right where you stand!",

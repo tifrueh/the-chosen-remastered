@@ -244,7 +244,7 @@ void chosen::Game::initWorld() {
     stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
     stranger.addVulnerability(fireWand);
     hall.addCharacter(stranger);
-    player.setDefeatMessage(stranger, longsword, crsrc::deathStrangerLongsword);
+    player.setDefeatMessage(stranger, longsword, crsrc::defeatStrangerLongsword);
 
     elliot.setDescription(crsrc::elliotDesc);
     elliot.setHugMessage(crsrc::elliotHug);
