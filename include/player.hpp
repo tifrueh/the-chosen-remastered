@@ -26,7 +26,7 @@ namespace chosen {
             Player();
             void setName(const std::string &name);
             void setLocation(Room &room);
-            void setDeathMessage(Character &character, Item &item, const std::string &message);
+            void setDefeatMessage(Character &character, Item &item, const std::string &message);
             void setVictoryMessage(Character &character, Item &item, const std::string &message);
             Room *getLocation();
             std::string getLocationName();

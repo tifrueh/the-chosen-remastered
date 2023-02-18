@@ -24,7 +24,7 @@ void chosen::Player::setLocation(chosen::Room &room) {
     location = &room;
 }
 
-void chosen::Player::setDeathMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
+void chosen::Player::setDefeatMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
     deathMessages[&character][&item] = message;
 }
 
