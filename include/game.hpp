@@ -56,7 +56,7 @@ namespace chosen {
             Item fireWand = {"fireWand", "a", "wand of fire"};
             Item holyWater = {"holyWater", "a", "bottle of holy water"};
 
-            NPC stranger = {"stranger", "a", "stranger"};
+            FighterNPC stranger = {"stranger", "a", "stranger"};
             NPC elliot = {"elliot", "", "Elliot"};
             NPC hag = {"hag", "an", "old hag"};
             NPC scholar = {"scholar", "a", "scholar"};

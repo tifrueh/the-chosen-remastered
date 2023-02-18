@@ -57,4 +57,9 @@ namespace chosen {
             bool isVulnerableAgainst(Item &item);
             bool evaluateFight(Item &weapon);
     };
+
+    class FighterNPC : public Enemy {
+        public:
+            FighterNPC(const std::string &id, const std::string &article, const std::string &name);
+    };
 }

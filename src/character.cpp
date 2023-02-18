@@ -138,3 +138,9 @@ bool chosen::Enemy::evaluateFight(chosen::Item &weapon) {
 
     return isVulnerableAgainst(weapon);
 }
+
+chosen::FighterNPC::FighterNPC(const std::string &id, 
+                 const std::string &article, 
+                 const std::string &name) : chosen::Enemy(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory:Character:Enemy:FighterNPC";
+}
