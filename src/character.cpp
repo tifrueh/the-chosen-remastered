@@ -144,4 +144,5 @@ chosen::FighterNPC::FighterNPC(const std::string &id,
                  const std::string &article, 
                  const std::string &name) : chosen::Enemy(id, article, name) {
     classId = "GameEntity:GameEntityWithInventory:Character:Enemy:FighterNPC";
+    defaultVictoryMessage = theName + " did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
 }
