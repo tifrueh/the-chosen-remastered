@@ -249,6 +249,8 @@ void chosen::Game::initWorld() {
     elliot.setDescription(crsrc::elliotDesc);
     elliot.setHugMessage(crsrc::elliotHug);
     elliot.setDefaultDeathMessage(crsrc::elliotDefDeathMsg);
+    player.setDefeatMessage(elliot, holyWater, crsrc::defeatElliotWater);
+    elliot.addImmunity(holyWater);
     westHallRoom.addCharacter(elliot);
 
     hag.setDescription(crsrc::hagDesc);
