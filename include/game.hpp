@@ -56,11 +56,12 @@ namespace chosen {
             Item fireWand = {"fireWand", "a", "wand of fire"};
             Item holyWater = {"holyWater", "a", "bottle of holy water"};
 
-            FighterNPC stranger = {"stranger", "a", "stranger"};
             NPC elliot = {"elliot", "", "Elliot"};
             NPC hag = {"hag", "an", "old hag"};
             NPC scholar = {"scholar", "a", "scholar"};
 
+            FighterNPC stranger = {"stranger", "a", "stranger"};
+            
             Enemy demonKing = {"demonKing", "", "An-Harat"};
 
             void initWorld();
