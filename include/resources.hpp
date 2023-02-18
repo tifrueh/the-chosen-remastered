@@ -34,6 +34,7 @@ namespace crsrc {
         "And a name pops into your memory. Anyone's name?",
         "No, your name ... Must be ..."
     };
+    const std::string victoryMessage = "Congratulations! You have been victorious and thereby beaten the game!";
     const std::string cellarDesc = "You are in a damp cellar. It's cold, the walls are all made of grey rock, and it's generally rather unpleasant here. The only light is coming from a torch mounted to the north wall. You can also see the decaying body of a long dead ... thing? (it is definitely not human) chained to the east wall. That must be where the unbearable stench is coming from.";
     const std::string cellarLadderDesc = "You are standing in a stairwell with rough stone walls covered in lichen and moss.";
     const std::string hallDesc = "You are now standing in a long hall, the ceiling of which you can barely see. There are many torches on every wall, flooding the vast room with light. The walls are ornately decorated and in the middle of the room you see a long table with many wooden chairs to each side of it. It seems as if someone was preparing a feast, for the table is set with many plates and cutlery. The only thing missing is the food.";

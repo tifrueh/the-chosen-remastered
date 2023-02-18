@@ -12,6 +12,8 @@
 chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer") {
     classId = "GameEntity:GameEntityWithInventory:Player";
     location = nullptr;
+    alive = true;
+    victory = false;
 }
 
 void chosen::Player::setName(const std::string &name) {
@@ -66,6 +68,22 @@ std::string chosen::Player::getVictoryMessage(chosen::Character &character, chos
     catch (std::out_of_range const&) {
         return character.getDefaultDeathMessage();
     }
+}
+
+void chosen::Player::die() {
+    alive = false;
+}
+
+void chosen::Player::win() {
+    victory = true;
+}
+
+bool chosen::Player::isAlive() {
+    return alive;
+}
+
+bool chosen::Player::hasWon() {
+    return victory;
 }
 
 void chosen::Player::move(const int &direction) {

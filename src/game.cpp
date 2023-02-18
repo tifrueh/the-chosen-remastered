@@ -16,9 +16,9 @@
 #include "game.hpp"
 
 chosen::Game::Game() {
-    state = 0;
     score = 0;
     moves = 0;
+    running = true;
 
     initWorld();
 }
@@ -30,7 +30,7 @@ void chosen::Game::gameloop() {
     std::string command;
 
 
-    while (state == 0) {
+    while (running) {
         command = tui.tuiInput();
         cstr::trim(command);
         std::string errorMessage = "I do not know what you meant by " + command + ".";
@@ -127,28 +127,21 @@ void chosen::Game::gameloop() {
             tui.tuiPrint(errorMessage);
         }
 
+        if (throneRoom.getCharacterByAlias("an-harat") == nullptr) {
+            player.win();
+        }
+
+        if (!player.isAlive() || player.hasWon()) {
+            endGame();
+        }
+
         moves++;
         tui.updateMoves(moves);
         tui.updateScore(score);
         tui.setLocation(player.getLocationName());
     }
 
-    tui.tuiPrintNewline();
-
-    switch (score) {
-        case 0:
-            tui.tuiPrint("You vanquished not a single enemy during the game.");
-            break;
-        
-        case 1:
-            tui.tuiPrint("You vanquished 1 enemy during the game.");
-            break;
-        
-        default:
-            tui.tuiPrint("You vanquished " + std::to_string(score) + " enemies during the game.");
-    }
-
-    tui.waitForInput("\n[Hit any key to exit.]");
+    endLoop();
 }
 
 void chosen::Game::initWorld() {
@@ -315,6 +308,34 @@ void chosen::Game::initLoop() {
     player.getLocation()->registerVisit();
 }
 
+void chosen::Game::endLoop() {
+
+    tui.tuiPrintNewline();
+
+    if (player.hasWon()) {
+        tui.tuiPrint(crsrc::victoryMessage);
+    }
+
+    switch (score) {
+        case 0:
+            tui.tuiPrint("You vanquished not a single enemy during the game.");
+            break;
+        
+        case 1:
+            tui.tuiPrint("You vanquished 1 enemy during the game.");
+            break;
+        
+        default:
+            tui.tuiPrint("You vanquished " + std::to_string(score) + " enemies during the game.");
+    }
+
+    tui.waitForInput("\n[Hit any key to exit.]");
+}
+
+void chosen::Game::endGame() {
+    running = false;
+}
+
 void chosen::Game::cmdTalk(std::string character) {
     
     if (!player.getLocation()->hasAnyCharacter()) {
@@ -418,7 +439,7 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
     else {
         if (characterPtr->getClassId() != "GameEntity:GameEntityWithInventory:Character:NPC") {
             tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
-            state = 1;
+            player.die();
         }
     }
 }
@@ -673,6 +694,6 @@ void chosen::Game::cmdClear() {
 void chosen::Game::cmdExit() {
     std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
     if (affirm == "y") {
-        state = 1;
+        endGame();
     }
 }

@@ -14,9 +14,9 @@
 namespace chosen {
     class Game {
         private:
-            int state;
             int score;
             int moves;
+            bool running;
 
             ctui::TUI tui;
 
@@ -65,6 +65,8 @@ namespace chosen {
 
             void initWorld();
             void initLoop();
+            void endLoop();
+            void endGame();
 
             void cmdTalk(std::string character);
             void cmdFight(std::string character, std::string item);

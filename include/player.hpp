@@ -19,6 +19,8 @@ namespace chosen {
             Room *location;
             std::map<Character*, std::map<Item*, std::string>> deathMessages;
             std::map<Character*, std::map<Item*, std::string>> victoryMessages;
+            bool alive;
+            bool victory;
         
         public:
             Player();
@@ -33,6 +35,10 @@ namespace chosen {
             std::vector<std::string> getShortLocationDescription();
             std::string getDeathMessage(Character &character, Item &item);
             std::string getVictoryMessage(Character &character, Item &item);
+            void die();
+            void win();
+            bool isAlive();
+            bool hasWon();
 
             void move(const int &direction);
             void take(Item &item);
