@@ -243,12 +243,14 @@ void chosen::Game::initWorld() {
     stranger.setDefaultVictoryMessage(crsrc::strangerDefVictoryMsg);
     stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
     stranger.addVulnerability(fireWand);
+    stranger.addVulnerability(swordsODD);
     hall.addCharacter(stranger);
     player.setDefeatMessage(stranger, longsword, crsrc::defeatStrangerLongsword);
 
     warrioress.setDescription(crsrc::warrioressDesc);
     warrioress.setConversation(crsrc::warrioressConversation);
     warrioress.addVulnerability(fireWand);
+    warrioress.addVulnerability(swordsODD);
     nsPassageway.addCharacter(warrioress);
 
     elliot.setDescription(crsrc::elliotDesc);
