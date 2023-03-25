@@ -438,14 +438,14 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
     if (victory) {
         tui.tuiPrint(player.getVictoryMessage(*characterPtr, *itemPtr));
 
-        if (characterPtr->getClassId() == "GameEntity:GameEntityWithInventory:Character:Enemy") {
+        if (characterPtr->givesScore()) {
             score += 1;
         }
     } 
     else {
         tui.tuiPrint(player.getDefeatMessage(*characterPtr, *itemPtr));
         
-        if (characterPtr->getClassId() != "GameEntity:GameEntityWithInventory:Character:NPC") {
+        if (characterPtr->isDeadly()) {
             player.die();
         }
     }

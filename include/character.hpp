@@ -14,6 +14,8 @@ namespace chosen {
         protected:
             long unsigned int conversationCounter;
             bool isKillable;
+            bool deadly;
+            bool scoring;
             std::string description;
             std::vector<std::string> conversation;
             std::string hugMessage;
@@ -34,6 +36,12 @@ namespace chosen {
             std::string getDefaultDeathMessage();
             void setDefaultVictoryMessage(const std::string &message);
             std::string getDefaultVictoryMessage();
+            void enableScore();
+            void disableScore();
+            bool givesScore();
+            void makeDeadly();
+            void makePeaceful();
+            bool isDeadly();
     };
 
     class NPC : public Character {
