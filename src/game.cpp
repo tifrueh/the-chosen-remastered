@@ -281,6 +281,14 @@ void chosen::Game::initWorld() {
     demonKing.addVulnerability(swordsODD);
     throneRoom.addCharacter(demonKing);
     player.setVictoryMessage(demonKing, swordsODD, crsrc::victoryDemonKingSwords);
+
+    mandrak.setDescription(crsrc::mandrakDesc);
+    mandrak.setConversation(crsrc::mandrakConversation);
+    mandrak.setDefaultVictoryMessage(crsrc::mandrakDefVictoryMsg);
+    mandrak.addAlias("advisor");
+    mandrak.addAlias("head of the kingsguard");
+    throneEntrance.addCharacter(mandrak);
+    player.setVictoryMessage(mandrak, swordsODD, crsrc::victoryMandrakSwords);
 }
 
 void chosen::Game::initLoop() {

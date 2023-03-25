@@ -64,6 +64,11 @@ namespace chosen {
             FighterNPC warrioress = {"warrioress", "a", "warrioress"};
 
             Enemy demonKing = {"demonKing", "", "An-Harat"};
+            Enemy mandrak = {"mandrak", "", "Mandrak"};
+            Enemy fireDemon = {"fireDemon", "a", "demon of fire"};
+            Enemy waterDemon = {"waterDemon", "a", "demon of water"};
+            Enemy earthDemon = {"earthDemon", "a", "demon of earth"};
+            Enemy airDemon = {"airDemon", "a", "demon of air"};
 
             void initWorld();
             void initLoop();
