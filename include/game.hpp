@@ -73,7 +73,6 @@ namespace chosen {
             void initWorld();
             void initLoop();
             void endLoop();
-            void endGame();
 
             void cmdTalk(std::string character);
             void cmdFight(std::string character, std::string item);

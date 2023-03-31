@@ -132,7 +132,7 @@ void chosen::Game::gameloop() {
         }
 
         if (!player.isAlive() || player.hasWon()) {
-            endGame();
+            running = false;
         }
 
         moves++;
@@ -352,9 +352,6 @@ void chosen::Game::endLoop() {
     tui.waitForInput("\n[Hit any key to exit.]");
 }
 
-void chosen::Game::endGame() {
-    running = false;
-}
 
 void chosen::Game::cmdTalk(std::string character) {
     
@@ -715,6 +712,6 @@ void chosen::Game::cmdClear() {
 void chosen::Game::cmdExit() {
     std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
     if (affirm == "y") {
-        endGame();
+        running = false;
     }
 }
