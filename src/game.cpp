@@ -324,6 +324,15 @@ void chosen::Game::initWorld() {
     airDemon.addAlias("air demon");
     nsPassageway.addCharacter(airDemon);
     player.setVictoryMessage(airDemon, crossbow, crsrc::victoryAirDemonCrossbow);
+
+    earthDemon.setDescription(crsrc::earthDemonDesc);
+    earthDemon.setConversation(crsrc::demonConversation);
+    earthDemon.setDefaultVictoryMessage(crsrc::earthDemonDefVictoryMsg);
+    earthDemon.setHugMessage(crsrc::demonHugMessage);
+    earthDemon.addVulnerability(longsword);
+    earthDemon.addAlias("earth demon");
+    westHallRoom.addCharacter(earthDemon);
+    player.setVictoryMessage(earthDemon, longsword, crsrc::victoryEarthDemonCrossbow);
 }
 
 void chosen::Game::initLoop() {

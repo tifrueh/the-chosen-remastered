@@ -132,4 +132,8 @@ namespace crsrc {
     const std::string airDemonDesc = "You see a demon of air, looking malevolently at you.";
     const std::string airDemonDefVictoryMsg = "You can't reach the demon, as it is flying high above your head. The demon reaches out with its long claws plunges them into your chest.";
     const std::string victoryAirDemonCrossbow = "As you press the trigger, a bolt flashes from the bow, killing the demon of air.";
+    const std::string earthDemonDesc = "You see a demon of earth, looking malevolently at you.";
+    const std::string earthDemonDefVictoryMsg = "You cannot seem to penetrate the earth demon's thick skin. As you stand there, puzzled, the demon throws a bone-crushing punch into your face.";
+    const std::string victoryEarthDemonCrossbow = "You swing your sword forward with all the power you can muster. It cuts through flesh and bone effortlessly, killing the demon of earth.";
+
 }
