@@ -315,6 +315,15 @@ void chosen::Game::initWorld() {
     eastHallRoom.addCharacter(waterDemon);
     player.setVictoryMessage(waterDemon, fireWand, crsrc::victoryWaterDemonWand);
     player.setDefeatMessage(waterDemon, holyWater, crsrc::defeatWaterDemonWater);
+
+    airDemon.setDescription(crsrc::airDemonDesc);
+    airDemon.setConversation(crsrc::demonConversation);
+    airDemon.setDefaultVictoryMessage(crsrc::airDemonDefVictoryMsg);
+    airDemon.setHugMessage(crsrc::demonHugMessage);
+    airDemon.addVulnerability(crossbow);
+    airDemon.addAlias("air demon");
+    nsPassageway.addCharacter(airDemon);
+    player.setVictoryMessage(airDemon, crossbow, crsrc::victoryAirDemonCrossbow);
 }
 
 void chosen::Game::initLoop() {
