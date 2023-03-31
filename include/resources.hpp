@@ -14,7 +14,7 @@
 
 namespace crsrc {
     const std::array<std::string, 6> welcomeMessage = {
-        "The Chosen (Remastered): At Night's End",
+        "The Chosen: At Night's End (Remastered)",
         REVISION,
         "Copyright (C) 2022-2023 Timo Frueh",
         "This program comes with ABSOLUTELY NO WARRANTY.",
