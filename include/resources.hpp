@@ -125,4 +125,8 @@ namespace crsrc {
     const std::string fireDemonDefVictoryMsg = "As you attack the demon, your weapon goes up in flames right away. As you drop your weapon to the ground, the demon points at you and a blazing ball of fire rushes at your face.";
     const std::string victoryFireDemonHolyWater = "You open the bottle and throw its content, which is refilled magically the instant the bottle is empty, killing the demon of fire.";
     const std::string defeatFireDemonWand = "You point the wand forward and as soon as you think of fire, flames spray from the tip of the wooden staff. But the demon seems to be becoming even stronger. It points at you and a blazing ball of fire rushes at your face.";
+    const std::string waterDemonDesc = "You see a demon of water, looking at you malevolently.";
+    const std::string waterDemonDefVictoryMsg = "As you attack the demon, your weapon passes right through its body. Without hesitation, the demon comes at you and engulfs you with its watery body, suffocating you.";
+    const std::string victoryWaterDemonWand = "You point the wand forward and as soon as you think of fire, flames spray from the tip of the wooden staff, killing the demon of water.";
+    const std::string defeatWaterDemonWater = "You open the bottle and throw its content, with is refilled magically the instant the bottle is empty. But the demon seems to become even stronger. It comes at you and engulfs you with its watery body, suffocating you.";
 }

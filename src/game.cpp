@@ -305,6 +305,16 @@ void chosen::Game::initWorld() {
     libraryEntrance.addCharacter(fireDemon);
     player.setVictoryMessage(fireDemon, holyWater, crsrc::victoryFireDemonHolyWater);
     player.setDefeatMessage(fireDemon, fireWand, crsrc::defeatFireDemonWand);
+
+    waterDemon.setDescription(crsrc::waterDemonDesc);
+    waterDemon.setConversation(crsrc::demonConversation);
+    waterDemon.setDefaultVictoryMessage(crsrc::waterDemonDefVictoryMsg);
+    waterDemon.setHugMessage(crsrc::demonHugMessage);
+    waterDemon.addVulnerability(fireWand);
+    waterDemon.addAlias("water demon");
+    eastHallRoom.addCharacter(waterDemon);
+    player.setVictoryMessage(waterDemon, fireWand, crsrc::victoryWaterDemonWand);
+    player.setDefeatMessage(waterDemon, holyWater, crsrc::defeatWaterDemonWater);
 }
 
 void chosen::Game::initLoop() {
