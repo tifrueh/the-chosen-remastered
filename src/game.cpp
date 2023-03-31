@@ -738,7 +738,7 @@ void chosen::Game::cmdScream() {
 }
 
 void chosen::Game::cmdHelp() {
-    tui.tuiPrint("cmd: help");
+    tui.tuiPrint(crsrc::help);
 }
 
 void chosen::Game::cmdInventory() {

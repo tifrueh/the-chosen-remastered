@@ -135,5 +135,14 @@ namespace crsrc {
     const std::string earthDemonDesc = "You see a demon of earth, looking malevolently at you.";
     const std::string earthDemonDefVictoryMsg = "You cannot seem to penetrate the earth demon's thick skin. As you stand there, puzzled, the demon throws a bone-crushing punch into your face.";
     const std::string victoryEarthDemonCrossbow = "You swing your sword forward with all the power you can muster. It cuts through flesh and bone effortlessly, killing the demon of earth.";
-
+    const std::vector<std::string> help = {
+        "Some essential commands I can execute:",
+        "",
+        "talk -=========- talk to someone",
+        "fight -========- fight someone",
+        "take -=========- take something",
+        "drop -=========- drop something",
+        "n/e/s/w -======- go into a direction",
+        "up/down -======- climb up/down"
+    };
 }
