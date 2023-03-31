@@ -137,7 +137,6 @@ namespace crsrc {
     const std::string victoryEarthDemonCrossbow = "You swing your sword forward with all the power you can muster. It cuts through flesh and bone effortlessly, killing the demon of earth.";
     const std::vector<std::string> help = {
         "Some essential commands I can execute:",
-        "",
         "talk -=========- talk to someone",
         "fight -========- fight someone",
         "take -=========- take something",
