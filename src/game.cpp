@@ -328,7 +328,9 @@ void chosen::Game::initLoop() {
 
 void chosen::Game::endLoop() {
 
-    tui.tuiPrint("You die ...");
+    if (!player.isAlive()) {
+        tui.tuiPrint("You die ...");
+    }
 
     tui.tuiPrintNewline();
 
