@@ -265,12 +265,16 @@ void chosen::Game::initWorld() {
     hag.addAlias("hag");
     hag.addAlias("woman");
     hag.addAlias("old woman");
+    hag.addImmunity(holyWater);
     staffRoom.addCharacter(hag);
+    player.setDefeatMessage(hag, holyWater, crsrc::defeatHagWater);
 
     scholar.setDescription(crsrc::scholarDesc);
     scholar.setConversation(crsrc::scholarConversation);
+    scholar.addImmunity(holyWater);
     scholar.addAlias("learned man");
     library.addCharacter(scholar);
+    player.setDefeatMessage(scholar, holyWater, crsrc::defeatScholarWater);
 
     demonKing.setDescription(crsrc::demonKingDesc);
     demonKing.setConversation(crsrc::demonKingConversation);
