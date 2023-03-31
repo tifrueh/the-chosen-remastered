@@ -70,9 +70,9 @@ namespace crsrc {
         "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable. I must be getting old ...",
         "Would you please leave me alone? I'd appreciate that greatly."
     };
-    const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
+    const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...";
     const std::string strangerDefDeathMsg = "The stranger did not wish you harm. But you already started the fight and cannot stop. You kill the stranger, watching the light fade from his piercingly blue eyes.";
-    const std::string defeatStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.\nYou die ...";
+    const std::string defeatStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.";
     const std::string warrioressDesc = "You see a warrioress here, seeming a bit lost but eying you with obvious distrust.";
     const std::vector<std::string> warrioressConversation = {
         "What? Do you have nothing better to do?",
@@ -106,13 +106,13 @@ namespace crsrc {
         "Come on then, try to ban me from my realm, try to destroy my immortal soul with these weapons you carry, and I'll behead you right where you stand!"
     };
     const std::string demonKingHugMessage = "As you approach the Demon King, he looks at you insecurely and hesitates, but finally holds the tip of his sword to your chest so that you have to take a step back again.";
-    const std::string demonKingDefVictoryMsg = "As you attack An-Harat, he brushes away your weapon without any trouble. It seems you are not yet strong enough. As you struggle to keep your balance, An-Harat comes at you, thrusts out his sword and pierces your heart.\nYou die ...";
+    const std::string demonKingDefVictoryMsg = "As you attack An-Harat, he brushes away your weapon without any trouble. It seems you are not yet strong enough. As you struggle to keep your balance, An-Harat comes at you, thrusts out his sword and pierces your heart.";
     const std::string victoryDemonKingSwords = "You grip the sword hilts and draw the blades. An-Harat blocks your first thrust with ease and starts a vicious counterattack, aiming for your throat. The Sword of Dusk sweeps up, deflecting An-Harat's blade. But he keeps his balance and comes at you again. He pushes you back with a series of incredibly fast attacks, and you have to step back a few paces, all while blocking his slashes with both your swords. A shallow cut appears on your arm, seeping blood. Doubt enters your mind. Can you truly defeat this beast? You feel the swords in your hands becoming warmer and strength floods back into your tired arms. You push away all thoughts and launch an attack yourself. You lunge towards your enemy, the Sword of Dawn reaching for An-Harat's chest. He blocks your thrust, but you turn around and fight on, faster and faster, until your eyes can barely see your blades anymore. You feel your foe tiring, each of his moves becoming slower and less controlled. Finally, you spot an opening in An-Harat's defense and move in for the kill. The Sword of Dawn sinks into the Demon King's chest, his sword clatters to the ground, and you look into his eyes, their fire slowly fading.";
     const std::string mandrakDesc = "You see Mandrak, the King's closest advisor and head of the Kingsguard, standing in front of the throne room, holding his lance close.";
     const std::vector<std::string> mandrakConversation = {
         "Turn back, oh powerless soul. I will let you pass, but He will kill you if you try to take his throne. Only the Swords of Dusk and Dawn can kill Him and those were lost to the world a long time ago. Long live the Demon King!",
         "Long live the Demon King!"
     };
-    const std::string mandrakDefVictoryMsg = "You start a fight, but Mandrak is too strong. He dodges your attacks with ease, skillfully overcomes your defenses and deals a fatal blow. \nYou die ...";
+    const std::string mandrakDefVictoryMsg = "You start a fight, but Mandrak is too strong. He dodges your attacks with ease, skillfully overcomes your defenses and deals a fatal blow.";
     const std::string victoryMandrakSwords = "You start a fight. Mandrak is incredibly fast, but you are faster. Your parry every slash of his lance with ease and as soon as you spot a hole in Mandrak's defense, you strike out and deliver a fatal blow.";
 }

@@ -15,7 +15,7 @@ chosen::Character::Character(const std::string &id,
     description = cArticleName + " is here.";
     hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
     defaultDeathMessage = "You kill " + theName + ".";
-    defaultVictoryMessage = cTheName + " lands a fatal blow. \nYou die ...";
+    defaultVictoryMessage = cTheName + " lands a fatal blow.";
 }
 
 void chosen::Character::setDescription(const std::string &description) {
@@ -173,7 +173,7 @@ chosen::FighterNPC::FighterNPC(const std::string &id,
                  const std::string &article, 
                  const std::string &name) : chosen::Enemy(id, article, name) {
     classId = "GameEntity:GameEntityWithInventory:Character:Enemy:FighterNPC";
-    defaultVictoryMessage = cTheName + " did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
+    defaultVictoryMessage = cTheName + " did not wish you harm. But you already started the fight. You lose ...";
     deadly = true;
     scoring = false;
 }

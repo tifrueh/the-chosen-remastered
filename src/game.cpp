@@ -278,6 +278,8 @@ void chosen::Game::initWorld() {
     demonKing.setDefaultVictoryMessage(crsrc::demonKingDefVictoryMsg);
     demonKing.addAlias("demon king");
     demonKing.addAlias("king");
+    demonKing.addAlias("an harat");
+    demonKing.addAlias("anharat");
     demonKing.addVulnerability(swordsODD);
     throneRoom.addCharacter(demonKing);
     player.setVictoryMessage(demonKing, swordsODD, crsrc::victoryDemonKingSwords);
@@ -325,6 +327,8 @@ void chosen::Game::initLoop() {
 }
 
 void chosen::Game::endLoop() {
+
+    tui.tuiPrint("You die ...");
 
     tui.tuiPrintNewline();
 
