@@ -291,6 +291,16 @@ void chosen::Game::initWorld() {
     mandrak.addAlias("head of the kingsguard");
     throneEntrance.addCharacter(mandrak);
     player.setVictoryMessage(mandrak, swordsODD, crsrc::victoryMandrakSwords);
+
+    fireDemon.setDescription(crsrc::fireDemonDesc);
+    fireDemon.setConversation(crsrc::demonConversation);
+    fireDemon.setDefaultVictoryMessage(crsrc::fireDemonDefVictoryMsg);
+    fireDemon.setHugMessage(crsrc::demonHugMessage);
+    fireDemon.addVulnerability(holyWater);
+    fireDemon.addAlias("fire demon");
+    libraryEntrance.addCharacter(fireDemon);
+    player.setVictoryMessage(fireDemon, holyWater, crsrc::victoryFireDemonHolyWater);
+    player.setDefeatMessage(fireDemon, fireWand, crsrc::defeatFireDemonWand);
 }
 
 void chosen::Game::initLoop() {
