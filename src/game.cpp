@@ -70,12 +70,6 @@ void chosen::Game::gameloop() {
             std::string hug = cprs::parseCommand(command, "hug");
             cmdHug(hug);
         }
-        else if (cprs::isCommand(command, "lock")) {
-            cmdLock();
-        }
-        else if (cprs::isCommand(command, "unlock")) {
-            cmdUnlock();
-        }
         else if (cprs::isCommand(command, "go")) {
             std::string go = cprs::parseCommand(command, "go");
             cmdGo(go);
@@ -632,22 +626,6 @@ void chosen::Game::cmdHug(std::string character) {
     else {
         tui.tuiPrint(player.hug(*chPtr));
     }
-}
-
-void chosen::Game::cmdOpen() {
-    tui.tuiPrint("cmd: open a door");
-}
-
-void chosen::Game::cmdClose() {
-    tui.tuiPrint("cmd: close a door");
-}
-
-void chosen::Game::cmdLock() {
-    tui.tuiPrint("cmd: lock a door");
-}
-
-void chosen::Game::cmdUnlock() {
-    tui.tuiPrint("cmd: unlock a door");
 }
 
 void chosen::Game::movePlayer(const int &direction) {
