@@ -211,7 +211,7 @@ void chosen::Game::initWorld() {
     swordsODD.setInitialDescription(crsrc::swordsOddInitDescription);
     swordsODD.setExaminationDescription(crsrc::swordsOddExDescription);
     swordsODD.addAlias("swords");
-    swordsODD.setScoreRequirement(5);
+    swordsODD.setScoreRequirement(4);
     swordsODD.setReqUnmetMessage(crsrc::swordsOddReqUnmetMessage);
     hiddenRoom.addItem(swordsODD);
 
