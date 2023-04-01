@@ -9,7 +9,7 @@
 #include <array>
 #include <vector>
 
-#define VERSION "1.0.0-dev"
+#define VERSION "1.0.0-alpha"
 #define REVISION "Revision " VERSION
 
 namespace crsrc {
