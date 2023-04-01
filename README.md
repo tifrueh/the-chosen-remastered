@@ -74,3 +74,5 @@ and press the `ENTER` key. The game cooperates and tells you:
 ~~~ text
 You notice that the sword is glowing faintly, indicating that a spell has been cast on it.
 ~~~
+
+Continue now your quest and rid the world of the Demon King. Good luck, Adventurer!
