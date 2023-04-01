@@ -1,6 +1,6 @@
 # The Chosen: At Night's End (Remastered)
 
-This is a short Zork-like text-adventure I (re-)wrote. The original version was written in python and can be found [here](https://github.com/tifrueh/the-chosen).
+This is a short Zork-like text-adventure I (re-)wrote. The original python version can be found [here](https://github.com/tifrueh/the-chosen).
 
 Your objective is to find a pair of legendary swords and kill an evil king with them.
 
