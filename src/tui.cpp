@@ -45,7 +45,7 @@ void ctui::TUI::initStatusBar(const std::string &initialLocation) {
     createBox(3, maxx, 0, 0);
 
     locationWin = newwin(1, 40, 1, 2);
-    wprintw(locationWin, str);
+    wprintw(locationWin, "%s", str);
     wrefresh(locationWin);
 
     scoreWin = newwin(1, 10, 1, maxx - 26);
@@ -91,7 +91,7 @@ void ctui::TUI::mvGetStr(const int &y, const int &x, char *str) {
 
         wmove(inWin, 0, 3);
         wclrtoeol(inWin);
-        wprintw(inWin, str);
+        wprintw(inWin, "%s", str);
         wrefresh(inWin);
 
         iC = wgetch(inWin);
@@ -181,21 +181,21 @@ void ctui::TUI::setLocation(const std::string &location) {
     const char *str = location.c_str();
 
     wclear(locationWin);
-    wprintw(locationWin, str);
+    wprintw(locationWin, "%s", str);
     wrefresh(locationWin);
 }
 
 void ctui::TUI::updateScore(const int &score) {
     std::string sScore = cstr::int_to_string(score, 3);
     const char *csScore = sScore.c_str();
-    mvwprintw(scoreWin, 0, 7, csScore);
+    mvwprintw(scoreWin, 0, 7, "%s", csScore);
     wrefresh(scoreWin);
 }
 
 void ctui::TUI::updateMoves(const int &moves) {
     std::string sMoves = cstr::int_to_string(moves, 4);
     const char *csMoves = sMoves.c_str();
-    mvwprintw(movesWin, 0, 7, csMoves);
+    mvwprintw(movesWin, 0, 7, "%s", csMoves);
     wrefresh(movesWin);
 }
 
