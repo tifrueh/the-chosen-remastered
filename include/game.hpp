@@ -14,9 +14,9 @@
 namespace chosen {
     class Game {
         private:
-            int state;
             int score;
             int moves;
+            bool running;
 
             ctui::TUI tui;
 
@@ -56,13 +56,23 @@ namespace chosen {
             Item fireWand = {"fireWand", "a", "wand of fire"};
             Item holyWater = {"holyWater", "a", "bottle of holy water"};
 
-            Enemy stranger = {"stranger", "a", "stranger"};
             NPC elliot = {"elliot", "", "Elliot"};
             NPC hag = {"hag", "an", "old hag"};
             NPC scholar = {"scholar", "a", "scholar"};
 
+            FighterNPC stranger = {"stranger", "a", "stranger"};
+            FighterNPC warrioress = {"warrioress", "a", "warrioress"};
+
+            Enemy demonKing = {"demonKing", "", "An-Harat"};
+            Enemy mandrak = {"mandrak", "", "Mandrak"};
+            Enemy fireDemon = {"fireDemon", "a", "demon of fire"};
+            Enemy waterDemon = {"waterDemon", "a", "demon of water"};
+            Enemy earthDemon = {"earthDemon", "a", "demon of earth"};
+            Enemy airDemon = {"airDemon", "a", "demon of air"};
+
             void initWorld();
             void initLoop();
+            void endLoop();
 
             void cmdTalk(std::string character);
             void cmdFight(std::string character, std::string item);

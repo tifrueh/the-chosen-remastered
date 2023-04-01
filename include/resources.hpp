@@ -9,12 +9,12 @@
 #include <array>
 #include <vector>
 
-#define VERSION "1.0.0-dev"
+#define VERSION "1.0.0-alpha"
 #define REVISION "Revision " VERSION
 
 namespace crsrc {
     const std::array<std::string, 6> welcomeMessage = {
-        "The Chosen (Remastered): At Night's End",
+        "The Chosen: At Night's End (Remastered)",
         REVISION,
         "Copyright (C) 2022-2023 Timo Frueh",
         "This program comes with ABSOLUTELY NO WARRANTY.",
@@ -34,6 +34,7 @@ namespace crsrc {
         "And a name pops into your memory. Anyone's name?",
         "No, your name ... Must be ..."
     };
+    const std::string victoryMessage = "Congratulations! You have been victorious and thereby beaten the game!";
     const std::string cellarDesc = "You are in a damp cellar. It's cold, the walls are all made of grey rock, and it's generally rather unpleasant here. The only light is coming from a torch mounted to the north wall. You can also see the decaying body of a long dead ... thing? (it is definitely not human) chained to the east wall. That must be where the unbearable stench is coming from.";
     const std::string cellarLadderDesc = "You are standing in a stairwell with rough stone walls covered in lichen and moss.";
     const std::string hallDesc = "You are now standing in a long hall, the ceiling of which you can barely see. There are many torches on every wall, flooding the vast room with light. The walls are ornately decorated and in the middle of the room you see a long table with many wooden chairs to each side of it. It seems as if someone was preparing a feast, for the table is set with many plates and cutlery. The only thing missing is the food.";
@@ -69,26 +70,78 @@ namespace crsrc {
         "Oh, adventurer, can it become any worse? I've lost the bottle the high priest gave me, now I'm helpless against those nastily blazing demons. By the gods, that something like this could happen to me, unthinkable. I must be getting old ...",
         "Would you please leave me alone? I'd appreciate that greatly."
     };
-    const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...\nYou die ...";
+    const std::string strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...";
     const std::string strangerDefDeathMsg = "The stranger did not wish you harm. But you already started the fight and cannot stop. You kill the stranger, watching the light fade from his piercingly blue eyes.";
+    const std::string defeatStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.";
+    const std::string warrioressDesc = "You see a warrioress here, seeming a bit lost but eying you with obvious distrust.";
+    const std::vector<std::string> warrioressConversation = {
+        "What? Do you have nothing better to do?",
+        "*to herself* Damn this demon of earth. I can't get through its skin. Maybe I need something sharper as my trusty club.",
+        "What? Do you have nothing better to do?"
+    };
     const std::string elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
     std::vector<std::string> elliotConversation = {
         "[NAME LINE PLACEHOLDER]",
-        "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that that you must first prove your worth to those Swords by killing seven of the Demon King's minions. Only then will they obey you. But what do I know!",
+        "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that that you must first prove your worth to those Swords by killing four of the Demon King's minions. Only then will they obey you. But what do I know!",
         "Go on, then. Kill the demons, find the swords and kill the King. You can do it, my friend, I'm sure of it."
     };
     const std::string elliotHug = "Elliot hugs you back.";
+    const std::string elliotDefDeathMsg = "You land a fatal blow. But before Elliot takes his last breath, he manages to say: \"Why?\". The look in his fading eyes almost breaks your heart. This wasn't right ...";
+    const std::string defeatElliotWater = "You open the bottle and throw its contents at Elliot. The bottle is refilled magically in an instant and Elliot is quite drenched now. He looks at you, quit bewildered.";
     const std::string hagDesc = "On the bed sits an old hag.";
     const std::vector<std::string> hagConversation = {
         "Oooh ... what a fine surprise ... the Chosen is finally here. You know your task already, I suppose? Quick, quick, let me tell you something then: To discover the swords you must find the three burning suns, then turn south and take the daring step. That doesn't help you? Well, this is all I know.",
         "You want to hear that again? Well, then, listen closely this time: To discover the swords you must find the three burning suns, then turn south and take the daring step. Now, now ... Go and find the Swords, Chosen. It's what you came here for, after all ...",
         "Go and find the swords, Chosen. It's what you came here for, after all ..."
     };
+    const std::string defeatHagWater = "You open the bottle and throw its contents at the old woman. The bottle is refilled magically in an instant and the hag is quite drenched now. She looks at you, quite bewildered.";
     const std::string scholarDesc = "You spot a scholar, frantically working through the shelves, probably searching for a particular book.";
     const std::vector<std::string> scholarConversation = {
         "Gods, how can a book be so difficult to find! Where do you hide yourself, you little rascal ...",
         "Oh, greetings. Long days and pleasant nights to thee. I didn't notice you there, say sorry. Are you in need of a book? I'm afraid the library doesn't hand them over to strangers ...",
         "Be cautious out there, okay? Those demons are vicious. They are very strong indeed and each kind can only be killed in one unique way ..."
     };
-    const std::string deathStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.\nYou die ...";
+    const std::string defeatScholarWater = "You open the bottle and throw its contents at the scholar. The bottle is refilled magically in an instant and the man is quite drenched now. He looks at you, quite bewildered.";
+    const std::string demonKingDesc = "You see An-Harat, the Demon King, sitting on his magnificent throne and looking incredibly menacing.";
+    const std::vector<std::string> demonKingConversation = {
+        "Aah, greetings, Chosen. You are here at last. What took you so long? My demons certainly were no challenge for you, for you are in the possession of the legendary Swords of Dusk and Dawn, is that not so? Even as powerful a servant as Mandrak would not have been able to withstand those dreadful blades of yours, the bringers of death and destruction. Are you here to kill me, then? Do you want to take my throne? You want to take my world from me, because you think it belongs to you mortals? You want to end my eternal reign and rid the world of my kind? Come on then, try to ban me from my realm, try to destroy my immortal soul with these weapons you carry, and I'll behead you right where you stand!",
+        "Come on then, try to ban me from my realm, try to destroy my immortal soul with these weapons you carry, and I'll behead you right where you stand!"
+    };
+    const std::string demonKingHugMessage = "As you approach the Demon King, he looks at you insecurely and hesitates, but finally holds the tip of his sword to your chest so that you have to take a step back again.";
+    const std::string demonKingDefVictoryMsg = "As you attack An-Harat, he brushes away your weapon without any trouble. It seems you are not yet strong enough. As you struggle to keep your balance, An-Harat comes at you, thrusts out his sword and pierces your heart.";
+    const std::string victoryDemonKingSwords = "You grip the sword hilts and draw the blades. An-Harat blocks your first thrust with ease and starts a vicious counterattack, aiming for your throat. The Sword of Dusk sweeps up, deflecting An-Harat's blade. But he keeps his balance and comes at you again. He pushes you back with a series of incredibly fast attacks, and you have to step back a few paces, all while blocking his slashes with both your swords. A shallow cut appears on your arm, seeping blood. Doubt enters your mind. Can you truly defeat this beast? You feel the swords in your hands becoming warmer and strength floods back into your tired arms. You push away all thoughts and launch an attack yourself. You lunge towards your enemy, the Sword of Dawn reaching for An-Harat's chest. He blocks your thrust, but you turn around and fight on, faster and faster, until your eyes can barely see your blades anymore. You feel your foe tiring, each of his moves becoming slower and less controlled. Finally, you spot an opening in An-Harat's defense and move in for the kill. The Sword of Dawn sinks into the Demon King's chest, his sword clatters to the ground, and you look into his eyes, their fire slowly fading.";
+    const std::string mandrakDesc = "You see Mandrak, the King's closest advisor and head of the Kingsguard, standing in front of the throne room, holding his lance close.";
+    const std::vector<std::string> mandrakConversation = {
+        "Turn back, oh powerless soul. I will let you pass, but He will kill you if you try to take his throne. Only the Swords of Dusk and Dawn can kill Him and those were lost to the world a long time ago. Long live the Demon King!",
+        "Long live the Demon King!"
+    };
+    const std::string mandrakDefVictoryMsg = "You start a fight, but Mandrak is too strong. He dodges your attacks with ease, skillfully overcomes your defenses and deals a fatal blow.";
+    const std::string victoryMandrakSwords = "You start a fight. Mandrak is incredibly fast, but you are faster. Your parry every slash of his lance with ease and as soon as you spot a hole in Mandrak's defense, you strike out and deliver a fatal blow.";
+    const std::vector<std::string> demonConversation = {
+        "*unintellegible bestial sounds*"
+    };
+    const std::string demonHugMessage = "You wouldn't want to hug such a hideous creature, would you?";
+    const std::string fireDemonDesc = "You see a demon of fire, looking at you malevolantly.";
+    const std::string fireDemonDefVictoryMsg = "As you attack the demon, your weapon goes up in flames right away. As you drop your weapon to the ground, the demon points at you and a blazing ball of fire rushes at your face.";
+    const std::string victoryFireDemonHolyWater = "You open the bottle and throw its content, which is refilled magically the instant the bottle is empty, killing the demon of fire.";
+    const std::string defeatFireDemonWand = "You point the wand forward and as soon as you think of fire, flames spray from the tip of the wooden staff. But the demon seems to become even stronger. It points at you and a blazing ball of fire rushes at your face.";
+    const std::string waterDemonDesc = "You see a demon of water, looking at you malevolently.";
+    const std::string waterDemonDefVictoryMsg = "As you attack the demon, your weapon passes right through its body. Without hesitation, the demon comes at you and engulfs you with its watery body, suffocating you.";
+    const std::string victoryWaterDemonWand = "You point the wand forward and as soon as you think of fire, flames spray from the tip of the wooden staff, killing the demon of water.";
+    const std::string defeatWaterDemonWater = "You open the bottle and throw its content, with is refilled magically the instant the bottle is empty. But the demon seems to become even stronger. It comes at you and engulfs you with its watery body, suffocating you.";
+    const std::string airDemonDesc = "You see a demon of air, looking malevolently at you.";
+    const std::string airDemonDefVictoryMsg = "You can't reach the demon, as it is flying high above your head. The demon reaches out with its long claws plunges them into your chest.";
+    const std::string victoryAirDemonCrossbow = "As you press the trigger, a bolt flashes from the bow, killing the demon of air.";
+    const std::string earthDemonDesc = "You see a demon of earth, looking malevolently at you.";
+    const std::string earthDemonDefVictoryMsg = "You cannot seem to penetrate the earth demon's thick skin. As you stand there, puzzled, the demon throws a bone-crushing punch into your face.";
+    const std::string victoryEarthDemonCrossbow = "You swing your sword forward with all the power you can muster. It cuts through flesh and bone effortlessly, killing the demon of earth.";
+    const std::vector<std::string> help = {
+        "Some essential commands I can execute:",
+        "talk -=========- talk to someone",
+        "fight -========- fight someone",
+        "take -=========- take something",
+        "drop -=========- drop something",
+        "n/e/s/w -======- go into a direction",
+        "up/down -======- climb up/down"
+    };
 }

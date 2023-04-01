@@ -16,9 +16,9 @@
 #include "game.hpp"
 
 chosen::Game::Game() {
-    state = 0;
     score = 0;
     moves = 0;
+    running = true;
 
     initWorld();
 }
@@ -30,7 +30,7 @@ void chosen::Game::gameloop() {
     std::string command;
 
 
-    while (state == 0) {
+    while (running) {
         command = tui.tuiInput();
         cstr::trim(command);
         std::string errorMessage = "I do not know what you meant by " + command + ".";
@@ -69,12 +69,6 @@ void chosen::Game::gameloop() {
         else if (cprs::isCommand(command, "hug")) {
             std::string hug = cprs::parseCommand(command, "hug");
             cmdHug(hug);
-        }
-        else if (cprs::isCommand(command, "lock")) {
-            cmdLock();
-        }
-        else if (cprs::isCommand(command, "unlock")) {
-            cmdUnlock();
         }
         else if (cprs::isCommand(command, "go")) {
             std::string go = cprs::parseCommand(command, "go");
@@ -127,13 +121,21 @@ void chosen::Game::gameloop() {
             tui.tuiPrint(errorMessage);
         }
 
+        if (throneRoom.getCharacterByAlias("an-harat") == nullptr) {
+            player.win();
+        }
+
+        if (!player.isAlive() || player.hasWon()) {
+            running = false;
+        }
+
         moves++;
         tui.updateMoves(moves);
         tui.updateScore(score);
         tui.setLocation(player.getLocationName());
     }
 
-    tui.waitForInput("\n[Hit any key to exit.]");
+    endLoop();
 }
 
 void chosen::Game::initWorld() {
@@ -209,7 +211,7 @@ void chosen::Game::initWorld() {
     swordsODD.setInitialDescription(crsrc::swordsOddInitDescription);
     swordsODD.setExaminationDescription(crsrc::swordsOddExDescription);
     swordsODD.addAlias("swords");
-    swordsODD.setScoreRequirement(7);
+    swordsODD.setScoreRequirement(4);
     swordsODD.setReqUnmetMessage(crsrc::swordsOddReqUnmetMessage);
     hiddenRoom.addItem(swordsODD);
 
@@ -234,12 +236,22 @@ void chosen::Game::initWorld() {
     stranger.setConversation(crsrc::strangerConversation);
     stranger.setDefaultVictoryMessage(crsrc::strangerDefVictoryMsg);
     stranger.setDefaultDeathMessage(crsrc::strangerDefDeathMsg);
+    stranger.addVulnerability(fireWand);
     stranger.addVulnerability(swordsODD);
     hall.addCharacter(stranger);
-    player.setDeathMessage(stranger, longsword, crsrc::deathStrangerLongsword);
+    player.setDefeatMessage(stranger, longsword, crsrc::defeatStrangerLongsword);
+
+    warrioress.setDescription(crsrc::warrioressDesc);
+    warrioress.setConversation(crsrc::warrioressConversation);
+    warrioress.addVulnerability(fireWand);
+    warrioress.addVulnerability(swordsODD);
+    nsPassageway.addCharacter(warrioress);
 
     elliot.setDescription(crsrc::elliotDesc);
     elliot.setHugMessage(crsrc::elliotHug);
+    elliot.setDefaultDeathMessage(crsrc::elliotDefDeathMsg);
+    player.setDefeatMessage(elliot, holyWater, crsrc::defeatElliotWater);
+    elliot.addImmunity(holyWater);
     westHallRoom.addCharacter(elliot);
 
     hag.setDescription(crsrc::hagDesc);
@@ -247,12 +259,74 @@ void chosen::Game::initWorld() {
     hag.addAlias("hag");
     hag.addAlias("woman");
     hag.addAlias("old woman");
+    hag.addImmunity(holyWater);
     staffRoom.addCharacter(hag);
+    player.setDefeatMessage(hag, holyWater, crsrc::defeatHagWater);
 
     scholar.setDescription(crsrc::scholarDesc);
     scholar.setConversation(crsrc::scholarConversation);
+    scholar.addImmunity(holyWater);
     scholar.addAlias("learned man");
     library.addCharacter(scholar);
+    player.setDefeatMessage(scholar, holyWater, crsrc::defeatScholarWater);
+
+    demonKing.setDescription(crsrc::demonKingDesc);
+    demonKing.setConversation(crsrc::demonKingConversation);
+    demonKing.setHugMessage(crsrc::demonKingHugMessage);
+    demonKing.setDefaultVictoryMessage(crsrc::demonKingDefVictoryMsg);
+    demonKing.addAlias("demon king");
+    demonKing.addAlias("king");
+    demonKing.addAlias("an harat");
+    demonKing.addAlias("anharat");
+    demonKing.addVulnerability(swordsODD);
+    throneRoom.addCharacter(demonKing);
+    player.setVictoryMessage(demonKing, swordsODD, crsrc::victoryDemonKingSwords);
+
+    mandrak.setDescription(crsrc::mandrakDesc);
+    mandrak.setConversation(crsrc::mandrakConversation);
+    mandrak.setDefaultVictoryMessage(crsrc::mandrakDefVictoryMsg);
+    mandrak.addAlias("advisor");
+    mandrak.addAlias("head of the kingsguard");
+    throneEntrance.addCharacter(mandrak);
+    player.setVictoryMessage(mandrak, swordsODD, crsrc::victoryMandrakSwords);
+
+    fireDemon.setDescription(crsrc::fireDemonDesc);
+    fireDemon.setConversation(crsrc::demonConversation);
+    fireDemon.setDefaultVictoryMessage(crsrc::fireDemonDefVictoryMsg);
+    fireDemon.setHugMessage(crsrc::demonHugMessage);
+    fireDemon.addVulnerability(holyWater);
+    fireDemon.addAlias("fire demon");
+    libraryEntrance.addCharacter(fireDemon);
+    player.setVictoryMessage(fireDemon, holyWater, crsrc::victoryFireDemonHolyWater);
+    player.setDefeatMessage(fireDemon, fireWand, crsrc::defeatFireDemonWand);
+
+    waterDemon.setDescription(crsrc::waterDemonDesc);
+    waterDemon.setConversation(crsrc::demonConversation);
+    waterDemon.setDefaultVictoryMessage(crsrc::waterDemonDefVictoryMsg);
+    waterDemon.setHugMessage(crsrc::demonHugMessage);
+    waterDemon.addVulnerability(fireWand);
+    waterDemon.addAlias("water demon");
+    eastHallRoom.addCharacter(waterDemon);
+    player.setVictoryMessage(waterDemon, fireWand, crsrc::victoryWaterDemonWand);
+    player.setDefeatMessage(waterDemon, holyWater, crsrc::defeatWaterDemonWater);
+
+    airDemon.setDescription(crsrc::airDemonDesc);
+    airDemon.setConversation(crsrc::demonConversation);
+    airDemon.setDefaultVictoryMessage(crsrc::airDemonDefVictoryMsg);
+    airDemon.setHugMessage(crsrc::demonHugMessage);
+    airDemon.addVulnerability(crossbow);
+    airDemon.addAlias("air demon");
+    nsPassageway.addCharacter(airDemon);
+    player.setVictoryMessage(airDemon, crossbow, crsrc::victoryAirDemonCrossbow);
+
+    earthDemon.setDescription(crsrc::earthDemonDesc);
+    earthDemon.setConversation(crsrc::demonConversation);
+    earthDemon.setDefaultVictoryMessage(crsrc::earthDemonDefVictoryMsg);
+    earthDemon.setHugMessage(crsrc::demonHugMessage);
+    earthDemon.addVulnerability(longsword);
+    earthDemon.addAlias("earth demon");
+    westHallRoom.addCharacter(earthDemon);
+    player.setVictoryMessage(earthDemon, longsword, crsrc::victoryEarthDemonCrossbow);
 }
 
 void chosen::Game::initLoop() {
@@ -287,6 +361,35 @@ void chosen::Game::initLoop() {
     tui.tuiPrint(player.getFullLocationDescription());
     player.getLocation()->registerVisit();
 }
+
+void chosen::Game::endLoop() {
+
+    if (!player.isAlive()) {
+        tui.tuiPrint("You die ...");
+    }
+
+    tui.tuiPrintNewline();
+
+    if (player.hasWon()) {
+        tui.tuiPrint(crsrc::victoryMessage);
+    }
+
+    switch (score) {
+        case 0:
+            tui.tuiPrint("You vanquished not a single enemy during the game.");
+            break;
+        
+        case 1:
+            tui.tuiPrint("You vanquished 1 enemy during the game.");
+            break;
+        
+        default:
+            tui.tuiPrint("You vanquished " + std::to_string(score) + " enemies during the game.");
+    }
+
+    tui.waitForInput("\n[Hit any key to exit.]");
+}
+
 
 void chosen::Game::cmdTalk(std::string character) {
     
@@ -372,7 +475,8 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
         tui.tuiPrint("You do not have any item called " + item + ".");
         return;
     }
-    else if (itemPtr->wieldable(score)){
+    
+    if (itemPtr->wieldable(score)){
         victory = player.fight(*characterPtr, *itemPtr);
     }
     else {
@@ -383,14 +487,15 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
     if (victory) {
         tui.tuiPrint(player.getVictoryMessage(*characterPtr, *itemPtr));
 
-        if (characterPtr->getClassId() == "GameEntity:GameEntityWithInventory:Character:Enemy") {
+        if (characterPtr->givesScore()) {
             score += 1;
         }
     } 
     else {
-        if (characterPtr->getClassId() != "GameEntity:GameEntityWithInventory:Character:NPC") {
-            tui.tuiPrint(player.getDeathMessage(*characterPtr, *itemPtr));
-            state = 1;
+        tui.tuiPrint(player.getDefeatMessage(*characterPtr, *itemPtr));
+        
+        if (characterPtr->isDeadly()) {
+            player.die();
         }
     }
 }
@@ -523,22 +628,6 @@ void chosen::Game::cmdHug(std::string character) {
     }
 }
 
-void chosen::Game::cmdOpen() {
-    tui.tuiPrint("cmd: open a door");
-}
-
-void chosen::Game::cmdClose() {
-    tui.tuiPrint("cmd: close a door");
-}
-
-void chosen::Game::cmdLock() {
-    tui.tuiPrint("cmd: lock a door");
-}
-
-void chosen::Game::cmdUnlock() {
-    tui.tuiPrint("cmd: unlock a door");
-}
-
 void chosen::Game::movePlayer(const int &direction) {
     
     if (!player.getLocation()->hasLinkToDirection(direction)) {
@@ -627,7 +716,7 @@ void chosen::Game::cmdScream() {
 }
 
 void chosen::Game::cmdHelp() {
-    tui.tuiPrint("cmd: help");
+    tui.tuiPrint(crsrc::help);
 }
 
 void chosen::Game::cmdInventory() {
@@ -645,6 +734,6 @@ void chosen::Game::cmdClear() {
 void chosen::Game::cmdExit() {
     std::string affirm = tui.tuiInput("Do you really wish to leave the game? (y is affermative)");
     if (affirm == "y") {
-        state = 1;
+        running = false;
     }
 }

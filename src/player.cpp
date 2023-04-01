@@ -12,6 +12,8 @@
 chosen::Player::Player() : GameEntityWithInventory("player", "", "Adventurer") {
     classId = "GameEntity:GameEntityWithInventory:Player";
     location = nullptr;
+    alive = true;
+    victory = false;
 }
 
 void chosen::Player::setName(const std::string &name) {
@@ -22,7 +24,7 @@ void chosen::Player::setLocation(chosen::Room &room) {
     location = &room;
 }
 
-void chosen::Player::setDeathMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
+void chosen::Player::setDefeatMessage(chosen::Character &character, chosen::Item &item, const std::string &message) {
     deathMessages[&character][&item] = message;
 }
 
@@ -50,7 +52,7 @@ std::vector<std::string> chosen::Player::getShortLocationDescription() {
     return location->getShortDescription();
 }
 
-std::string chosen::Player::getDeathMessage(chosen::Character &character, chosen::Item &item) {
+std::string chosen::Player::getDefeatMessage(chosen::Character &character, chosen::Item &item) {
     try {
         return deathMessages.at(&character).at(&item);
     }
@@ -66,6 +68,22 @@ std::string chosen::Player::getVictoryMessage(chosen::Character &character, chos
     catch (std::out_of_range const&) {
         return character.getDefaultDeathMessage();
     }
+}
+
+void chosen::Player::die() {
+    alive = false;
+}
+
+void chosen::Player::win() {
+    victory = true;
+}
+
+bool chosen::Player::isAlive() {
+    return alive;
+}
+
+bool chosen::Player::hasWon() {
+    return victory;
 }
 
 void chosen::Player::move(const int &direction) {

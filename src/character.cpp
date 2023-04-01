@@ -11,10 +11,11 @@ chosen::Character::Character(const std::string &id,
     classId = "GameEntity:GameEntityWithInventory:Character";
     conversationCounter = 0;
     isKillable = true;
+    deadly = true;
     description = cArticleName + " is here.";
     hugMessage = cTheName + " recoils as you move closer. You decide not to press the matter.";
     defaultDeathMessage = "You kill " + theName + ".";
-    defaultVictoryMessage = "You start a fight with " + theName + ". You lose ...\nYou die ...";
+    defaultVictoryMessage = cTheName + " lands a fatal blow.";
 }
 
 void chosen::Character::setDescription(const std::string &description) {
@@ -78,11 +79,38 @@ std::string chosen::Character::getDefaultVictoryMessage() {
     return defaultVictoryMessage;
 }
 
+void chosen::Character::enableScore() {
+    scoring = true;
+}
+
+void chosen::Character::disableScore() {
+    scoring = false;
+}
+
+bool chosen::Character::givesScore() {
+    return scoring;
+}
+
+void chosen::Character::makeDeadly() {
+    deadly = true;
+}
+
+void chosen::Character::makePeaceful() {
+    deadly = false;
+}
+
+bool chosen::Character::isDeadly() {
+    return deadly;
+}
+
 chosen::NPC::NPC(const std::string &id, 
                  const std::string &article, 
                  const std::string &name) : chosen::Character(id, article, name) {
     classId = "GameEntity:GameEntityWithInventory:Character:NPC";
     defaultDeathMessage = "You kill " + theName + ".\nThis wasn't right ... You feel sorry for " + theName + ".";
+    defaultVictoryMessage = cTheName + " looks at you and seems quite bewildered.";
+    deadly = false;
+    scoring = false;
 }
 
 void chosen::NPC::addImmunity(chosen::Item &item) {
@@ -113,6 +141,8 @@ chosen::Enemy::Enemy(const std::string &id,
                      const std::string &article, 
                      const std::string &name) : chosen::Character(id, article, name) {
     classId = "GameEntity:GameEntityWithInventory:Character:Enemy";
+    deadly = true;
+    scoring = true;
 }
 
 void chosen::Enemy::addVulnerability(chosen::Item &item) {
@@ -137,4 +167,13 @@ bool chosen::Enemy::evaluateFight(chosen::Item &weapon) {
     }
 
     return isVulnerableAgainst(weapon);
+}
+
+chosen::FighterNPC::FighterNPC(const std::string &id, 
+                 const std::string &article, 
+                 const std::string &name) : chosen::Enemy(id, article, name) {
+    classId = "GameEntity:GameEntityWithInventory:Character:Enemy:FighterNPC";
+    defaultVictoryMessage = cTheName + " did not wish you harm. But you already started the fight. You lose ...";
+    deadly = true;
+    scoring = false;
 }

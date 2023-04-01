@@ -19,20 +19,26 @@ namespace chosen {
             Room *location;
             std::map<Character*, std::map<Item*, std::string>> deathMessages;
             std::map<Character*, std::map<Item*, std::string>> victoryMessages;
+            bool alive;
+            bool victory;
         
         public:
             Player();
             void setName(const std::string &name);
             void setLocation(Room &room);
-            void setDeathMessage(Character &character, Item &item, const std::string &message);
+            void setDefeatMessage(Character &character, Item &item, const std::string &message);
             void setVictoryMessage(Character &character, Item &item, const std::string &message);
             Room *getLocation();
             std::string getLocationName();
             std::string getLocationDescription();
             std::vector<std::string> getFullLocationDescription();
             std::vector<std::string> getShortLocationDescription();
-            std::string getDeathMessage(Character &character, Item &item);
+            std::string getDefeatMessage(Character &character, Item &item);
             std::string getVictoryMessage(Character &character, Item &item);
+            void die();
+            void win();
+            bool isAlive();
+            bool hasWon();
 
             void move(const int &direction);
             void take(Item &item);
