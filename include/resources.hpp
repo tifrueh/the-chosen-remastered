@@ -121,7 +121,7 @@ namespace crsrc {
         "*unintellegible bestial sounds*"
     };
     const std::string demonHugMessage = "You wouldn't want to hug such a hideous creature, would you?";
-    const std::string fireDemonDesc = "You see a demon of fire, looking at you malevolantly.";
+    const std::string fireDemonDesc = "You see a demon of fire, looking at you malevolently.";
     const std::string fireDemonDefVictoryMsg = "As you attack the demon, your weapon goes up in flames right away. As you drop your weapon to the ground, the demon points at you and a blazing ball of fire rushes at your face.";
     const std::string victoryFireDemonHolyWater = "You open the bottle and throw its content, which is refilled magically the instant the bottle is empty, killing the demon of fire.";
     const std::string defeatFireDemonWand = "You point the wand forward and as soon as you think of fire, flames spray from the tip of the wooden staff. But the demon seems to become even stronger. It points at you and a blazing ball of fire rushes at your face.";
