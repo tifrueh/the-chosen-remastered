@@ -2,7 +2,7 @@
 // Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in main.cpp
 
-#include <string>
+#include <cstring>
 #include "cli.hpp"
 
 bool ccli::hasCliArg(int argc, char* argv[], cliArg argument) {
