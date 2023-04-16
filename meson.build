@@ -1,12 +1,13 @@
 project(
         'the-chosen-remastered', 'cpp',
         default_options: ['cpp_std=c++17'],
-        version: '1.0.0-alpha.2'
+        version: '1.0.0'
 )
 
 incdir = include_directories('include')
 
 srcs = ['src/character.cpp',
+        'src/cli.cpp',
         'src/customstring.cpp',
         'src/game.cpp',
         'src/gameentity.cpp',
@@ -14,6 +15,7 @@ srcs = ['src/character.cpp',
         'src/main.cpp',
         'src/parser.cpp',
         'src/player.cpp',
+        'src/resources.cpp',
         'src/tui.cpp',
         'src/world.cpp']
 
@@ -26,3 +28,5 @@ executable(
         dependencies: ncurses,
         install: true
 )
+
+install_man('resources/man/the-chosen-remastered.6')

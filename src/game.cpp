@@ -285,6 +285,7 @@ void chosen::Game::initWorld() {
     mandrak.setDescription(crsrc::mandrakDesc);
     mandrak.setConversation(crsrc::mandrakConversation);
     mandrak.setDefaultVictoryMessage(crsrc::mandrakDefVictoryMsg);
+    mandrak.addVulnerability(swordsODD);
     mandrak.addAlias("advisor");
     mandrak.addAlias("head of the kingsguard");
     throneEntrance.addCharacter(mandrak);
