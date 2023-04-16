@@ -7,6 +7,7 @@ project(
 incdir = include_directories('include')
 
 srcs = ['src/character.cpp',
+        'src/cli.cpp',
         'src/customstring.cpp',
         'src/game.cpp',
         'src/gameentity.cpp',

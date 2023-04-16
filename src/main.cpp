@@ -14,11 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+#include <iostream>
 #include <string>
+#include <algorithm>
+#include "resources.hpp"
+#include "cli.hpp"
 #include "game.hpp"
 
-int main() {
-    chosen::Game theChosen;
-    theChosen.gameloop();
+int main(int argc, char *argv[]) {
+    ccli::cliArg version = {"-v", "--version"};
+
+    bool cliArgVersion = ccli::hasCliArg(argc, argv, version);
+
+    if (cliArgVersion) {
+        std::cout << crsrc::version << std::endl;
+    } else {
+        chosen::Game theChosen;
+        theChosen.gameloop();
+    }
 }
