@@ -139,4 +139,4 @@ const std::vector<std::string> crsrc::help = {
     "n/e/s/w -======- go into a direction",
     "up/down -======- climb up/down"
 };
-const std::string crsrc::cliHelp = "the-chosen-remastered: A short ZORK-like text adventure\nUsage: the-chosen-remastered [OPTIONS]\n\nOptions:\n  -h, --help\t\tShow this help message and exit\n  -v, --version\t\t Print version info and exit\n\nNote: to learn more, type \"help\" in-game or use 'man the-chosen-remastered'";
+const std::string crsrc::cliHelp = "the-chosen-remastered: A short ZORK-like text adventure\nUsage: the-chosen-remastered [OPTIONS]\n\nOptions:\n  -h, --help             Show this help message and exit\n  -v, --version          Print version info and exit\n\nNote: To learn more, type \"help\" in-game or use 'man the-chosen-remastered'";
