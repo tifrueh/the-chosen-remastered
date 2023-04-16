@@ -7,8 +7,8 @@
 
 namespace ccli {
     struct cliArg {
-        char* shortArg;
-        char* longArg;
+        const char* shortArg;
+        const char* longArg;
     };
     bool hasCliArg(int argc, char* argv[], cliArg argument);
 }
