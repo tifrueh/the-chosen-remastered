@@ -28,3 +28,5 @@ executable(
         dependencies: ncurses,
         install: true
 )
+
+install_man('resources/man/the-chosen-remastered.6')
