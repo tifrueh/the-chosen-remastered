@@ -14,6 +14,7 @@ srcs = ['src/character.cpp',
         'src/main.cpp',
         'src/parser.cpp',
         'src/player.cpp',
+        'src/resources.cpp',
         'src/tui.cpp',
         'src/world.cpp']
 
