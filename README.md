@@ -1,6 +1,6 @@
 # The Chosen: At Night's End (Remastered)
 
-This is a short Zork-like text-adventure I (re-)wrote. The original python version can be found [here](https://github.com/tifrueh/the-chosen).
+This is a short ZORK-like text-adventure I (re-)wrote. The original python version can be found [here](https://github.com/tifrueh/the-chosen).
 
 Your objective is to find a pair of legendary swords and kill an evil king with them.
 
@@ -11,6 +11,8 @@ Your objective is to find a pair of legendary swords and kill an evil king with 
 1. Tap my homebrew tap: `brew tap https://github.com/tifrueh/homebrew-mytap`
 
 2. Install with `brew install the-chosen-remastered`
+
+_Note: The standard macOS terminal does not seem to work natively with the ncurses version provided by homebrew. If you have problems playing the game, try using some other terminal emulator (for example [iTerm2](https://iterm2.com)) or compile from source with the native macOS ncurses installation._
 
 ### Windows, macOS, Linux
 
@@ -75,4 +77,4 @@ and press the `ENTER` key. The game cooperates and tells you:
 You notice that the sword is glowing faintly, indicating that a spell has been cast on it.
 ~~~
 
-Continue now your quest and rid the world of the Demon King. Good luck, Adventurer!
+Now continue your quest, find the Swords of Dusk and Dawn and use them to destroy the Demon King. Good luck, Adventurer!
