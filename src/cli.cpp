@@ -9,7 +9,7 @@ bool ccli::hasCliArg(int argc, char* argv[], cliArg argument) {
     bool argFound = false;
 
     for (int i = 0; i < argc; i++) {
-        if (strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "--version") == 0) {
+        if (strcmp(argv[i], argument.shortArg) == 0 || strcmp(argv[i], argument.longArg) == 0) {
             argFound = true;
         } else {
             argFound = false;

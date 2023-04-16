@@ -22,13 +22,24 @@
 #include "game.hpp"
 
 int main(int argc, char *argv[]) {
-    ccli::cliArg version = {"-v", "--version"};
+    ccli::cliArg version;
+    version.shortArg = "-v";
+    version.longArg = "--version";
+
+    ccli::cliArg help;
+    help.shortArg = "-h";
+    help.longArg = "--help";
 
     bool cliArgVersion = ccli::hasCliArg(argc, argv, version);
+    bool cliArgHelp = ccli::hasCliArg(argc, argv, help);
 
     if (cliArgVersion) {
         std::cout << crsrc::version << std::endl;
-    } else {
+    }
+    else if (cliArgHelp) {
+        std::cout << crsrc::cliHelp << std::endl;
+    } 
+    else {
         chosen::Game theChosen;
         theChosen.gameloop();
     }

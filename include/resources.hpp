@@ -87,4 +87,5 @@ namespace crsrc {
     extern const std::string earthDemonDefVictoryMsg;
     extern const std::string victoryEarthDemonCrossbow;
     extern const std::vector<std::string> help;
+    extern const std::string cliHelp;
 }
