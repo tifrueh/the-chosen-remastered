@@ -451,6 +451,13 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
         }
     }
 
+    chosen::Character *characterPtr = player.getLocation()->getCharacterByAlias(character);
+
+    if (characterPtr == nullptr) {
+        tui.tuiPrint("There is no one called " + character + " here.");
+        return;
+    }
+
     if (item == "") {
 
         item = tui.tuiInput("With what do you want to fight?");
@@ -465,18 +472,13 @@ void chosen::Game::cmdFight(std::string character, std::string item) {
         }
     }
 
-    chosen::Character *characterPtr = player.getLocation()->getCharacterByAlias(character);
     chosen::Item *itemPtr = player.getItemByAlias(item);
 
-    if (characterPtr == nullptr) {
-        tui.tuiPrint("There is no one called " + character + " here.");
-        return;
-    }
-    else if (itemPtr == nullptr) {
+    if (itemPtr == nullptr) {
         tui.tuiPrint("You do not have any item called " + item + ".");
         return;
     }
-    
+
     if (itemPtr->wieldable(score)){
         victory = player.fight(*characterPtr, *itemPtr);
     }
