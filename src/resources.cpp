@@ -77,7 +77,7 @@ const std::vector<std::string> crsrc::warrioressConversation = {
 const std::string crsrc::elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
 std::vector<std::string> crsrc::elliotConversation = {
     "[NAME LINE PLACEHOLDER]",
-    "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that that you must first prove your worth to those Swords by killing four of the Demon King's minions. Only then will they obey you. But what do I know!",
+    "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that you must first prove your worth to those Swords by killing four of the Demon King's minions. Only then will they obey you. But what do I know!",
     "Go on, then. Kill the demons, find the swords and kill the King. You can do it, my friend, I'm sure of it."
 };
 const std::string crsrc::elliotHug = "Elliot hugs you back.";
