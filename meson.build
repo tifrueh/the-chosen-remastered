@@ -35,4 +35,5 @@ executable(
 )
 
 install_data('resources/the-chosen.png')
+install_data('resources/the-chosen-remastered.desktop')
 install_man('resources/man/the-chosen-remastered.6')
