@@ -4,7 +4,12 @@ project(
         version: 'dev'
 )
 
-incdir = include_directories('include')
+incdir = include_directories('include', 'configuration-files')
+
+conf_data = configuration_data()
+conf_data.set('version', meson.project_version())
+
+subdir('configuration-files')
 
 srcs = ['src/character.cpp',
         'src/cli.cpp',

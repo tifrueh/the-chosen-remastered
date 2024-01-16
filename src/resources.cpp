@@ -6,8 +6,9 @@
 #include <array>
 #include <vector>
 #include "resources.hpp"
+#include "config.hpp"
 
-const std::string crsrc::version = "dev";
+const std::string crsrc::version = VERSION;
 const std::array<std::string, 6> crsrc::welcomeMessage = {
     "The Chosen: At Night's End (Remastered)",
     "Revision " + version,
