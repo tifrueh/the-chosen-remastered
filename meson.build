@@ -1,7 +1,7 @@
 project(
         'the-chosen-remastered', 'cpp',
         default_options: ['cpp_std=c++17'],
-        version: '1.0.1'
+        version: 'dev'
 )
 
 incdir = include_directories('include')
