@@ -1,10 +1,15 @@
 project(
         'the-chosen-remastered', 'cpp',
         default_options: ['cpp_std=c++17'],
-        version: '1.0.1'
+        version: 'v1.0.2'
 )
 
-incdir = include_directories('include')
+incdir = include_directories('include', 'configuration-files')
+
+conf_data = configuration_data()
+conf_data.set('version', meson.project_version())
+
+subdir('configuration-files')
 
 srcs = ['src/character.cpp',
         'src/cli.cpp',
@@ -29,4 +34,6 @@ executable(
         install: true
 )
 
+install_data('resources/the-chosen.png')
+install_data('resources/the-chosen-remastered.desktop')
 install_man('resources/man/the-chosen-remastered.6')

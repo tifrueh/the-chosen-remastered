@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=The Chosen (Remastered)
+Comment=A short ZORK-like text adventure
+TryExec=the-chosen-remastered
+Exec=the-chosen-remastered
+Icon=the-chosen
+Terminal=true
+Categories=Game

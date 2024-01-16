@@ -6,8 +6,9 @@
 #include <array>
 #include <vector>
 #include "resources.hpp"
+#include "config.hpp"
 
-const std::string crsrc::version = "1.0.1";
+const std::string crsrc::version = VERSION;
 const std::array<std::string, 6> crsrc::welcomeMessage = {
     "The Chosen: At Night's End (Remastered)",
     "Revision " + version,
@@ -68,7 +69,7 @@ const std::vector<std::string> crsrc::strangerConversation = {
 const std::string crsrc::strangerDefVictoryMsg = "The stranger did not wish you harm. But you already started the fight. You lose ...";
 const std::string crsrc::strangerDefDeathMsg = "The stranger did not wish you harm. But you already started the fight and cannot stop. You kill the stranger, watching the light fade from his piercingly blue eyes.";
 const std::string crsrc::defeatStrangerLongsword = "The stranger wishes you no harm. But as you slash at him he brushes your sword away with ease. A split-second later you see his blade rush at your face with incredible speed.";
-const std::string crsrc::warrioressDesc = "You see a warrioress here, seeming a bit lost but eying you with obvious distrust.";
+const std::string crsrc::warrioressDesc = "You see a warrioress here, seeming a bit lost but eyeing you with obvious distrust.";
 const std::vector<std::string> crsrc::warrioressConversation = {
     "What? Do you have nothing better to do?",
     "*to herself* Damn this demon of earth. I can't get through its skin. Maybe I need something sharper as my trusty club.",
@@ -77,7 +78,7 @@ const std::vector<std::string> crsrc::warrioressConversation = {
 const std::string crsrc::elliotDesc = "You see Elliot standing here, a man you have never met before. Or have you? How else would you know his name?";
 std::vector<std::string> crsrc::elliotConversation = {
     "[NAME LINE PLACEHOLDER]",
-    "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that that you must first prove your worth to those Swords by killing four of the Demon King's minions. Only then will they obey you. But what do I know!",
+    "Have you heard the latest gossip? We all know that the Demon King can be killed with the legendary Swords, right? Rumour has it that you must first prove your worth to those Swords by killing four of the Demon King's minions. Only then will they obey you. But what do I know!",
     "Go on, then. Kill the demons, find the swords and kill the King. You can do it, my friend, I'm sure of it."
 };
 const std::string crsrc::elliotHug = "Elliot hugs you back.";
