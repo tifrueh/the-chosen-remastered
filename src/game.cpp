@@ -221,7 +221,10 @@ void chosen::Game::initWorld() {
     fireWand.addAlias("wand");
     fireWand.addAlias("fire wand");
     fireWand.addAlias("wood");
+    fireWand.addAlias("dark wood");
     fireWand.addAlias("piece of wood");
+    fireWand.addAlias("twisted piece of wood");
+    fireWand.addAlias("twisted piece of dark wood");
     hall.addItem(fireWand);
 
     holyWater.setDescription(crsrc::holyWaterDesc);
