@@ -1,13 +1,14 @@
 project(
         'the-chosen-remastered', 'cpp',
         default_options: ['cpp_std=c++17'],
-        version: 'v1.0.2'
+        version: '1.0.2'
 )
 
 incdir = include_directories('include', 'configuration-files')
 
 conf_data = configuration_data()
 conf_data.set('version', meson.project_version())
+conf_data.set('vversion', 'v' + meson.project_version())
 
 subdir('configuration-files')
 

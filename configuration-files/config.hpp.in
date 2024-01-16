@@ -2,4 +2,4 @@
 // Copyright (C) 2022-2023 Timo Früh
 // Full copyright notice in src/main.cpp
 
-#define VERSION "@version@"
+#define VERSION "@vversion@"
