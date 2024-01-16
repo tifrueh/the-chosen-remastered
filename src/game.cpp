@@ -223,6 +223,7 @@ void chosen::Game::initWorld() {
     fireWand.addAlias("wood");
     fireWand.addAlias("dark wood");
     fireWand.addAlias("piece of wood");
+    fireWand.addAlias("piece of dark wood");
     fireWand.addAlias("twisted piece of wood");
     fireWand.addAlias("twisted piece of dark wood");
     hall.addItem(fireWand);
